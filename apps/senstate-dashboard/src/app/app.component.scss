@@ -1,0 +1,64 @@
+$watchColumns: 2;
+
+/*
+ * Remove template code below
+ */
+:host {
+  display: block;
+  font-family: sans-serif;
+}
+
+.content{
+  margin: 16px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  margin: 5px;
+
+  min-width: calc(100 / #{$watchColumns} - 10px);
+  max-width: calc(100 / #{$watchColumns} - 10px);
+}
+
+.test {
+  display: flex;
+  background: #e5e5e5;
+  flex-wrap: wrap;
+  // height: 160px;
+  border: 4px solid #FFFFFF;
+}
+
+mat-toolbar {
+  display: flex;
+}
+
+.toolbar-title {
+
+}
+
+.connected-to {
+  flex: 1;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+
+  .data {
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .span {
+    flex: 1;
+  }
+}

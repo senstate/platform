@@ -1,0 +1,442 @@
+{
+  "version": 1,
+  "projects": {
+    "senstate-dashboard": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/senstate-dashboard",
+      "sourceRoot": "apps/senstate-dashboard/src",
+      "prefix": "senstate",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/senstate/dashboard",
+            "index": "apps/senstate-dashboard/src/index.html",
+            "main": "apps/senstate-dashboard/src/main.ts",
+            "polyfills": "apps/senstate-dashboard/src/polyfills.ts",
+            "tsConfig": "apps/senstate-dashboard/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/senstate-dashboard/src/favicon.ico",
+              "apps/senstate-dashboard/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/senstate-dashboard/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/senstate-dashboard/src/environments/environment.ts",
+                  "with": "apps/senstate-dashboard/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "senstate-dashboard:build",
+            "proxyConfig": "apps/senstate-dashboard/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "senstate-dashboard:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "senstate-dashboard:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/senstate-dashboard/tsconfig.app.json",
+              "apps/senstate-dashboard/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/senstate-dashboard/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/senstate-dashboard/jest.config.js",
+            "tsConfig": "apps/senstate-dashboard/tsconfig.spec.json",
+            "setupFile": "apps/senstate-dashboard/src/test-setup.ts"
+          }
+        },
+        "serve-with-services": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "ng serve senstate"
+              },
+              {
+                "command": "ng serve senstate-dashboard"
+              }
+            ],
+            "parallel": true
+          }
+        }
+      }
+    },
+    "senstate-dashboard-e2e": {
+      "root": "apps/senstate-dashboard-e2e",
+      "sourceRoot": "apps/senstate-dashboard-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/senstate-dashboard-e2e/cypress.json",
+            "tsConfig": "apps/senstate-dashboard-e2e/tsconfig.e2e.json",
+            "devServerTarget": "senstate-dashboard:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "senstate-dashboard:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/senstate-dashboard-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/senstate-dashboard-e2e/**"]
+          }
+        }
+      }
+    },
+    "senstate": {
+      "root": "apps/senstate",
+      "sourceRoot": "apps/senstate/src",
+      "projectType": "application",
+      "prefix": "senstate",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/senstate",
+            "main": "apps/senstate/src/main.ts",
+            "tsConfig": "apps/senstate/tsconfig.app.json",
+            "assets": [
+              {
+                "input": "apps/senstate/src/root-assets",
+                "glob": "*.*",
+                "output": "./"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "sourceMap": true,
+              "extractLicenses": true,
+              "inspect": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/senstate/src/environments/environment.ts",
+                  "with": "apps/senstate/src/environments/environment.prod.ts"
+                }
+              ],
+              "externalDependencies": "all"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "senstate:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/senstate/tsconfig.app.json",
+              "apps/senstate/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/senstate/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/senstate/jest.config.js",
+            "tsConfig": "apps/senstate/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "example-app": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/example-app",
+      "sourceRoot": "apps/example-app/src",
+      "prefix": "senstate",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/example-app",
+            "index": "apps/example-app/src/index.html",
+            "main": "apps/example-app/src/main.ts",
+            "polyfills": "apps/example-app/src/polyfills.ts",
+            "tsConfig": "apps/example-app/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/example-app/src/favicon.ico",
+              "apps/example-app/src/assets"
+            ],
+            "styles": ["apps/example-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/example-app/src/environments/environment.ts",
+                  "with": "apps/example-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "example-app:build",
+            "port": 4355
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "example-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "example-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/example-app/tsconfig.app.json",
+              "apps/example-app/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/example-app/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/example-app/jest.config.js",
+            "tsConfig": "apps/example-app/tsconfig.spec.json",
+            "setupFile": "apps/example-app/src/test-setup.ts"
+          }
+        },
+        "serve-hub": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "ng serve senstate"
+              },
+              {
+                "command": "ng serve senstate-dashboard"
+              },
+              {
+                "command": "ng serve example-app"
+              }
+            ],
+            "parallel": true
+          }
+        }
+      }
+    },
+    "client": {
+      "projectType": "library",
+      "root": "libs/client",
+      "sourceRoot": "libs/client/src",
+      "prefix": "senstate",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/client/tsconfig.lib.json",
+            "project": "libs/client/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/client/tsconfig.lib.json",
+              "libs/client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/client/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client/jest.config.js",
+            "tsConfig": "libs/client/tsconfig.spec.json",
+            "setupFile": "libs/client/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "client-connection": {
+      "projectType": "library",
+      "root": "libs/client-connection",
+      "sourceRoot": "libs/client-connection/src",
+      "prefix": "senstate",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/client-connection/tsconfig.lib.json",
+            "project": "libs/client-connection/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/client-connection/tsconfig.lib.json",
+              "libs/client-connection/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/client-connection/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-connection/jest.config.js",
+            "tsConfig": "libs/client-connection/tsconfig.spec.json",
+            "setupFile": "libs/client-connection/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "dashboard-connection": {
+      "projectType": "library",
+      "root": "libs/dashboard-connection",
+      "sourceRoot": "libs/dashboard-connection/src",
+      "prefix": "senstate",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/dashboard-connection/tsconfig.lib.json",
+              "libs/dashboard-connection/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/dashboard-connection/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/dashboard-connection/jest.config.js",
+            "tsConfig": "libs/dashboard-connection/tsconfig.spec.json",
+            "setupFile": "libs/dashboard-connection/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "senstate"
+}

@@ -1,0 +1,33 @@
+{
+  "npmScope": "senstate",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "senstate-dashboard-e2e": {
+      "tags": []
+    },
+    "senstate-dashboard": {
+      "tags": []
+    },
+    "senstate": {
+      "tags": []
+    },
+    "example-app": {
+      "tags": []
+    },
+    "client": {
+      "tags": []
+    },
+    "client-connection": {
+      "tags": []
+    },
+    "dashboard-connection": {
+      "tags": []
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<div class="split">
+
+
+  <div class="column">
+    <div>
+      Running Watchers
+
+      <div *ngFor="let watcher of runningWatchers; let index = index">
+        {{watcher.type}}[{{watcher.timer}}]
+
+        <button mat-raised-button (click)="removeWatcher(index)">Delete</button>
+      </div>
+    </div>
+
+    <mat-form-field>
+      <mat-placeholder>Interval</mat-placeholder>
+      <input matInput type="number" value="500" #interval>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Watch-Type</mat-placeholder>
+      <mat-select #typeSelect>
+        <mat-option *ngFor="let watchType of watchTypes"
+                    [value]="watchType.value">
+          {{watchType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+<br/>
+<br/>
+    <button mat-raised-button
+            (click)="startTimer(interval.value, typeSelect.value)"
+            *ngIf="typeSelect.value > -1"
+    >
+      Start Events
+    </button>
+
+    <br/>
+    <br/>
+    <button mat-raised-button (click)="addLog()">Add Log</button>
+
+
+  </div>
+
+
+  <iframe src="http://localhost:4200"></iframe>
+
+</div>
+
