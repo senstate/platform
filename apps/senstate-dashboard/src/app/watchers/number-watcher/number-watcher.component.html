@@ -1,6 +1,6 @@
 <mat-card>
-  <p>{{ data| json }}</p>
+  <p>{{ data$ | async }}</p>
 
-  Min: <b>0</b> <i>TODO</i> <br />
-  Max: <b>0</b> <i>TODO</i> <br />
+  Min: <b>{{min$ | async}}</b> <br />
+  Max: <b>{{max$ | async}}</b> <br />
 </mat-card>
