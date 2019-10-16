@@ -1,19 +1,23 @@
+# API V0.1.4
+
 Point your websocket connection to the cli `ws://ip:3333`
 
-# 1. The sending app needs to "register"
-Send following data to the event 'addApp':
+## Event Types
+Generic Event, sent as json to the cli
+```ts
+interface EventType<T> {
+  event: string,
+  data: T; // one of the following
+}
+```
 
+Events
 ```ts
 export interface AppMeta {
   appId: string;  // just a short GUID, no special syntax needed
   name: string;   // your Apps Name, to differ in the dashboard
 }
 ```
-
-#2. Add a Watcher-Meta Info
-
-Target: 'addWatcher'
-
 ```ts
 export const enum WatchType {
   String,   // 0
@@ -29,10 +33,6 @@ export interface WatcherMeta {
 }
 ```
 
-# 3. Send the watcher-data
-
-Event: 'inputEvent'
-
 ```ts
 export interface WatchData {
   watchId: string;
@@ -40,12 +40,31 @@ export interface WatchData {
 }
 ```
 
-# 4.  Logger
-
-Event: 'inputLogEvent'
-
 ```ts
 export interface LogData {
   log: any;
 }
 ```
+
+# 1. The sending app needs to "register"
+event `addApp`
+
+data `AppMeta`
+
+
+#2. Add a Watcher-Meta Info
+event `addWatcher`
+
+data `WatcherMeta`
+
+
+# 3. Send the watcher-data
+event `inputEvent`
+
+data `WatchData`
+
+# 4.  Logger
+event `inputLogEvent`
+
+data `LogData`
+
