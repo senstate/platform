@@ -28,6 +28,9 @@
     },
     "dashboard-connection": {
       "tags": []
+    },
+    "app-utils": {
+      "tags": []
     }
   }
 }

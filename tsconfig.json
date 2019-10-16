@@ -17,14 +17,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@senstate/client": [
-        "libs/client/src/index.ts",
-        "dist/libs/client"
-      ],
+      "@senstate/client": ["libs/client/src/index.ts", "dist/libs/client"],
       "@senstate/client-connection": ["libs/client-connection/src/index.ts"],
       "@senstate/dashboard-connection": [
         "libs/dashboard-connection/src/index.ts"
-      ]
+      ],
+      "@senstate/app-utils": ["libs/app-utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
