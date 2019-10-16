@@ -1,16 +1,18 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map, tap,} from 'rxjs/operators';
+import {map,} from 'rxjs/operators';
 import {DASHBOARD_EVENT_NAMES, NetworkInfo} from '@senstate/dashboard-connection';
 import {ActivatedRoute} from "@angular/router";
 import {SocketService} from "./socket.service";
 import {SocketEvent} from "@senstate/client-connection";
 import {HubService} from "./state/hub.service";
+import {MatSliderChange} from "@angular/material/slider";
 
 @Component({
   selector: 'senstate-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   networkInterface$ = this.http.get<NetworkInfo[]>('/api/dash/interfaces').pipe(
@@ -24,6 +26,7 @@ export class AppComponent {
   mappedApps$ = this.hubService.app$;
   socketStatus$ = this.hubService.socketStatus$;
   watcherCount$ = this.hubService.watcherCount$;
+  delayLabel = (num) => `${num} ms`;
 
   constructor (private http: HttpClient,
                private socketService: SocketService,
@@ -48,7 +51,7 @@ export class AppComponent {
   }
 
   public getWatchData$(watchId: string) {
-    return this.hubService.getWatcherData(watchId);
+    return this.hubService.getWatcherData$(watchId);
   }
 
   public getAppLogs$(appId: string) {
@@ -69,5 +72,9 @@ export class AppComponent {
 
   getValues <T>(obj: {[key: string]: T}) {
     return Object.values(obj);
+  }
+
+  changeDebounce ($event: MatSliderChange) {
+    this.socketService.socket.sendJson(DASHBOARD_EVENT_NAMES.CHANGE_DEBOUNCE_TIME, $event.value);
   }
 }

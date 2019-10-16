@@ -1,4 +1,4 @@
-import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
@@ -8,11 +8,10 @@ import {
   MatBadgeModule,
   MatButtonModule,
   MatCardModule,
-  MatExpansionModule, MatIconModule, MatIconRegistry,
+  MatExpansionModule, MatIconModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
-import {environment} from '../environments/environment';
 import { QRCodeModule } from 'angular2-qrcode';
 import {MdePopoverModule} from "@material-extended/mde";
 import {RouterModule} from "@angular/router";
@@ -25,6 +24,10 @@ import {EffectsModule} from '@ngrx/effects'
 import {metaReducers, stateReducer} from "./state";
 import {HubModule} from "./state/hub.module";
 import {HubEffects} from "./state/hub.effects";
+import {SenIconRegisterModule} from "@senstate/app-utils";
+import {app_icons} from "./app.icons";
+import {MatSliderModule} from "@angular/material/slider";
+import {PrettyJsonModule} from "angular2-prettyjson";
 
 @NgModule({
   declarations: [AppComponent, NumberWatcherComponent, StringWatcherComponent, JsonWatcherComponent],
@@ -54,7 +57,13 @@ import {HubEffects} from "./state/hub.effects";
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MdePopoverModule
+    MdePopoverModule,
+    SenIconRegisterModule.register({
+      svgFolder: 'assets/svg',
+      icons: app_icons
+    }),
+    MatSliderModule,
+    PrettyJsonModule
   ],
   providers: [
     SocketService
@@ -62,20 +71,7 @@ import {HubEffects} from "./state/hub.effects";
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    registerIcons(iconRegistry, sanitizer);
+  constructor () {
   }
 }
 
-
-export const icons = [
-  'important_devices'
-];
-
-export function registerIcons (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-  for (const icon of icons) {
-    iconRegistry.addSvgIcon(
-      icon,
-      sanitizer.bypassSecurityTrustResourceUrl(`assets/svg/${icon}.svg`));
-  }
-}

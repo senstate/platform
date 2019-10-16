@@ -9,7 +9,7 @@ import {SocketEvent} from "@senstate/client-connection";
 
 interface EventsByApp {
   // watcherId
-  [key: string]: WatchData
+  [key: string]: any
 }
 
 interface WatcherToApp {

@@ -30,7 +30,7 @@ export class HubService {
 
   }
 
-  getWatcherData (watchId: string) {
+  getWatcherData$ (watchId: string) {
     return this.state.select(state => {
       const appId = state.data.watcherToApp[watchId];
 

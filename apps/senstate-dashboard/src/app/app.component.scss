@@ -4,12 +4,16 @@ $watchColumns: 2;
  * Remove template code below
  */
 :host {
-  display: block;
+  display: flex;
   font-family: sans-serif;
+  height: 100vh;
+  flex-direction: column;
 }
 
 .content{
   margin: 16px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .cards {
@@ -26,12 +30,22 @@ $watchColumns: 2;
   max-width: calc(100 / #{$watchColumns} - 10px);
 }
 
-.test {
+.popover {
   display: flex;
-  background: #e5e5e5;
+  background: #FFFFFF;
   flex-wrap: wrap;
-  // height: 160px;
+  flex-direction: column;
+  align-items: center;
   border: 4px solid #FFFFFF;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+code {
+  background: lightgray;
+  border-radius: 3px;
+  padding: 2px;
 }
 
 mat-toolbar {
@@ -49,8 +63,6 @@ mat-toolbar {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
 
   .data {
     color: white;
@@ -61,4 +73,18 @@ mat-toolbar {
   .span {
     flex: 1;
   }
+}
+
+.data-delay {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  span {
+    width: 50px;
+  }
+}
+
+.space {
+  flex: 1;
 }

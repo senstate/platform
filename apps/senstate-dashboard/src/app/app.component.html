@@ -1,14 +1,26 @@
 <mat-toolbar color="primary" #mainToolbar>
   <div class="toolbar-title">Senstate 0.1.4</div>
 
-  <div class="connected-to">Socket: {{socketStatus$ | async }}</div>
+  <div class="space"></div>
 
-  <button mat-button *ngIf="!isMobile"
-          [mdePopoverTriggerFor]="themePopover"
-          [mdePopoverTargetAt]="mainToolbar"
-          mdePopoverTriggerOn="click">
-    Mobile Mode <img src="assets/qrcode.png">
-  </button>
+  <div class="right-side">
+    <button mat-button *ngIf="!isMobile"
+            [mdePopoverTriggerFor]="themePopover"
+            [mdePopoverTargetAt]="{_elementRef: qrImg}"
+            mdePopoverTriggerOn="click">
+      Mobile Mode <img src="assets/qrcode.png" #qrImg>
+    </button>
+
+    <button mat-icon-button
+            [mdePopoverTriggerFor]="settingsPopover"
+            [mdePopoverTargetAt]="mainToolbar"
+            mdePopoverTriggerOn="click">
+      <mat-icon svgIcon="settings_applications"
+                style="width: 32px; height: 32px">
+
+      </mat-icon>
+    </button>
+  </div>
 
   <!--
   <button mat-icon-button [mdePopoverTriggerFor]="notificationsPopover" [mdePopoverTargetAt]="mainToolbar" mdePopoverTriggerOn="click">
@@ -16,6 +28,33 @@
   </button>
   -->
 
+  <mde-popover #settingsPopover="mdePopover"
+               [mdePopoverOverlapTrigger]="false"
+               [mdePopoverCloseOnClick]="false"
+               [mdePopoverOffsetX]="-25"
+               [mdePopoverOffsetY]="2"
+               [mdePopoverArrowOffsetX]="15"
+               mdePopoverArrowColor="#FFFFFF">
+    <div class="popover mat-elevation-z2">
+      <label>Debounce Events</label>
+      <div class="data-delay">
+        <mat-icon svgIcon="watch_later"></mat-icon>
+
+        <mat-slider [min]="0" [max]="1000"
+                    [value]="200" #slider
+                    [step]="50"
+                    [tickInterval]="100"
+                    [thumbLabel]="true"
+                    (change)="changeDebounce($event)">
+
+        </mat-slider>
+
+        <span>
+        {{ delayLabel(slider.value) }}
+          </span>
+      </div>
+    </div>
+  </mde-popover>
 </mat-toolbar>
 
 <div class="content">
@@ -43,15 +82,14 @@
                 <div class="card">
                   <span class="label mat-caption">{{ tag.tag }}</span>
                   <senstate-string-watcher
-
-                    [data]="getWatchData$(tag.watchId) | async"
+                      [watchId]="tag.watchId"
                     *ngSwitchCase="0"
                   ></senstate-string-watcher>
 
                   <senstate-number-watcher
                     *ngSwitchCase="1"
 
-                    [data]="getWatchData$(tag.watchId) | async"
+                    [watchId]="tag.watchId"
                   ></senstate-number-watcher>
 
                   <senstate-number-watcher
@@ -60,7 +98,7 @@
 
                   <senstate-json-watcher
                     *ngSwitchCase="2"
-                    [data]="getWatchData$(tag.watchId) | async"
+                    [watchId]="tag.watchId"
                   >
 
                   </senstate-json-watcher>
@@ -88,15 +126,24 @@
   <mde-popover #themePopover="mdePopover"
                [mdePopoverOverlapTrigger]="false"
                [mdePopoverCloseOnClick]="false"
-               [mdePopoverOffsetX]="-25"
+               [mdePopoverOffsetX]="0"
                [mdePopoverOffsetY]="2"
                [mdePopoverArrowOffsetX]="15"
                mdePopoverArrowColor="#FFFFFF">
-    <div class="test mat-elevation-z2">
-      <qr-code *ngIf="networkInterface$ | async as interface"
-               [value]="interface" [size]="150">
+    <div class="popover mat-elevation-z2">
+      <div>1. Open your Phone</div>
+      <br>
+      <div>2. Scan this qr-code</div>
+      <br>
+      <ng-container *ngIf="networkInterface$ | async as interface">
+        <qr-code
+          [value]="interface" [size]="150">
 
-      </qr-code>
+        </qr-code>
+        <br/>
+        <div>or open <br/><code>{{interface}}</code></div>
+
+      </ng-container>
     </div>
   </mde-popover>
 
@@ -105,9 +152,12 @@
 
 
 <mat-toolbar color="primary" class="footer">
-  <span class="data">
-    <mat-icon svgIcon="important_devices"></mat-icon> &nbsp; {{ (mappedApps$ | async)?.length }}</span>
+  <span class="data" title="App # Watcher-Count">
+    <mat-icon svgIcon="important_devices"></mat-icon> &nbsp;
+    {{ (mappedApps$ | async)?.length }} # {{ watcherCount$ | async }}</span>
   <span class="span"> </span>
-  <span class="data">Watchers: {{ watcherCount$ | async }}</span>
+  <span class="data">
+    Socket: {{socketStatus$ | async }}
+</span>
 
 </mat-toolbar>

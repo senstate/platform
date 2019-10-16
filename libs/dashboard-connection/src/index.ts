@@ -18,11 +18,14 @@ export interface MetaStore {
   apps: AppStore;
 }
 
+
+// TODO AS ACTIONS
 export const DASHBOARD_EVENT_NAMES = {
   META: 'meta',
   WATCHER_EVENTS: 'events',
   NEED_META: 'needMeta',
-  LOG: 'log'
+  LOG: 'log',
+  CHANGE_DEBOUNCE_TIME: 'changeDebounce'
 };
 
 export interface NetworkInfo {
