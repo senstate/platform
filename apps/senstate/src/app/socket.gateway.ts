@@ -1,13 +1,21 @@
-import {combineLatest, Subject} from 'rxjs';
+import {BehaviorSubject, combineLatest, Subject} from 'rxjs';
 import {AppMeta, CLIENT_CONSTS, LogData, WatchData, WatcherMeta} from '@senstate/client';
 import {DASHBOARD_EVENT_NAMES, LogEvent} from '@senstate/dashboard-connection';
 import {StateService} from "./state.service";
 
 import * as WebSocket from 'ws';
 import {ConnectedClient} from "./connectedClient";
-import {auditTime, groupBy, mergeMap, tap} from "rxjs/operators";
+import {auditTime, groupBy, mergeMap, skip, switchMap, takeUntil, tap, withLatestFrom} from "rxjs/operators";
+
+interface EventType {
+  event: string,
+  data: any;
+}
 
 export class SocketGateway {
+  private auditTime$ = new BehaviorSubject<number>(200);
+  private toDashboard$ = new Subject<EventType>();
+
   private events = new Subject<WatchData>();
   private logEvents = new Subject<LogEvent>();
   // private readonly logger = new Logger(SocketGateway.name);
@@ -26,7 +34,7 @@ export class SocketGateway {
       });
 
       ws.on('message', (message) => {
-        const receivedObject = JSON.parse(message.toString());
+        const receivedObject = JSON.parse(message.toString()) as EventType;
         const eventData = receivedObject.data;
 
         switch (receivedObject.event) {
@@ -54,6 +62,11 @@ export class SocketGateway {
             this.needMeta(client);
             break;
           }
+          case DASHBOARD_EVENT_NAMES.CHANGE_DEBOUNCE_TIME: {
+            console.info('Change Debounce Time to', receivedObject.data);
+            this.auditTime$.next(receivedObject.data);
+            break;
+          }
 
           default: {
             // console.warn('UHM...');
@@ -71,12 +84,20 @@ export class SocketGateway {
     //const connectedDashboards = ;
 
         combineLatest([
-          this.events.pipe(
-            /*groupBy(e => e.watchId),
-            tap(grouped => console.info('grouped', grouped)),
-            mergeMap(grouped => grouped.pipe(
-              auditTime(1000),
-            )),*/
+          this.auditTime$.pipe(
+            tap(v => console.info('audit changed', v)),
+            switchMap(auditTimeInterval =>
+              this.events.pipe(
+                takeUntil(this.auditTime$.pipe(
+                  skip(1),
+                  tap (v => console.info('stop events with previous auditTime')),
+                )),
+                groupBy(e => e.watchId),
+                mergeMap((grouped) => grouped.pipe(
+                  auditTime(auditTimeInterval),
+                )),
+              )
+            ),
             tap(item => {
               // console.info('sending', item);
               this.sendToDashboards(DASHBOARD_EVENT_NAMES.WATCHER_EVENTS, item);
