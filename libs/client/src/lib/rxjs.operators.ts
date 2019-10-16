@@ -1,4 +1,4 @@
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {WatchType} from './interfaces';
 import {TimeMeasurer} from './measure';
 import {createWatchSender} from "./watch-sender";
@@ -23,4 +23,33 @@ export const SenstateOperators = {
   }
 };
 
+export const UtilOperators = {
+  min: () => {
+    // any better rxjs way?
+    let minVal:number = null;
+
+    return map<any, number>(
+      (x) => {
+        if(minVal == null){
+          return minVal = x;
+        }
+        return minVal = Math.min(minVal, x);
+      }
+    );
+  },
+  max: () => {
+    // any better rxjs way?
+    let maxVal:number = null;
+
+    return map<any, number>(
+      (x) => {
+        if(maxVal == null){
+          return maxVal = x;
+        }
+
+        return maxVal = Math.max(maxVal, x);
+      }
+    );
+  },
+};
 
