@@ -1,4 +1,13 @@
-import {AppMeta, CLIENT_CONSTS, CONNECTION, LogData, someGuid, WatchData, WatcherMeta} from '@senstate/client';
+import {
+  AppMeta,
+  CLIENT_CONSTS,
+  CONNECTION,
+  ErrorData,
+  LogData,
+  someGuid,
+  WatchData,
+  WatcherMeta
+} from '@senstate/client';
 import {Socket, SocketEvent} from "./socket";
 
 
@@ -34,6 +43,9 @@ export function setSenstateConnection (
     },
     sendLog (data: LogData) {
       socket.sendJson(CLIENT_CONSTS.INPUT_LOG_EVENT, data);
+    },
+    sendError (data: ErrorData) {
+      socket.sendJson(CLIENT_CONSTS.INPUT_ERROR_EVENT, data);
     }
   };
 }

@@ -1,6 +1,6 @@
 import {BehaviorSubject, combineLatest, Subject} from 'rxjs';
-import {AppMeta, CLIENT_CONSTS, LogData, WatchData, WatcherMeta} from '@senstate/client';
-import {DASHBOARD_EVENT_NAMES, LogEvent} from '@senstate/dashboard-connection';
+import {AppMeta, CLIENT_CONSTS, ErrorData, LogData, WatchData, WatcherMeta} from '@senstate/client';
+import {DASHBOARD_EVENT_NAMES, LogEvent, ErrorEvent} from '@senstate/dashboard-connection';
 import {StateService} from "./state.service";
 
 import * as WebSocket from 'ws';
@@ -14,10 +14,11 @@ interface EventType {
 
 export class SocketGateway {
   private auditTime$ = new BehaviorSubject<number>(200);
+  // TODO once everything is refactored to a shared action-object
+  // push all actions through this
   private toDashboard$ = new Subject<EventType>();
 
   private events = new Subject<WatchData>();
-  private logEvents = new Subject<LogEvent>();
   // private readonly logger = new Logger(SocketGateway.name);
   private readonly connected_clients: ConnectedClient[] = [];
   private readonly connected_dashboards: ConnectedClient[] = [];
@@ -53,6 +54,11 @@ export class SocketGateway {
             break;
           }
 
+          case CLIENT_CONSTS.INPUT_ERROR_EVENT: {
+            this.inputErrorEvent(client, eventData);
+            break;
+          }
+
           case CLIENT_CONSTS.ADD_WATCHER: {
             this.addWatcher(client, eventData);
             break;
@@ -81,40 +87,31 @@ export class SocketGateway {
   }
 
   afterInit () {
-    //const connectedDashboards = ;
+    this.auditTime$.pipe(
+      tap(v => console.info('audit changed', v)),
+      switchMap(auditTimeInterval =>
+        this.events.pipe(
+          takeUntil(this.auditTime$.pipe(
+            skip(1),
+            tap (v => console.info('stop events with previous auditTime')),
+          )),
+          groupBy(e => e.watchId),
+          mergeMap((grouped) => grouped.pipe(
+            auditTime(auditTimeInterval),
+          )),
+        )
+      ),
+      tap(item => {
+        // console.info('sending', item);
+        this.sendToDashboards(DASHBOARD_EVENT_NAMES.WATCHER_EVENTS, item);
+      })
+    ).subscribe();
 
-        combineLatest([
-          this.auditTime$.pipe(
-            tap(v => console.info('audit changed', v)),
-            switchMap(auditTimeInterval =>
-              this.events.pipe(
-                takeUntil(this.auditTime$.pipe(
-                  skip(1),
-                  tap (v => console.info('stop events with previous auditTime')),
-                )),
-                groupBy(e => e.watchId),
-                mergeMap((grouped) => grouped.pipe(
-                  auditTime(auditTimeInterval),
-                )),
-              )
-            ),
-            tap(item => {
-              // console.info('sending', item);
-              this.sendToDashboards(DASHBOARD_EVENT_NAMES.WATCHER_EVENTS, item);
-            })
-          ),
-          this.logEvents.pipe(
-            tap(item => {
-              this.sendToDashboards(DASHBOARD_EVENT_NAMES.LOG, item);
-            })
-          ),
-          this.state.meta$.pipe(
-            tap(meta => {
-              this.sendToDashboards(DASHBOARD_EVENT_NAMES.META, meta);
-            })
-          )
-        ])
-          .subscribe();
+    this.state.meta$.pipe(
+      tap(meta => {
+        this.sendToDashboards(DASHBOARD_EVENT_NAMES.META, meta);
+      })
+    ).subscribe();
   }
 
   sendToDashboards(event: string, data: any) {
@@ -132,11 +129,21 @@ export class SocketGateway {
   inputLogEvent (client: ConnectedClient, data: LogData) {
     const appId = this.state.clientToApp[client.id];
 
-    this.logEvents.next({
+    this.sendToDashboards(DASHBOARD_EVENT_NAMES.LOG, {
       appId,
-      log: data.log
-    });
+      data
+    } as LogEvent);
   }
+
+  inputErrorEvent (client: ConnectedClient, data: ErrorData) {
+    const appId = this.state.clientToApp[client.id];
+
+    this.sendToDashboards(DASHBOARD_EVENT_NAMES.ERROR, {
+      appId,
+      data
+    } as ErrorEvent);
+  }
+
 
   addApp (client: ConnectedClient, data: AppMeta) {
     this.state.appConnected(client, data);

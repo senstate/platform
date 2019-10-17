@@ -114,7 +114,12 @@
         </mat-tab>
         <mat-tab label="Log">
           <div *ngFor="let l of getAppLogs$(app.appId) | async">
-            {{l.log | json}}
+            {{l.data | json}}
+          </div>
+        </mat-tab>
+        <mat-tab label="Errors">
+          <div *ngFor="let l of getAppErrors$(app.appId) | async">
+            {{l.data | json}}
           </div>
         </mat-tab>
       </mat-tab-group>

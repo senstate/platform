@@ -58,6 +58,10 @@ export class AppComponent {
     return this.hubService.getLogs(appId);
   }
 
+  public getAppErrors$(appId: string) {
+    return this.hubService.getLogs(appId);
+  }
+
   public trackByAppFunc (appObj: any) {
     return appObj.app;
   }

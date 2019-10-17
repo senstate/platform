@@ -1,4 +1,4 @@
-import {AppMeta, WatcherMeta} from '@senstate/client';
+import {AppMeta, ErrorData, LogData, WatcherMeta} from '@senstate/client';
 
 export interface WatcherStore {
   [key: string]: WatcherMeta
@@ -25,6 +25,7 @@ export const DASHBOARD_EVENT_NAMES = {
   WATCHER_EVENTS: 'events',
   NEED_META: 'needMeta',
   LOG: 'log',
+  ERROR: 'error',
   CHANGE_DEBOUNCE_TIME: 'changeDebounce'
 };
 
@@ -34,6 +35,11 @@ export interface NetworkInfo {
 }
 
 export interface LogEvent {
-  log: string;
+  data: LogData;
+  appId: string;
+}
+
+export interface ErrorEvent {
+  data: ErrorData;
   appId: string;
 }

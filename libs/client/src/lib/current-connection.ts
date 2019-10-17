@@ -1,4 +1,4 @@
-import {Connection, LogData, WatchData, WatcherMeta} from './interfaces';
+import {Connection, ErrorData, LogData, WatchData, WatcherMeta} from './interfaces';
 
 /**
  * To be used with @senstate/client-connection
@@ -9,6 +9,7 @@ export const CONNECTION: {
   current: {
     sendData (data: WatchData) {},
     setWatcher (meta: WatcherMeta) {},
-    sendLog (data: LogData) {}
+    sendLog (data: LogData) {},
+    sendError (data: ErrorData) {}
   }
 };

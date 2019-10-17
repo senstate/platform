@@ -3,7 +3,7 @@ import {Action} from "ts-action";
 import {on} from 'ts-action-immer/reducer';
 import {createReducer} from "@ngrx/store";
 import {WatchData} from "@senstate/client";
-import {LogEvent, MetaStore} from "@senstate/dashboard-connection";
+import {ErrorEvent, LogEvent, MetaStore} from "@senstate/dashboard-connection";
 import {SocketEvent} from "@senstate/client-connection";
 
 
@@ -26,6 +26,7 @@ export interface HubState {
   watcherToApp: WatcherToApp;
   eventsCounter: { [key: string]: number };
   logsByApp: { [key: string]: LogEvent[] };
+  errorsByApp: { [key: string]: ErrorEvent[] };
 
   meta: MetaStore;
 }
@@ -37,6 +38,7 @@ export const HubReducerInitState: HubState = {
   watcherToApp: {},
   eventsCounter: {},
   logsByApp: {},
+  errorsByApp: {},
 
   // from cli
   meta: {
@@ -92,6 +94,11 @@ const topicReducer = createReducer(
 
   on(HubActions.LOG_DATA, (state, {payload}) => {
     const logsAr = state.logsByApp[payload.appId] = state.logsByApp[payload.appId] || [];
+    logsAr.push(payload);
+  }),
+
+  on(HubActions.ERROR_DATA, (state, {payload}) => {
+    const logsAr = state.errorsByApp[payload.appId] = state.errorsByApp[payload.appId] || [];
     logsAr.push(payload);
   }),
 

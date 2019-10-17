@@ -1,12 +1,20 @@
-import { CONNECTION } from './current-connection';
+import {CONNECTION} from './current-connection';
+import {LogLevel} from "./interfaces";
 
 
 export type LogSender = (v: any) => void;
 
-export function createLogSender(): LogSender {
-  return (log) => {
+// refactor / different way for js apps
+
+export function createLogSender(logLevel: LogLevel = LogLevel.Info, logName?: string): LogSender {
+  return (log, data?, line?) => {
     CONNECTION.current.sendLog({
-      log
+      log,
+      logLevel,
+      logName,
+      data,
+      line
     });
   }
 }
+

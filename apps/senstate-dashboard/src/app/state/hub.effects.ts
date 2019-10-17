@@ -4,7 +4,7 @@ import {SocketService} from "../socket.service";
 import {DASHBOARD_EVENT_NAMES, MetaStore} from "@senstate/dashboard-connection";
 import {map, tap} from "rxjs/operators";
 import {HubActions} from "./actions";
-import {WatchData} from "@senstate/client";
+import {ErrorData, LogData, WatchData} from "@senstate/client";
 
 @Injectable()
 export class HubEffects {
@@ -19,8 +19,13 @@ export class HubEffects {
   );
 
   @Effect()
-  private logEvents$ = this.socketService.fromEvent<WatchData>(DASHBOARD_EVENT_NAMES.LOG).pipe(
+  private logEvents$ = this.socketService.fromEvent<LogData>(DASHBOARD_EVENT_NAMES.LOG).pipe(
     map(l => HubActions.LOG_DATA(l))
+  );
+
+  @Effect()
+  private errorEvents$ = this.socketService.fromEvent<ErrorData>(DASHBOARD_EVENT_NAMES.ERROR).pipe(
+    map(l => HubActions.ERROR_DATA(l))
   );
 
   constructor (private actions$: Actions,

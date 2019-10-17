@@ -54,6 +54,12 @@ export class HubService {
     })
   }
 
+  getErrors (appId: string) {
+    return this.state.select(state => {
+      return state.data.logsByApp[appId];
+    })
+  }
+
   statusChanged (value: SocketEvent) {
     this.state.dispatch(HubActions.STATUS_CHANGED(value));
   }
