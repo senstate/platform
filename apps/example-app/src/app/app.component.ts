@@ -77,7 +77,7 @@ export class AppComponent {
   }
 
   addWindowError () {
-     let foo: any;
+     let foo: any = null;
 
      foo.baz();
   }
