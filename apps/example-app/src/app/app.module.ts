@@ -16,3 +16,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 })
 export class AppModule {
 }
+
+setTimeout(() => {
+  let foo: any;
+
+  foo.baz();
+}, 1500);
+

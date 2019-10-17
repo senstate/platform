@@ -1,4 +1,5 @@
 export * from './lib/rxjs.operators';
+export * from './lib/error.handler';
 export * from './lib/current-connection';
 export * from './lib/interfaces';
 export * from './lib/watch-sender';

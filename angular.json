@@ -4,8 +4,9 @@
     "senstate-dashboard": {
       "projectType": "application",
       "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
       "root": "apps/senstate-dashboard",

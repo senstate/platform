@@ -56,7 +56,7 @@ export class HubService {
 
   getErrors (appId: string) {
     return this.state.select(state => {
-      return state.data.logsByApp[appId];
+      return state.data.errorsByApp[appId];
     })
   }
 

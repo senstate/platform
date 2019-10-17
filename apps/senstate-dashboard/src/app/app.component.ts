@@ -59,7 +59,7 @@ export class AppComponent {
   }
 
   public getAppErrors$(appId: string) {
-    return this.hubService.getLogs(appId);
+    return this.hubService.getErrors(appId);
   }
 
   public trackByAppFunc (appObj: any) {

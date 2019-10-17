@@ -98,8 +98,8 @@ const topicReducer = createReducer(
   }),
 
   on(HubActions.ERROR_DATA, (state, {payload}) => {
-    const logsAr = state.errorsByApp[payload.appId] = state.errorsByApp[payload.appId] || [];
-    logsAr.push(payload);
+    const errorAr = state.errorsByApp[payload.appId] = state.errorsByApp[payload.appId] || [];
+    errorAr.push(payload);
   }),
 
   on(HubActions.STATUS_CHANGED, (state, action) => {

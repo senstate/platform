@@ -1,4 +1,5 @@
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
+import {filter, take} from "rxjs/operators";
 
 export const enum SocketEvent {
   Connecting,
@@ -12,7 +13,7 @@ export class Socket {
   private socket: WebSocket;
   private connected = false;
 
-  public socketEvents$ = new Subject<SocketEvent>();
+  public socketEvents$ = new BehaviorSubject<SocketEvent>(SocketEvent.Connecting);
   public dataEvents$ = new Subject<any>(); // TODO TYPE
 
 
@@ -23,6 +24,15 @@ export class Socket {
   public sendJson(event: string, data: any) {
     if (this.connected) {
       this.socket.send(JSON.stringify({event, data}));
+    } else {
+      // Subscribe to push events once connected
+      this.socketEvents$.pipe(
+        filter(e => e === SocketEvent.Connected),
+        take(1) // close subscription once connected
+      ).subscribe(() => {
+        this.socket.send(JSON.stringify({event, data}));
+        }
+      );
     }
   }
 

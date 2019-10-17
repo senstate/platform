@@ -4,9 +4,6 @@ import {createLogSender, SenstateOperators, WatchType} from '@senstate/client';
 import {map} from 'rxjs/operators';
 import {setSenstateConnection} from '@senstate/client-connection';
 
-setSenstateConnection({
-  name: 'My Example App'
-});
 
 const logger = createLogSender();
 
@@ -79,10 +76,22 @@ export class AppComponent {
     logger('New Log, hi :)');
   }
 
+  addWindowError () {
+     let foo: any;
+
+     foo.baz();
+  }
+
   removeWatcher (index: number) {
     const watcher = this.runningWatchers[index];
     watcher.obs$.unsubscribe();
 
     this.runningWatchers.splice(index, 1);
+  }
+
+  addEvents () {
+    this.startTimer(50, WatchType.String);
+    this.startTimer(50, WatchType.Number);
+    this.startTimer(50, WatchType.Json);
   }
 }

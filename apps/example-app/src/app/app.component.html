@@ -25,8 +25,8 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-<br/>
-<br/>
+    <br/>
+    <br/>
     <button mat-raised-button
             (click)="startTimer(interval.value, typeSelect.value)"
             *ngIf="typeSelect.value > -1"
@@ -36,7 +36,12 @@
 
     <br/>
     <br/>
+
+
+
+    <button mat-raised-button (click)="addEvents()">Add Basic Events</button>
     <button mat-raised-button (click)="addLog()">Add Log</button>
+    <button mat-raised-button (click)="addWindowError()">Add Window Error</button>
 
 
   </div>

@@ -28,9 +28,10 @@ import {SenIconRegisterModule} from "@senstate/app-utils";
 import {app_icons} from "./app.icons";
 import {MatSliderModule} from "@angular/material/slider";
 import {PrettyJsonModule} from "angular2-prettyjson";
+import { JsonViewerComponent } from './components/json-viewer/json-viewer.component';
 
 @NgModule({
-  declarations: [AppComponent, NumberWatcherComponent, StringWatcherComponent, JsonWatcherComponent],
+  declarations: [AppComponent, NumberWatcherComponent, StringWatcherComponent, JsonWatcherComponent, JsonViewerComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
