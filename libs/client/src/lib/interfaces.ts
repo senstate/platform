@@ -34,7 +34,7 @@ export interface LogData {
   logLevel?: LogLevel; // Info if not set
   line?: number; // if existing
   data?: any;
-  timestamp?: number; // added by hub to dashboard
+  dateIso?: string; // added by hub to dashboard
 }
 
 export interface ErrorData {
@@ -42,7 +42,7 @@ export interface ErrorData {
   message: string;
   line?: number;
   methodName?: string;
-  stack: string;
+  stack?: string;
 }
 
 export interface Connection {

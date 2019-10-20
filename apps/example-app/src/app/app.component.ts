@@ -1,11 +1,9 @@
 import {Component} from '@angular/core';
 import {interval, Subject, Subscription} from 'rxjs';
-import {createLogSender, SenstateOperators, WatchType} from '@senstate/client';
+import {genericLogSender, LogLevel, SenstateOperators, WatchType} from '@senstate/client';
 import {map} from 'rxjs/operators';
-import {setSenstateConnection} from '@senstate/client-connection';
 
-
-const logger = createLogSender();
+const logger = genericLogSender();
 
 interface IWatcherInfo {
   timer: number;
@@ -73,13 +71,43 @@ export class AppComponent {
   }
 
   addLog () {
-    logger('New Log, hi :)');
+    logger({
+      log: 'New Info Log',
+      data: {
+        some: 'additional data',
+        hm: 1
+      }
+    });
+    logger({
+      log: 'New Debug Log',
+      data: {
+        some: 'additional data',
+        hm: 2
+      },
+      logLevel: LogLevel.Debug
+    });
+    logger({
+      log: 'New Warn Log',
+      data: {
+        some: 'additional data',
+        hm: 3
+      },
+      logLevel: LogLevel.Warn
+    });
+    logger({
+      log: 'New Error Log',
+      data: {
+        some: 'additional data',
+        hm: 4
+      },
+      logLevel: LogLevel.Error
+    });
   }
 
   addWindowError () {
-     let foo: any = null;
+    let foo: any = null;
 
-     foo.baz();
+    foo.baz();
   }
 
   removeWatcher (index: number) {

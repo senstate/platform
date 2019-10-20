@@ -1,5 +1,5 @@
 import {map, tap} from 'rxjs/operators';
-import {WatchType} from './interfaces';
+import {LogLevel, WatchType} from './interfaces';
 import {TimeMeasurer} from './measure';
 import {createWatchSender} from "./watch-sender";
 import {createLogSender} from "./log-sender";
@@ -16,10 +16,10 @@ export const SenstateOperators = {
   measureStep: <T> (measurer: TimeMeasurer) => {
     return tap<T>(() => measurer.step())
   },
-  log: <T> () => {
-    const sender = createLogSender();
+  log: <T> (name: string, level?: LogLevel) => {
+    const sender = createLogSender(level, name);
 
-    return tap<T>(sender);
+    return tap<T>((data) => sender('', data));
   }
 };
 

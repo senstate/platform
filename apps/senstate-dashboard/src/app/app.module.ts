@@ -29,9 +29,21 @@ import {app_icons} from "./app.icons";
 import {MatSliderModule} from "@angular/material/slider";
 import {PrettyJsonModule} from "angular2-prettyjson";
 import { JsonViewerComponent } from './components/json-viewer/json-viewer.component';
+import { LogViewerComponent } from './components/log-viewer/log-viewer.component';
+import {MatTableModule} from "@angular/material/table";
+import {CdkTableModule} from "@angular/cdk/table";
+import {LogLevelPipe} from "./components/log-viewer/log-level.pipe";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
-  declarations: [AppComponent, NumberWatcherComponent, StringWatcherComponent, JsonWatcherComponent, JsonViewerComponent],
+  declarations: [
+    AppComponent, NumberWatcherComponent, StringWatcherComponent,
+    JsonWatcherComponent, JsonViewerComponent, LogViewerComponent,
+    LogLevelPipe
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -64,10 +76,18 @@ import { JsonViewerComponent } from './components/json-viewer/json-viewer.compon
       icons: app_icons
     }),
     MatSliderModule,
-    PrettyJsonModule
+    PrettyJsonModule,
+    MatTableModule,
+    CdkTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [
-    SocketService
+    SocketService,
+
+
   ],
   bootstrap: [AppComponent]
 })

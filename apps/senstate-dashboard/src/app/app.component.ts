@@ -1,12 +1,14 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map,} from 'rxjs/operators';
-import {DASHBOARD_EVENT_NAMES, NetworkInfo} from '@senstate/dashboard-connection';
+import {filter, map, pluck, shareReplay,} from 'rxjs/operators';
+import {App, DASHBOARD_EVENT_NAMES, ErrorEvent, NetworkInfo} from '@senstate/dashboard-connection';
 import {ActivatedRoute} from "@angular/router";
 import {SocketService} from "./socket.service";
 import {SocketEvent} from "@senstate/client-connection";
 import {HubService} from "./state/hub.service";
 import {MatSliderChange} from "@angular/material/slider";
+import {Observable} from "rxjs";
+import {ErrorData, LogData} from "@senstate/client";
 
 @Component({
   selector: 'senstate-root',
@@ -22,6 +24,10 @@ export class AppComponent {
 
 
   public isMobile = false;
+
+  // refactor..
+  logObservablesByApp: {[key: string]: Observable<LogData[]>} = {};
+  errorObservablesByApp: {[key: string]: Observable<ErrorEvent[]>} = {};
 
   mappedApps$ = this.hubService.app$;
   socketStatus$ = this.hubService.socketStatus$;
@@ -55,15 +61,21 @@ export class AppComponent {
   }
 
   public getAppLogs$(appId: string) {
-    return this.hubService.getLogs(appId);
+    return this.logObservablesByApp[appId] // cached
+      || (this.logObservablesByApp[appId] = this.hubService.getLogs(appId).pipe(
+      filter(logs => !!logs),
+      map(logs => logs.map(l => l.data)),
+      shareReplay(0)
+    ));
   }
 
   public getAppErrors$(appId: string) {
-    return this.hubService.getErrors(appId);
+    return this.errorObservablesByApp[appId] ||
+      (this.errorObservablesByApp[appId] = this.hubService.getErrors(appId));
   }
 
-  public trackByAppFunc (appObj: any) {
-    return appObj.app;
+  public trackByAppFunc (appObj: App) {
+    return appObj.appId;
   }
 
   public trackByWatcherFunc (tagObj: any) {

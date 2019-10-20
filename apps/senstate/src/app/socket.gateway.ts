@@ -6,7 +6,10 @@ import {StateService} from "./state.service";
 import * as WebSocket from 'ws';
 import {ConnectedClient} from "./connectedClient";
 import {auditTime, groupBy, mergeMap, skip, switchMap, takeUntil, tap, withLatestFrom} from "rxjs/operators";
+import {toIsoWithOffset} from "../../../../libs/client/src/lib/date.utils";
 
+
+// extract
 interface EventType {
   event: string,
   data: any;
@@ -128,6 +131,10 @@ export class SocketGateway {
 
   inputLogEvent (client: ConnectedClient, data: LogData) {
     const appId = this.state.clientToApp[client.id];
+
+    if (!data.dateIso) {
+      data.dateIso = toIsoWithOffset(new Date());
+    }
 
     this.sendToDashboards(DASHBOARD_EVENT_NAMES.LOG, {
       appId,

@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+}
+
+/** yes, min/max/normal width needed, otherwise the table won't use the max-width **/
+/* Column Widths */
+.mat-column-logLevel {
+  max-width: 64px;
+  min-width: 64px;
+  width: 64px;
+}
+
+.mat-column-dateIso,
+.mat-column-logName {
+  max-width: 124px;
+  min-width: 124px;
+  width: 124px;
+}
+
+.log-level0 {
+  // Debug
+  background: #78909c;
+}
+
+.log-level1 {
+  // background: #bdbdbd;
+}
+
+.log-level2 {
+  background: #ff7043;
+}
+
+.log-level3 {
+  background: #e64a19;
+}
+
+.data-row {
+  senstate-json-viewer {
+    display: block;
+    background: #d3d3d3cc;
+  }
+}
+
+.filter-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5px;
+
+
+  mat-form-field {
+    flex: 1;
+    padding: 5px;
+  }
+  mat-paginator {
+    flex: 1;
+  }
+}

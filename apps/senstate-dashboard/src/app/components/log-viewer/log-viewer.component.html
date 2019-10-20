@@ -1,0 +1,53 @@
+<div class="filter-bar mat-paginator mat-elevation-z8">
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)"
+         placeholder="Filter" autocomplete="off">
+</mat-form-field>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons>
+  test
+</mat-paginator>
+</div>
+
+<table mat-table [dataSource]="dataSource"
+       multiTemplateDataRows matSort>
+  <ng-container matColumnDef="log">
+    <th mat-header-cell *matHeaderCellDef> Log</th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="element.line">Line: {{element.line}} -</ng-container>
+      {{element.log}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="logName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+    <td mat-cell *matCellDef="let element"> {{element.logName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="logLevel">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Level</th>
+    <td mat-cell *matCellDef="let element"> {{element.logLevel | logLevelString}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateIso">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Timestamp</th>
+    <td mat-cell *matCellDef="let element"> {{element.dateIso | date:'medium'}} </td>
+  </ng-container>
+
+  <!-- Secondary Column -->
+  <ng-container matColumnDef="data">
+    <td mat-cell [attr.colspan]="displayedColumns.length"
+        *matCellDef="let element" class="hideIfEmpty">
+      <senstate-json-viewer [data]="element.data">
+
+      </senstate-json-viewer>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [class]="'log-level'+row.logLevel"></tr>
+  <tr mat-row *matRowDef="let row; columns: secondRowColumns; when: showRow"
+      [class]="'data-row log-level'+row.logLevel"></tr>
+</table>

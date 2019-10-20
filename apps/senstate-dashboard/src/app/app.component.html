@@ -113,9 +113,7 @@
           </ng-container>
         </mat-tab>
         <mat-tab label="Log">
-          <div *ngFor="let l of getAppLogs$(app.appId) | async">
-            <senstate-json-viewer [data]="l.data"></senstate-json-viewer>
-          </div>
+          <senstate-log-viewer [logArray]="getAppLogs$(app.appId) | async"></senstate-log-viewer>
         </mat-tab>
         <mat-tab *ngIf="getAppErrors$(app.appId) | async as errors">
           <ng-template mat-tab-label>
