@@ -1,13 +1,10 @@
 <div class="filter-bar mat-paginator mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)"
+           placeholder="Filter" autocomplete="off">
+  </mat-form-field>
 
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)"
-         placeholder="Filter" autocomplete="off">
-</mat-form-field>
-
-<mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons>
-  test
-</mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
 </div>
 
 <table mat-table [dataSource]="dataSource"

@@ -3,29 +3,30 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Input,
-  OnChanges,
-  SimpleChanges,
   ViewChild,
-  ChangeDetectorRef, AfterViewInit
+  ChangeDetectorRef,
+  SimpleChanges, OnChanges
 } from '@angular/core';
-import {LogEvent} from "@senstate/dashboard-connection";
-import {LogData} from "@senstate/client";
-import {MatTableDataSource} from "@angular/material/table";
+import {ErrorData, LogData} from "@senstate/client";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource} from "@angular/material/table";
+import {ErrorEvent} from "@senstate/dashboard-connection";
+
+// TODO Extract table component with paginator / filter/ sort
 
 @Component({
-  selector: 'senstate-log-viewer',
-  templateUrl: './log-viewer.component.html',
-  styleUrls: ['./log-viewer.component.scss'],
+  selector: 'senstate-error-viewer',
+  templateUrl: './error-viewer.component.html',
+  styleUrls: ['./error-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LogViewerComponent implements OnInit, AfterViewInit, OnChanges {
+export class ErrorViewerComponent implements OnInit, OnChanges {
   @Input()
-  public logArray: LogData[];
+  public errorArray: ErrorData[];
 
-  displayedColumns: (keyof LogData)[] = ['dateIso','logLevel', 'logName', 'log'];
-  secondRowColumns: (keyof LogData)[] = ['data'];
+  displayedColumns: (keyof ErrorData)[] = ['errorName', 'methodName', "message"];
+  secondRowColumns: (keyof ErrorData)[] = ['stack'];
 
 
   private paginator: MatPaginator;
@@ -33,7 +34,6 @@ export class LogViewerComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild(MatSort, {static: true}) set matSort(ms: MatSort) {
     this.sort = ms;
-    console.info('set sort');
     this.setDataSourceAttributes();
   }
 
@@ -52,18 +52,15 @@ export class LogViewerComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['logArray']) {
-      this.dataSource = new MatTableDataSource(this.logArray || []);
+    if (changes['errorArray']) {
+      this.dataSource = new MatTableDataSource(this.errorArray || []);
       this.setDataSourceAttributes();
     }
   }
 
-  showRow (_, l: LogData) {
-    return !!l.data;
+  showRow (_, l: ErrorData) {
+    return !!l.stack;
   }
 
   setDataSourceAttributes() {

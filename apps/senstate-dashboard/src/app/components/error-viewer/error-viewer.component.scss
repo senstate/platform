@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+
+.filter-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5px;
+
+
+  mat-form-field {
+    flex: 1;
+    padding: 5px;
+  }
+  mat-paginator {
+    flex: 1;
+  }
+}

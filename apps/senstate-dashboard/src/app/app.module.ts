@@ -37,12 +37,14 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { ErrorViewerComponent } from './components/error-viewer/error-viewer.component';
 
 @NgModule({
   declarations: [
     AppComponent, NumberWatcherComponent, StringWatcherComponent,
     JsonWatcherComponent, JsonViewerComponent, LogViewerComponent,
-    LogLevelPipe
+    LogLevelPipe,
+    ErrorViewerComponent
   ],
   imports: [
     BrowserModule,

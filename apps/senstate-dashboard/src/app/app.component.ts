@@ -27,7 +27,7 @@ export class AppComponent {
 
   // refactor..
   logObservablesByApp: {[key: string]: Observable<LogData[]>} = {};
-  errorObservablesByApp: {[key: string]: Observable<ErrorEvent[]>} = {};
+  errorObservablesByApp: {[key: string]: Observable<ErrorData[]>} = {};
 
   mappedApps$ = this.hubService.app$;
   socketStatus$ = this.hubService.socketStatus$;
@@ -56,10 +56,6 @@ export class AppComponent {
     });
   }
 
-  public getWatchData$(watchId: string) {
-    return this.hubService.getWatcherData$(watchId);
-  }
-
   public getAppLogs$(appId: string) {
     return this.logObservablesByApp[appId] // cached
       || (this.logObservablesByApp[appId] = this.hubService.getLogs(appId).pipe(
@@ -71,7 +67,11 @@ export class AppComponent {
 
   public getAppErrors$(appId: string) {
     return this.errorObservablesByApp[appId] ||
-      (this.errorObservablesByApp[appId] = this.hubService.getErrors(appId));
+      (this.errorObservablesByApp[appId] = this.hubService.getErrors(appId).pipe(
+        filter(error => !!error),
+        map(er => er.map(e => e.data)),
+        shareReplay(0)
+      ));
   }
 
   public trackByAppFunc (appObj: App) {

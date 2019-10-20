@@ -121,9 +121,8 @@
                   matBadgeOverlap="false">Errors</span>
           </ng-template>
 
-          <div *ngFor="let l of errors">
-            <senstate-json-viewer [data]="l.data"></senstate-json-viewer>
-          </div>
+          <senstate-error-viewer [errorArray]="getAppErrors$(app.appId) | async"></senstate-error-viewer>
+
         </mat-tab>
       </mat-tab-group>
 
