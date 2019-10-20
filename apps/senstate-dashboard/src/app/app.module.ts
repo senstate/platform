@@ -38,6 +38,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { ErrorViewerComponent } from './components/error-viewer/error-viewer.component';
+import {MaterialCssVarsModule} from "angular-material-css-vars";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,20 @@ import { ErrorViewerComponent } from './components/error-viewer/error-viewer.com
     MatFormFieldModule,
     MatInputModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MaterialCssVarsModule.forRoot({
+      // all optional
+      isAutoContrast: true,
+      darkThemeClass: 'isDarkTheme',
+      lightThemeClass: 'isLightTheme',
+      isDarkTheme: true,
+
+  //      primary: '#3f51b5',
+   //     accent: '#e91e63',
+    //    warn: '#f44336',
+
+      // ...
+    })
   ],
   providers: [
     SocketService,

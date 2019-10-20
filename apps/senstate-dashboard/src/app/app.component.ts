@@ -9,6 +9,7 @@ import {HubService} from "./state/hub.service";
 import {MatSliderChange} from "@angular/material/slider";
 import {Observable} from "rxjs";
 import {ErrorData, LogData} from "@senstate/client";
+import {MaterialCssVarsService} from "angular-material-css-vars";
 
 @Component({
   selector: 'senstate-root',
@@ -34,14 +35,22 @@ export class AppComponent {
   watcherCount$ = this.hubService.watcherCount$;
   delayLabel = (num) => `${num} ms`;
 
+  darkTheme = true;
+
   constructor (private http: HttpClient,
                private socketService: SocketService,
                private hubService: HubService,
-               private route: ActivatedRoute) {
+               private route: ActivatedRoute,
+               public materialCssVarsService: MaterialCssVarsService) {
     this.route.queryParamMap.subscribe(q => {
       this.isMobile = q.has('mobile');
       console.info('params', q)
     });
+
+    materialCssVarsService.setDarkTheme(true);
+    const hex = '#8e24aa';
+    this.materialCssVarsService.setPrimaryColor(hex);
+    this.materialCssVarsService.setAccentColor('#C64BFF');
 
     this.socketService.socket.socketEvents$.subscribe(value => {
       console.info('Socket event', value);
@@ -92,5 +101,10 @@ export class AppComponent {
 
   changeDebounce ($event: MatSliderChange) {
     this.socketService.socket.sendJson(DASHBOARD_EVENT_NAMES.CHANGE_DEBOUNCE_TIME, $event.value);
+  }
+
+  toggleTheme () {
+    this.darkTheme = !this.darkTheme;
+    this.materialCssVarsService.setDarkTheme(this.darkTheme);
   }
 }

@@ -53,6 +53,11 @@
         {{ delayLabel(slider.value) }}
           </span>
       </div>
+
+      <label>Theme</label>
+      <div>
+        <button mat-raised-button color="primary" (click)="toggleTheme()">Toggle</button>
+      </div>
     </div>
   </mde-popover>
 </mat-toolbar>
@@ -153,8 +158,6 @@
       </ng-container>
     </div>
   </mde-popover>
-
-
 </div>
 
 
