@@ -21,6 +21,6 @@ jobs:
       run: |
         npm install
         npm run affected:build
-       npm run affected:test
+        npm run affected:test
       env:
         CI: true
