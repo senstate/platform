@@ -20,7 +20,16 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install
-        npm run affected:build --base=remotes/origin/$GITHUB_BASE_REF
-        npm run affected:test --base=remotes/origin/$GITHUB_BASE_REF
+        if [[ $GITHUB_BASE_REF ]]
+        then
+          export NX_BASE=remotes/origin/$GITHUB_BASE_REF
+        else
+          export NX_BASE=$(git rev-parse HEAD~1)
+        fi
+        echo "Base => $NX_BASE"
+        npm run format:check -- --base=$NX_BASE
+        # npm run affected:lint -- --base=$NX_BASE
+        npm run affected:build -- --base=$NX_BASE
+        npm run affected:test -- --base=$NX_BASE
       env:
         CI: true
