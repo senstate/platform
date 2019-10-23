@@ -20,7 +20,7 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install
-        npm run affected:build
-        npm run affected:test
+        npm run affected:build --base=remotes/origin/$GITHUB_BASE_REF
+        npm run affected:test --base=remotes/origin/$GITHUB_BASE_REF
       env:
         CI: true
