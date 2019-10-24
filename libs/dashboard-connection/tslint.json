@@ -2,6 +2,7 @@
   "extends": "../../tslint.json",
   "rules": {
     "directive-selector": [true, "attribute", "senstate", "camelCase"],
-    "component-selector": [true, "element", "senstate", "kebab-case"]
+    "component-selector": [true, "element", "senstate", "kebab-case"],
+    "import-blacklist": [true, "@senstate/dashboard-connection"]
   }
 }

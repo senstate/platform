@@ -2,6 +2,7 @@
   "extends": "../../tslint.json",
   "rules": {
     "directive-selector": [true, "attribute", "sen", "camelCase"],
-    "component-selector": [true, "element", "sen", "kebab-case"]
+    "component-selector": [true, "element", "sen", "kebab-case"],
+    "import-blacklist": [true, "@senstate/app-utils"]
   }
 }

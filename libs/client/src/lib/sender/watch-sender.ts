@@ -1,6 +1,6 @@
-import { WatchType} from './interfaces';
-import { CONNECTION } from './current-connection';
-import {someGuid} from "./utils";
+import { WatchType} from '../interfaces';
+import { CONNECTION } from '../current-connection';
+import {someGuid} from "../utils/utils";
 
 
 export type WatchSender = (v: any) => void;

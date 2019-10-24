@@ -1,5 +1,5 @@
-import {CONNECTION} from './current-connection';
-import {LogLevel} from "./interfaces";
+import {CONNECTION} from '../current-connection';
+import {LogLevel} from "../interfaces";
 
 
 export type LogSender = (log: string, data?: any, line?: any) => void;

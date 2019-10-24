@@ -1,6 +1,6 @@
-import { WatchSender, createWatchSender } from './watch-sender';
-import { WatchType } from './interfaces';
 import { mil } from './utils';
+import {createWatchSender, WatchSender} from "../sender/watch-sender";
+import {WatchType} from "../interfaces";
 
 export class TimeMeasurer {
   private readonly sender: WatchSender;

@@ -1,12 +1,11 @@
 import {BehaviorSubject, combineLatest, Subject} from 'rxjs';
-import {AppMeta, CLIENT_CONSTS, ErrorData, LogData, WatchData, WatcherMeta} from '@senstate/client';
+import {AppMeta, CLIENT_CONSTS, ErrorData, LogData, toIsoWithOffset, WatchData, WatcherMeta} from '@senstate/client';
 import {DASHBOARD_EVENT_NAMES, LogEvent, ErrorEvent} from '@senstate/dashboard-connection';
 import {StateService} from "./state.service";
 
 import * as WebSocket from 'ws';
 import {ConnectedClient} from "./connectedClient";
 import {auditTime, groupBy, mergeMap, skip, switchMap, takeUntil, tap, withLatestFrom} from "rxjs/operators";
-import {toIsoWithOffset} from "../../../../libs/client/src/lib/date.utils";
 
 
 // extract
