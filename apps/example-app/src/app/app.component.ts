@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {interval, Subject, Subscription} from 'rxjs';
-import {genericLogSender, LogLevel, SenstateOperators, WatchType} from '@senstate/client';
+import {genericLogSender, LogLevel, PropertyWatcher, SenstateOperators, WatchType} from '@senstate/client';
 import {map} from 'rxjs/operators';
 
 const logger = genericLogSender();
@@ -31,6 +31,13 @@ function typeToLabel (watchType: WatchType) {
 })
 export class AppComponent {
   title = 'example-app';
+
+  @PropertyWatcher()
+  public watchProperty = 0;
+
+
+  @PropertyWatcher('otherKey')
+  public watchOtherProperty = 0;
 
   public runningWatchers: IWatcherInfo[] = [];
 
@@ -121,5 +128,10 @@ export class AppComponent {
     this.startTimer(50, WatchType.String);
     this.startTimer(50, WatchType.Number);
     this.startTimer(50, WatchType.Json);
+  }
+
+  updateProperty () {
+    this.watchProperty++;
+    this.watchOtherProperty += 2;
   }
 }
