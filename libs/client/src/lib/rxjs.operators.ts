@@ -23,6 +23,8 @@ export const SenstateOperators = {
   }
 };
 
+// TODO to scan pipe ?
+
 export const UtilOperators = {
   min: () => {
     // any better rxjs way?

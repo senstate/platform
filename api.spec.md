@@ -1,9 +1,9 @@
 # API V0.1.4
 
-Point your websocket connection to the cli `ws://ip:3333`
+Point your websocket connection to the hub `ws://ip:3333`
 
 ## Event Types
-Generic Event, sent as json to the cli
+Generic Event, sent as json to the hub
 ```ts
 interface EventType<T> {
   event: string,

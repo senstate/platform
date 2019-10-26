@@ -38,7 +38,7 @@ export interface LogData {
 }
 
 export interface ErrorData {
-  errorName: string;
+  errorName?: string;
   message: string;
   line?: number;
   methodName?: string;

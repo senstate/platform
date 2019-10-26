@@ -1,5 +1,4 @@
-import {createLogSender} from "../sender/log-sender";
-import {createWatchSender} from "@senstate/client";
+import {createWatchSender} from "../sender/watch-sender";
 
 export interface SimpleChange<T> {
   previousValue: T;
