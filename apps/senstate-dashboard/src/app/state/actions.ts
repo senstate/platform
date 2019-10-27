@@ -12,6 +12,9 @@ export declare interface ActionCreatorMap {
 
 export declare type unionMap<C extends ActionCreatorMap> = ActionType<C[keyof C]>;
 
+export const DashboardActions = {
+  TOGGLE_PAUSE: action('[Dashboard] Toggle Pause', payload<string>())
+};
 
 export const HubActions = {
   SET_HUB_URL: action('[Hub] Set Hub URL'), // TODO
@@ -23,3 +26,4 @@ export const HubActions = {
 };
 
 export type HubActions = unionMap<typeof HubActions>;
+export type DashboardActions = unionMap<typeof DashboardActions>;

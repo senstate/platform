@@ -1,4 +1,4 @@
-import {HubActions} from '../state/actions';
+import {DashboardActions, HubActions} from '../state/actions';
 import {Action} from "ts-action";
 import {on} from 'ts-action-immer/reducer';
 import {createReducer} from "@ngrx/store";
@@ -20,7 +20,13 @@ interface AppState {
   [key: string]: Partial<EventsByApp>;
 }
 
+interface WatchersPaused {
+  [key: string]: boolean; // key => APPID_WATCHID
+}
+
 export interface HubState {
+  watchersPaused: WatchersPaused;
+
   socketStatus: SocketEvent;
   eventsByApp: AppState;
   watcherToApp: WatcherToApp;
@@ -34,6 +40,11 @@ export interface HubState {
 
 export const HubReducerInitState: HubState = {
   socketStatus: SocketEvent.Connecting,
+
+  // settings
+  watchersPaused: {},
+
+  // data
   eventsByApp: {},
   watcherToApp: {},
   eventsCounter: {},
@@ -85,6 +96,10 @@ const topicReducer = createReducer(
 
     const appId = state.watcherToApp[watchId];
 
+    if (state.watchersPaused[`${appId}_${watchId}`]) {
+      return;
+    }
+
     const eventsByApp = state.eventsByApp[appId] = state.eventsByApp[appId] || {};
     eventsByApp[watchId] = data;
 
@@ -104,6 +119,12 @@ const topicReducer = createReducer(
 
   on(HubActions.STATUS_CHANGED, (state, action) => {
     state.socketStatus = action.payload;
+  }),
+
+  on(DashboardActions.TOGGLE_PAUSE, (state, action) => {
+    const paused = state.watchersPaused[action.payload] || false;
+    state.watchersPaused[action.payload] = !paused;
+    console.info(state.watchersPaused, paused);
   })
 );
 

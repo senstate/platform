@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {State} from './index'
 import {SocketEvent} from "@senstate/client-connection";
-import {HubActions} from "./actions";
+import {DashboardActions, HubActions} from "./actions";
+import {map, tap} from "rxjs/operators";
 
 @Injectable()
 export class HubService {
@@ -30,6 +31,13 @@ export class HubService {
 
   }
 
+  getWatchersByApp$ (appId: string) {
+    return this.state.select(state => {
+      const watchers = state.data.meta.apps[appId].watchers;
+      return Object.keys(watchers).map(w => watchers[w]);
+    })
+  }
+
   getWatcherData$ (watchId: string) {
     return this.state.select(state => {
       const appId = state.data.watcherToApp[watchId];
@@ -48,19 +56,29 @@ export class HubService {
     })
   }
 
-  getLogs (appId: string) {
+  getLogs$ (appId: string) {
     return this.state.select(state => {
       return state.data.logsByApp[appId];
     })
   }
 
-  getErrors (appId: string) {
+  getErrors$ (appId: string) {
     return this.state.select(state => {
       return state.data.errorsByApp[appId];
     })
   }
 
+  isWatcherPaused$(appId: string, watchId: string) {
+    return this.state.select(s => s.data.watchersPaused[`${appId}_${watchId}`]).pipe(
+      map(v => v || false)
+    );
+  }
+
   statusChanged (value: SocketEvent) {
     this.state.dispatch(HubActions.STATUS_CHANGED(value));
+  }
+
+  togglePaused (appId: string, watchId: string) {
+    this.state.dispatch(DashboardActions.TOGGLE_PAUSE(`${appId}_${watchId}`));
   }
 }

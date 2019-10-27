@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Actions, Effect} from "@ngrx/effects";
-import {SocketService} from "../socket.service";
 import {DASHBOARD_EVENT_NAMES, MetaStore} from "@senstate/dashboard-connection";
 import {map, tap} from "rxjs/operators";
 import {HubActions} from "./actions";
 import {ErrorData, LogData, WatchData} from "@senstate/client";
+import {SocketService} from "../services/socket.service";
 
 @Injectable()
 export class HubEffects {

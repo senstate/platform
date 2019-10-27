@@ -11,6 +11,8 @@
          [ngSwitch]="tag.type">
 
       <senstate-watcher-card [title]="tag.tag"
+                             [appId]="appId"
+                             [watchId]="tag.watchId"
                              *ngSwitchCase="0">
         <senstate-string-watcher
           [watchId]="tag.watchId"
@@ -18,6 +20,8 @@
         ></senstate-string-watcher>
       </senstate-watcher-card>
       <senstate-watcher-card [title]="tag.tag" [showMenu]="true"
+                             [appId]="appId"
+                             [watchId]="tag.watchId"
                              *ngSwitchCase="1">
         <div menu-content>
           <mat-checkbox class="mat-menu-item" #minMaxCheckbox>Min / Max</mat-checkbox>
@@ -30,6 +34,8 @@
       </senstate-watcher-card>
 
       <senstate-watcher-card [title]="tag.tag"
+                             [appId]="appId"
+                             [watchId]="tag.watchId"
                              *ngSwitchCase="2">
         <senstate-json-watcher
           [watchId]="tag.watchId"

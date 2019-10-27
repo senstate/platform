@@ -1,6 +1,12 @@
 :host {
-  &:hover, &:focus-within {
+  &:hover {
     .top-line button {
+      visibility: visible;
+    }
+  }
+
+  &:focus-within {
+    .top-line button.menu {
       visibility: visible;
     }
   }
@@ -11,14 +17,40 @@
   height: 20px;
 
   button {
-    visibility: hidden;
-    height: 20px;
-    width: 25px;
-    line-height: 20px;
+    &:not(.paused) {
+      visibility: hidden;
+    }
+
+    &.pause_icon {
+      height: 16px;
+      width: 16px;
+      line-height: 16px;
+      opacity: 0.5;
+
+      &.paused, &:hover {
+        opacity: 1;
+      }
+
+      ::ng-deep mat-icon {
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    &.menu {
+      height: 20px;
+      width: 25px;
+      line-height: 20px;
+    }
   }
 }
 
 .label {
   align-self: center;
   flex: 1;
+}
+
+.pause_icon {
+  height: 16px;
+  width: 16px;
 }

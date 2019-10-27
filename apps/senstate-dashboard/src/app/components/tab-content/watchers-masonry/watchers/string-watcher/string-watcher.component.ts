@@ -6,7 +6,6 @@ import {HubService} from "../../../../../state/hub.service";
 @Component({
   selector: 'senstate-string-watcher',
   templateUrl: './string-watcher.component.html',
-  styleUrls: ['./string-watcher.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StringWatcherComponent implements OnInit {

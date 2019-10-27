@@ -1,6 +1,12 @@
 <div class="top-line">
+  <button mat-icon-button class="pause_icon"
+          [class.paused]="paused$ | async"
+          (click)="togglePaused()">
+    <mat-icon svgIcon="pause"></mat-icon>
+  </button>
   <span class="label mat-caption">{{ title }}</span>
   <button mat-icon-button *ngIf="showMenu"
+          class="menu"
           [matMenuTriggerFor]="matMenu">
     <mat-icon svgIcon="more_horiz"></mat-icon>
 

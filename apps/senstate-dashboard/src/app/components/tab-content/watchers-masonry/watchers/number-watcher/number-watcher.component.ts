@@ -7,7 +7,6 @@ import {HubService} from "../../../../../state/hub.service";
 @Component({
   selector: 'senstate-number-watcher',
   templateUrl: './number-watcher.component.html',
-  styleUrls: ['./number-watcher.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NumberWatcherComponent implements OnInit {
