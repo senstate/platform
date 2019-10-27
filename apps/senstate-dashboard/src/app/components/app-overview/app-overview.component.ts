@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef} from '@angular/core';
 import {App} from "@senstate/dashboard-connection";
 import {Observable} from "rxjs";
 import {ErrorData, LogData, WatcherMeta} from "@senstate/client";
@@ -20,7 +20,8 @@ export class AppOverviewComponent implements OnInit {
   public errors$: Observable<ErrorData[]>;
   public autoSizeActive = false;
 
-  constructor (private hub: HubService) {
+  constructor (private hub: HubService,
+               private cd: ChangeDetectorRef) {
   }
 
   ngOnInit () {
@@ -41,5 +42,6 @@ export class AppOverviewComponent implements OnInit {
 
   toggleAutoSize () {
     this.autoSizeActive = !this.autoSizeActive;
+    this.cd.markForCheck();
   }
 }

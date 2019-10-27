@@ -4,26 +4,32 @@
   border-radius: 10px;
 
   &:not(.auto) {
-    max-width: 100%;
+    width: 100%;
   }
 
   box-sizing: border-box;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 400px) {
   .card:not(.auto) {
-    max-width: 50%;
+    width: 50%;
+  }
+}
+
+@media all and (min-width: 700px) {
+  .card:not(.auto) {
+    width: 33%;
   }
 }
 
 @media all and (min-width: 1000px) {
   .card:not(.auto) {
-    max-width: 33%;
+    width: 25%;
   }
 }
 
-@media all and (min-width: 1300px) {
+@media all and (min-width: 1200px) {
   .card:not(.auto) {
-    max-width: 25%;
+    width: 20%;
   }
 }

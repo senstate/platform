@@ -45,6 +45,10 @@ $popoverHue: 600;
     border-radius: 10px;
     padding: 5px;
   }
+
+  .mde-popover-direction-arrow {
+    border-bottom-color: mat-css-color-primary($popoverHue+100) !important;
+  }
 }
 
 code {

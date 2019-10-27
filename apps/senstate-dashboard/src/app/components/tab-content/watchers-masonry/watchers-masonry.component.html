@@ -6,7 +6,8 @@
 
 
   <ngx-masonry [options]="masonryConfig">
-    <div [class]="'card card_type_'+tag.watchId" ngxMasonryItem [class.auto]="autoSizeCards"
+    <div [class]="'card card_type_'+tag.type" ngxMasonryItem
+         [class.auto]="autoSizeCards"
          *ngFor="let tag of watchers; trackBy: trackByWatcherFunc"
          [ngSwitch]="tag.type">
 

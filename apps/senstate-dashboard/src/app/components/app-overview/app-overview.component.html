@@ -3,8 +3,8 @@
 <mat-tab-group>
   <mat-tab>
     <ng-template mat-tab-label>
-            <span [matBadge]="getObjectLength(app.watchers)"
-                  matBadgeOverlap="false">Watchers</span>
+      <span [matBadge]="getObjectLength(app.watchers)"
+            matBadgeOverlap="false">Watchers</span>
     </ng-template>
 
     <senstate-watchers-masonry [appId]="app.appId"
@@ -40,8 +40,7 @@
              [mdePopoverCloseOnClick]="false"
              [mdePopoverOffsetX]="0"
              [mdePopoverOffsetY]="2"
-             [mdePopoverArrowOffsetX]="15"
-             mdePopoverArrowColor="#FFFFFF">
+             [mdePopoverArrowOffsetX]="15">
   <div class="popover mat-elevation-z2">
     <label>Card-Size</label>
     <mat-checkbox [checked]="autoSizeActive"
