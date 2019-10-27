@@ -3,13 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {filter, map, pluck, shareReplay,} from 'rxjs/operators';
 import {App, DASHBOARD_EVENT_NAMES, ErrorEvent, NetworkInfo} from '@senstate/dashboard-connection';
 import {ActivatedRoute} from "@angular/router";
-import {SocketService} from "./socket.service";
 import {SocketEvent} from "@senstate/client-connection";
 import {HubService} from "./state/hub.service";
 import {MatSliderChange} from "@angular/material/slider";
 import {Observable} from "rxjs";
 import {ErrorData, LogData} from "@senstate/client";
 import {MaterialCssVarsService} from "angular-material-css-vars";
+import {SocketService} from "./services/socket.service";
 
 @Component({
   selector: 'senstate-root',
@@ -65,37 +65,15 @@ export class AppComponent {
     });
   }
 
-  public getAppLogs$(appId: string) {
-    return this.logObservablesByApp[appId] // cached
-      || (this.logObservablesByApp[appId] = this.hubService.getLogs(appId).pipe(
-      filter(logs => !!logs),
-      map(logs => logs.map(l => l.data)),
-      shareReplay(0)
-    ));
-  }
-
-  public getAppErrors$(appId: string) {
-    return this.errorObservablesByApp[appId] ||
-      (this.errorObservablesByApp[appId] = this.hubService.getErrors(appId).pipe(
-        filter(error => !!error),
-        map(er => er.map(e => e.data)),
-        shareReplay(0)
-      ));
-  }
-
   public trackByAppFunc (appObj: App) {
     return appObj.appId;
   }
 
-  public trackByWatcherFunc (tagObj: any) {
-    return tagObj.watchId;
-  }
 
-  getObjectLength (obj: {}) {
-    return `${Object.keys(obj).length}`;
-  }
+
 
   getValues <T>(obj: {[key: string]: T}) {
+    console.info('getValues call');
     return Object.values(obj);
   }
 

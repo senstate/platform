@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {UtilOperators} from "@senstate/client";
-import {HubService} from "../../state/hub.service";
 import {filter, shareReplay, tap} from "rxjs/operators";
+import {HubService} from "../../../../../state/hub.service";
 
 @Component({
   selector: 'senstate-number-watcher',
@@ -14,6 +14,9 @@ export class NumberWatcherComponent implements OnInit {
 
   @Input()
   public watchId: string;
+
+  @Input()
+  public showMinMax : boolean;
 
   public data$ : Observable<any>;
 

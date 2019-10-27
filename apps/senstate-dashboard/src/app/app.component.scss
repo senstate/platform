@@ -20,17 +20,14 @@ $watchColumns: 2;
 
 .cards {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+  padding: 10px;
+  height: 100vw;
 }
 
-.card {
-  flex: 1;
-  margin: 5px;
 
-  min-width: calc(100 / #{$watchColumns} - 10px);
-  max-width: calc(100 / #{$watchColumns} - 10px);
-}
+
 
 $popoverHue: 600;
 

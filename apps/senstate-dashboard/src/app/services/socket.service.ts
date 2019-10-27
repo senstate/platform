@@ -1,8 +1,8 @@
 import {Injectable, NgZone} from "@angular/core";
-import {environment} from "../environments/environment";
 import {Socket} from "@senstate/client-connection";
 import {filter, map, tap} from "rxjs/operators";
 import {enterZone} from "@senstate/app-utils";
+import {environment} from "../../environments/environment";
 
 const config = {
   url: environment.apiUrl, options: {}

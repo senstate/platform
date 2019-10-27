@@ -65,72 +65,7 @@
 <div class="content">
   <div *ngIf="mappedApps$ | async as apps">
     <div *ngFor="let app of apps; trackBy: trackByAppFunc">
-      <h2 class="mat-h2">{{app.name}}</h2>
-
-      <mat-tab-group>
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <span [matBadge]="getObjectLength(app.watchers)"
-                  matBadgeOverlap="false">Watchers</span>
-          </ng-template>
-
-          <ng-container *ngIf="getValues(app.watchers) as watchers">
-
-            <h2 class="mat-h3" *ngIf="watchers.length === 0">
-              No watchers yet :)
-            </h2>
-
-
-            <div class="cards">
-              <ng-container *ngFor="let tag of watchers; trackBy: trackByWatcherFunc"
-                            [ngSwitch]="tag.type">
-                <div class="card">
-                  <span class="label mat-caption">{{ tag.tag }}</span>
-                  <senstate-string-watcher
-                      [watchId]="tag.watchId"
-                    *ngSwitchCase="0"
-                  ></senstate-string-watcher>
-
-                  <senstate-number-watcher
-                    *ngSwitchCase="1"
-
-                    [watchId]="tag.watchId"
-                  ></senstate-number-watcher>
-
-                  <senstate-number-watcher
-                    *ngSwitchCase="3"
-                  ></senstate-number-watcher>
-
-                  <senstate-json-watcher
-                    *ngSwitchCase="2"
-                    [watchId]="tag.watchId"
-                  >
-
-                  </senstate-json-watcher>
-
-                  <mat-card *ngSwitchDefault>
-                    <mat-card-title>{{tag.tag}}</mat-card-title>
-                    <mat-card-subtitle>{{tag.watchId}}</mat-card-subtitle>
-                  </mat-card>
-                </div>
-              </ng-container>
-            </div>
-          </ng-container>
-        </mat-tab>
-        <mat-tab label="Log">
-          <senstate-log-viewer [logArray]="getAppLogs$(app.appId) | async"></senstate-log-viewer>
-        </mat-tab>
-        <mat-tab *ngIf="getAppErrors$(app.appId) | async as errors">
-          <ng-template mat-tab-label>
-            <span [matBadge]="''+errors.length"
-                  matBadgeOverlap="false">Errors</span>
-          </ng-template>
-
-          <senstate-error-viewer [errorArray]="getAppErrors$(app.appId) | async"></senstate-error-viewer>
-
-        </mat-tab>
-      </mat-tab-group>
-
+      <senstate-app-overview [app]="app"></senstate-app-overview>
     </div>
   </div>
 

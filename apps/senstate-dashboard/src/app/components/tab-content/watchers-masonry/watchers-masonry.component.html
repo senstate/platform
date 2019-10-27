@@ -1,0 +1,47 @@
+<ng-container *ngIf="watchers$ |async as watchers">
+
+  <h2 class="mat-h3" *ngIf="watchers.length === 0">
+    No watchers yet :)
+  </h2>
+
+
+  <ngx-masonry [options]="masonryConfig">
+    <div class="card" ngxMasonryItem
+         *ngFor="let tag of watchers; trackBy: trackByWatcherFunc"
+         [ngSwitch]="tag.type">
+
+      <senstate-watcher-card [title]="tag.tag"
+                             *ngSwitchCase="0">
+        <senstate-string-watcher
+          [watchId]="tag.watchId"
+
+        ></senstate-string-watcher>
+      </senstate-watcher-card>
+      <senstate-watcher-card [title]="tag.tag" [showMenu]="true"
+                             *ngSwitchCase="1">
+        <div menu-content>
+          <mat-checkbox class="mat-menu-item" #minMaxCheckbox>Min / Max</mat-checkbox>
+        </div>
+
+        <senstate-number-watcher
+          [showMinMax]="minMaxCheckbox.checked"
+          [watchId]="tag.watchId"
+        ></senstate-number-watcher>
+      </senstate-watcher-card>
+
+      <senstate-watcher-card [title]="tag.tag"
+                             *ngSwitchCase="2">
+        <senstate-json-watcher
+          [watchId]="tag.watchId"
+        >
+
+        </senstate-json-watcher>
+      </senstate-watcher-card>
+
+      <mat-card *ngSwitchDefault>
+        <mat-card-title>{{tag.tag}}</mat-card-title>
+        <mat-card-subtitle>{{tag.watchId}}</mat-card-subtitle>
+      </mat-card>
+    </div>
+  </ngx-masonry>
+</ng-container>

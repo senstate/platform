@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {WatchData} from "@senstate/client";
-import {HubService} from "../../state/hub.service";
+import {HubService} from "../../../../../state/hub.service";
 
 @Component({
   selector: 'senstate-json-watcher',

@@ -1,0 +1,14 @@
+<div class="top-line">
+  <span class="label mat-caption">{{ title }}</span>
+  <button mat-icon-button *ngIf="showMenu"
+          [matMenuTriggerFor]="matMenu">
+    <mat-icon svgIcon="more_horiz"></mat-icon>
+
+  </button>
+  <mat-menu #matMenu>
+    <ng-content select="[menu-content]"></ng-content>
+  </mat-menu>
+</div>
+<mat-card>
+  <ng-content></ng-content>
+</mat-card>

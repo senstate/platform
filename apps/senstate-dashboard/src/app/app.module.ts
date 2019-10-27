@@ -15,10 +15,6 @@ import {
 import { QRCodeModule } from 'angular2-qrcode';
 import {MdePopoverModule} from "@material-extended/mde";
 import {RouterModule} from "@angular/router";
-import { NumberWatcherComponent } from './watchers/number-watcher/number-watcher.component';
-import { StringWatcherComponent } from './watchers/string-watcher/string-watcher.component';
-import { JsonWatcherComponent } from './watchers/json-watcher/json-watcher.component';
-import {SocketService} from "./socket.service";
 import {StoreModule} from '@ngrx/store'
 import {EffectsModule} from '@ngrx/effects'
 import {metaReducers, stateReducer} from "./state";
@@ -29,23 +25,21 @@ import {app_icons} from "./app.icons";
 import {MatSliderModule} from "@angular/material/slider";
 import {PrettyJsonModule} from "angular2-prettyjson";
 import { JsonViewerComponent } from './components/json-viewer/json-viewer.component';
-import { LogViewerComponent } from './components/log-viewer/log-viewer.component';
 import {MatTableModule} from "@angular/material/table";
 import {CdkTableModule} from "@angular/cdk/table";
-import {LogLevelPipe} from "./components/log-viewer/log-level.pipe";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { ErrorViewerComponent } from './components/error-viewer/error-viewer.component';
 import {MaterialCssVarsModule} from "angular-material-css-vars";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatMenuModule} from "@angular/material/menu";
+import {SocketService} from "./services/socket.service";
+import {AppOverviewModule} from "./components/app-overview/app-overview.module";
 
 @NgModule({
   declarations: [
-    AppComponent, NumberWatcherComponent, StringWatcherComponent,
-    JsonWatcherComponent, JsonViewerComponent, LogViewerComponent,
-    LogLevelPipe,
-    ErrorViewerComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,17 +87,18 @@ import {MaterialCssVarsModule} from "angular-material-css-vars";
       lightThemeClass: 'isLightTheme',
       isDarkTheme: true,
 
-  //      primary: '#3f51b5',
-   //     accent: '#e91e63',
-    //    warn: '#f44336',
+      //      primary: '#3f51b5',
+      //     accent: '#e91e63',
+      //    warn: '#f44336',
 
       // ...
-    })
+    }),
+    MatCheckboxModule,
+    MatMenuModule,
+    AppOverviewModule,
   ],
   providers: [
     SocketService,
-
-
   ],
   bootstrap: [AppComponent]
 })
