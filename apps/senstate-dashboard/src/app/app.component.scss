@@ -31,17 +31,20 @@ $watchColumns: 2;
 
 $popoverHue: 600;
 
-.popover {
-  @include mat-css-color-and-contrast($popoverHue);
-  border: 4px solid mat-css-color-primary($popoverHue+100);
+::ng-deep {
 
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border-radius: 10px;
-  padding: 5px;
+  .popover {
+    @include mat-css-color-and-contrast($popoverHue);
+    border: 4px solid mat-css-color-primary($popoverHue+100);
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+  }
 }
 
 code {

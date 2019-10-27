@@ -1,12 +1,10 @@
-
-
 <p *ngIf="data$ | async as data; else noDataYet">{{ data }}</p>
 
 <ng-template #noDataYet>
-  <i>Watcher registered, but no data send yet</i>
+  <i>no data send yet</i>
 </ng-template>
 
-  <div *ngIf="showMinMax">
-    Min: <b>{{min$ | async}}</b> <br/>
-    Max: <b>{{max$ | async}}</b> <br/>
-  </div>
+<div *ngIf="showMinMax">
+  Min: <b>{{min$ | async}}</b> <br/>
+  Max: <b>{{max$ | async}}</b> <br/>
+</div>

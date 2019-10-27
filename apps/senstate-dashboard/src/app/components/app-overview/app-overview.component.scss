@@ -1,0 +1,14 @@
+:host ::ng-deep {
+  mat-tab-group .mat-tab-label.mat-tab-disabled {
+    position: absolute;
+    right: 0;
+
+    justify-content: flex-end;
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
+
+.popover {
+  padding: 15px
+}

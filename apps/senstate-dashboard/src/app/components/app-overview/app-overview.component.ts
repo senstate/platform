@@ -18,6 +18,7 @@ export class AppOverviewComponent implements OnInit {
 
   public logs$: Observable<LogData[]>;
   public errors$: Observable<ErrorData[]>;
+  public autoSizeActive = false;
 
   constructor (private hub: HubService) {
   }
@@ -36,5 +37,9 @@ export class AppOverviewComponent implements OnInit {
 
   getObjectLength (obj: {}) {
     return `${Object.keys(obj).length}`;
+  }
+
+  toggleAutoSize () {
+    this.autoSizeActive = !this.autoSizeActive;
   }
 }

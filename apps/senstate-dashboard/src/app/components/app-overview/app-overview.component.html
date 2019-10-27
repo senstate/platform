@@ -7,7 +7,9 @@
                   matBadgeOverlap="false">Watchers</span>
     </ng-template>
 
-    <senstate-watchers-masonry [appId]="app.appId"></senstate-watchers-masonry>
+    <senstate-watchers-masonry [appId]="app.appId"
+                               [autoSizeCards]="autoSizeActive">
+    </senstate-watchers-masonry>
   </mat-tab>
   <mat-tab label="Log">
     <senstate-log-viewer [logArray]="logs$ | async"></senstate-log-viewer>
@@ -21,4 +23,30 @@
     <senstate-error-viewer [errorArray]="errors"></senstate-error-viewer>
 
   </mat-tab>
+  <mat-tab [disabled]="true">
+    <ng-template mat-tab-label>
+      <button mat-icon-button
+              [mdePopoverTriggerFor]="settingsPopover"
+              mdePopoverTriggerOn="click">
+        <mat-icon svgIcon="more_vert"></mat-icon>
+      </button>
+    </ng-template>
+  </mat-tab>
 </mat-tab-group>
+
+
+<mde-popover #settingsPopover="mdePopover"
+             [mdePopoverOverlapTrigger]="false"
+             [mdePopoverCloseOnClick]="false"
+             [mdePopoverOffsetX]="0"
+             [mdePopoverOffsetY]="2"
+             [mdePopoverArrowOffsetX]="15"
+             mdePopoverArrowColor="#FFFFFF">
+  <div class="popover mat-elevation-z2">
+    <label>Card-Size</label>
+    <mat-checkbox [checked]="autoSizeActive"
+                  (click)="toggleAutoSize()">
+      Disable Max-Width
+    </mat-checkbox>
+  </div>
+</mde-popover>

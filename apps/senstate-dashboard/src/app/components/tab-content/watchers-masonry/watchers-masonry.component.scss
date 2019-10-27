@@ -3,6 +3,27 @@
   padding-bottom: 15px;
   border-radius: 10px;
 
-  max-width: 25%;
+  &:not(.auto) {
+    max-width: 100%;
+  }
+
   box-sizing: border-box;
+}
+
+@media all and (min-width: 600px) {
+  .card:not(.auto) {
+    max-width: 50%;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  .card:not(.auto) {
+    max-width: 33%;
+  }
+}
+
+@media all and (min-width: 1300px) {
+  .card:not(.auto) {
+    max-width: 25%;
+  }
 }

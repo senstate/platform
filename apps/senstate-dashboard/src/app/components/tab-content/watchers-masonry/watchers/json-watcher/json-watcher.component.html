@@ -1,1 +1,6 @@
- <senstate-json-viewer [data]="data$ | async"></senstate-json-viewer>
+ <senstate-json-viewer *ngIf="data$ | async as data; else noDataYet"
+                       [data]="data"></senstate-json-viewer>
+
+ <ng-template #noDataYet>
+   <i>no data send yet</i>
+ </ng-template>

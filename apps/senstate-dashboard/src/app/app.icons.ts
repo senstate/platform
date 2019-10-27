@@ -5,6 +5,7 @@ export const app_icons = [
   'play_circle',
   'play_arrow',
   'more_horiz',
+  'more_vert',
   'settings_applications',
   'watch_later'
 ];

@@ -21,13 +21,14 @@
       visibility: hidden;
     }
 
+    opacity: 0.5;
+
     &.pause_icon {
       height: 16px;
       width: 16px;
       line-height: 16px;
-      opacity: 0.5;
 
-      &.paused, &:hover {
+      &.paused {
         opacity: 1;
       }
 
@@ -41,6 +42,11 @@
       height: 20px;
       width: 25px;
       line-height: 20px;
+    }
+
+
+    &:hover {
+      opacity: 1;
     }
   }
 }

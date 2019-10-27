@@ -15,6 +15,9 @@ export class WatchersMasonryComponent implements OnInit {
   @Input()
   public appId: string;
 
+  @Input()
+  public autoSizeCards = false;
+
   public watchers$: Observable<WatcherMeta[]>;
 
   public masonryConfig: NgxMasonryOptions = {
