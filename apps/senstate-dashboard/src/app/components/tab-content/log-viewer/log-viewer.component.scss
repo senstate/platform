@@ -1,5 +1,16 @@
+// TODO Extract as CSS Vars?
+$levelDebugBackground: #c2c2c2;
+$levelWarnBackground: #ffbb93;
+$levelErrorBackground: #b91400;
+$cellPadding: 5px;
+
 table {
   width: 100%;
+}
+
+td {
+  padding-top: $cellPadding !important;
+  padding-bottom: $cellPadding !important;
 }
 
 /** yes, min/max/normal width needed, otherwise the table won't use the max-width **/
@@ -19,7 +30,7 @@ table {
 
 .log-level0 {
   // Debug
-  background: #78909c;
+  background: $levelDebugBackground;
 }
 
 .log-level1 {
@@ -27,11 +38,11 @@ table {
 }
 
 .log-level2 {
-  background: #ff7043;
+  background: $levelWarnBackground;
 }
 
 .log-level3 {
-  background: #e64a19;
+  background: $levelErrorBackground;
 }
 
 .data-row {

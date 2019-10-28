@@ -1,7 +1,7 @@
 <h2 class="mat-h2">{{app.name}}</h2>
 
 <mat-tab-group>
-  <mat-tab>
+  <mat-tab #tab>
     <ng-template mat-tab-label>
       <span [matBadge]="getObjectLength(app.watchers)"
             matBadgeOverlap="false">Watchers</span>
@@ -25,7 +25,7 @@
   </mat-tab>
   <mat-tab [disabled]="true">
     <ng-template mat-tab-label>
-      <button mat-icon-button
+      <button mat-icon-button *ngIf="tab.position === 0"
               [mdePopoverTriggerFor]="settingsPopover"
               mdePopoverTriggerOn="click">
         <mat-icon svgIcon="more_vert"></mat-icon>
