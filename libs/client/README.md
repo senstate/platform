@@ -16,7 +16,7 @@ setSenstateConnection({
   // appId: 'customShortId' optional
 }  /* , ws://localhost:3333 */); // custom hub-address, working locally you won't need to change the target address
 ```
-Without calling `setStenstateConnection` all watchers/senders won't send anything to the Dashboard.
+Without calling `setSenstateConnection` all watchers/senders won't send anything to the Dashboard.
 
 ## Low-Level Senders
 
