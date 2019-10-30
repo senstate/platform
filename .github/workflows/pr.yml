@@ -33,3 +33,9 @@ jobs:
         npm run affected:test -- --base=$NX_BASE
       env:
         CI: true
+    - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v2.2.6
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CODE_COVERAGE_REPORT_ID }}
+      with:
+        coverageCommand: "npm run client:coverage"
