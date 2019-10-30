@@ -27,7 +27,7 @@ jobs:
           export NX_BASE=$(git rev-parse HEAD~1)
         fi
         echo "Base => $NX_BASE"
-        npm run format:check -- --base=$NX_BASE
+        # npm run format:check -- --base=$NX_BASE
         # npm run affected:lint -- --base=$NX_BASE
         npm run affected:build -- --base=$NX_BASE
         npm run affected:test -- --base=$NX_BASE
