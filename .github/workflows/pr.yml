@@ -32,7 +32,15 @@ jobs:
       env:
         CI: true
     - name: npm test
-      run: npm run affected:test -- --base=$NX_BASE
+      run: |
+        if [[ $GITHUB_BASE_REF ]]
+        then
+          export NX_BASE=remotes/origin/$GITHUB_BASE_REF
+        else
+          export NX_BASE=$(git rev-parse HEAD~1)
+        fi
+        echo "Base => $NX_BASE"
+        npm run affected:test -- --base=$NX_BASE
       env:
         CI: true
     - name: Test & publish code coverage
