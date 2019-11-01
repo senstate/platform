@@ -43,9 +43,8 @@ jobs:
         npm run affected:test -- --base=$NX_BASE
       env:
         CI: true
-    - name: Code Climate Coverage Action
-      uses: paambaati/codeclimate-action@v2.3.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CODE_COVERAGE_REPORT_ID }}
+    - name: Test with Coverage
+      run: npm run client:coverage
+    - uses: codecov/codecov-action@v1.0.3
       with:
-        coverageCommand: "npm run client:coverage"
+        token: ${{secrets.CODE_COV_TOKEN}}
