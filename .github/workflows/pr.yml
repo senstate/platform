@@ -17,9 +17,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
+    - name: npm install
+      run: npm install
+    - name: npm build
       run: |
-        npm install
         if [[ $GITHUB_BASE_REF ]]
         then
           export NX_BASE=remotes/origin/$GITHUB_BASE_REF
@@ -27,9 +28,23 @@ jobs:
           export NX_BASE=$(git rev-parse HEAD~1)
         fi
         echo "Base => $NX_BASE"
-        npm run format:check -- --base=$NX_BASE
-        # npm run affected:lint -- --base=$NX_BASE
         npm run affected:build -- --base=$NX_BASE
+      env:
+        CI: true
+    - name: npm test
+      run: |
+        if [[ $GITHUB_BASE_REF ]]
+        then
+          export NX_BASE=remotes/origin/$GITHUB_BASE_REF
+        else
+          export NX_BASE=$(git rev-parse HEAD~1)
+        fi
+        echo "Base => $NX_BASE"
         npm run affected:test -- --base=$NX_BASE
       env:
         CI: true
+    - name: Test with Coverage
+      run: npm run client:coverage
+    - uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODE_COV_TOKEN}}

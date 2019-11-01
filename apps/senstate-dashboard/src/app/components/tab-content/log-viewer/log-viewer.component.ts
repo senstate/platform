@@ -33,7 +33,6 @@ export class LogViewerComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild(MatSort, {static: true}) set matSort(ms: MatSort) {
     this.sort = ms;
-    console.info('set sort');
     this.setDataSourceAttributes();
   }
 

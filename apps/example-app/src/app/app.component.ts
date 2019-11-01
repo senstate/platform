@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {interval, Subject, Subscription} from 'rxjs';
+import {interval, Subscription} from 'rxjs';
 import {genericLogSender, LogLevel, PropertyWatcher, SenstateOperators, WatchType} from '@senstate/client';
 import {map} from 'rxjs/operators';
 
@@ -41,7 +41,6 @@ export class AppComponent {
 
   public runningWatchers: IWatcherInfo[] = [];
 
-  public timer$ = new Subject();
   watchTypes = [WatchType.Number, WatchType.String, WatchType.Json].map(t => ({
     name: typeToLabel(t),
     value: t
@@ -114,6 +113,8 @@ export class AppComponent {
   addWindowError () {
     let foo: any = null;
 
+    // example error to be "uncaught"
+    // noinspection JSObjectNullOrUndefined
     foo.baz();
   }
 

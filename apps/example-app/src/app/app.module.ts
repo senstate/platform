@@ -33,6 +33,7 @@ export class AppModule {
 setTimeout(() => {
   let foo: any;
 
+  // noinspection JSUnusedAssignment
   foo.baz();
-}, 1500);
+}, 4500);
 

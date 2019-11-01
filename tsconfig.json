@@ -22,7 +22,8 @@
       "@senstate/dashboard-connection": [
         "libs/dashboard-connection/src/index.ts"
       ],
-      "@senstate/app-utils": ["libs/app-utils/src/index.ts"]
+      "@senstate/app-utils": ["libs/app-utils/src/index.ts"],
+      "@test-utils/*": ["libs/test-utils/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
