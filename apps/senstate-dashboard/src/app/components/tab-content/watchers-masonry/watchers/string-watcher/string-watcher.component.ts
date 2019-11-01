@@ -13,7 +13,7 @@ export class StringWatcherComponent implements OnInit {
   @Input()
   public watchId: string;
 
-  public data$ : Observable<WatchData>;
+  public data$ : Observable<string>;
 
   constructor (private hubService: HubService) { }
 
