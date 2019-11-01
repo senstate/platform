@@ -36,10 +36,12 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatMenuModule} from "@angular/material/menu";
 import {SocketService} from "./services/socket.service";
 import {AppOverviewModule} from "./components/app-overview/app-overview.module";
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

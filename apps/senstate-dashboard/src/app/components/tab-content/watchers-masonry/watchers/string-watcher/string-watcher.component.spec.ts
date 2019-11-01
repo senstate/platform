@@ -1,12 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StringWatcherComponent } from './string-watcher.component';
-import {HubService} from "../../../../../state/hub.service";
 import {NEVER, of} from "rxjs";
-import {ineeda} from "ineeda";
 import {CommonModule} from "@angular/common";
+import {HubServiceMock, HubServiceMockProvider} from "@test-utils/mocks";
 
-const HubServiceMock = ineeda.factory<HubService>({});
 
 describe('StringWatcherComponent', () => {
   let component: StringWatcherComponent;
@@ -17,10 +15,7 @@ describe('StringWatcherComponent', () => {
       imports: [CommonModule],
       declarations: [ StringWatcherComponent ],
       providers: [
-        {
-          provide: HubService,
-          useClass: HubServiceMock
-        }
+        HubServiceMockProvider
       ]
     })
     .compileComponents()
@@ -36,7 +31,7 @@ describe('StringWatcherComponent', () => {
     expect(fixture.debugElement.nativeElement.textContent).toBe('no data send yet')
   });
 
-  it('got watch data - shows it', async (done) => {
+  it('got watch data - shows it', () => {
     const data =  'some string';
     fixture = TestBed.createComponent(StringWatcherComponent);
     HubServiceMock.getLatest().getWatcherData$ = watchId => of(data);
@@ -44,11 +39,6 @@ describe('StringWatcherComponent', () => {
     component.watchId = 'anyId';
     fixture.detectChanges();
     expect(component).toBeTruthy();
-
-    await fixture.whenRenderingDone();
-
     expect(fixture.debugElement.nativeElement.textContent).toContain(data);
-
-    done();
   });
 });

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LogViewerComponent } from './log-viewer.component';
+import {NO_ERRORS_SCHEMA} from "@angular/core";
+import {MatTableModule} from "@angular/material/table";
+import {LogLevelPipe} from "./log-level.pipe";
 
 describe('LogViewerComponent', () => {
   let component: LogViewerComponent;
@@ -8,7 +11,9 @@ describe('LogViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogViewerComponent ]
+      imports: [ MatTableModule ],
+      declarations: [ LogViewerComponent, LogLevelPipe ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
