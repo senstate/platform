@@ -5,16 +5,26 @@
     <mat-icon svgIcon="pause"></mat-icon>
   </button>
   <span class="label mat-caption">{{ title }}</span>
-  <button mat-icon-button *ngIf="showMenu"
+  <button mat-icon-button
           class="menu"
           [matMenuTriggerFor]="matMenu">
     <mat-icon svgIcon="more_horiz"></mat-icon>
-
   </button>
   <mat-menu #matMenu>
     <ng-content select="[menu-content]"></ng-content>
+    <mat-checkbox class="mat-menu-item" #showHistory>Show History</mat-checkbox>
   </mat-menu>
 </div>
 <mat-card>
   <ng-content></ng-content>
+  <ng-container *ngIf="showHistory.checked">
+
+    <hr class="mat-divider">
+    <span class="mat-caption">History (last 5)</span>
+
+    <senstate-watch-history [watchId]="watchId"
+                            [template]="historyTemplate">
+
+    </senstate-watch-history>
+  </ng-container>
 </mat-card>

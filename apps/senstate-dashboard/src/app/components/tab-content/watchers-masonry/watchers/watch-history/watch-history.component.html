@@ -1,0 +1,7 @@
+<ng-container *ngIf="data$ | async as entries">
+  <div *ngFor="let entry of entries">
+    <ng-container *ngTemplateOutlet="template; context: {$implicit: entry}">
+
+    </ng-container>
+  </div>
+</ng-container>

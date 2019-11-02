@@ -28,9 +28,6 @@ export class StacktracePipe implements PipeTransform {
 
     const instance = new stacktracey(value);
 
-    console.info(instance);
-
     return new stacktracey (value).pretty;
   }
-
 }

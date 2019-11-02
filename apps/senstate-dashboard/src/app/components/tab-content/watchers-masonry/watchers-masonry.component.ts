@@ -1,8 +1,18 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Directive,
+  TemplateRef,
+  ContentChild,
+  Output, EventEmitter
+} from '@angular/core';
 import {Observable} from "rxjs";
 import {WatcherMeta} from "@senstate/client";
 import {HubService} from "../../../state/hub.service";
 import {NgxMasonryOptions} from "ngx-masonry";
+
 
 @Component({
   selector: 'senstate-watchers-masonry',
