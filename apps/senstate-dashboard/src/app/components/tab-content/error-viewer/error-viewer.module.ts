@@ -6,12 +6,14 @@ import {MatInputModule} from "@angular/material/input";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
+import {StacktracePipe} from "./stacktrace.pipe";
 
 
 
 @NgModule({
   declarations: [
-    ErrorViewerComponent
+    ErrorViewerComponent,
+    StacktracePipe
   ],
   imports: [
     CommonModule,

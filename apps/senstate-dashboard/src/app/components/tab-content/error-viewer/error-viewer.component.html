@@ -32,8 +32,8 @@
   <!-- Secondary Column -->
   <ng-container matColumnDef="stack">
     <td mat-cell [attr.colspan]="displayedColumns.length"
-        *matCellDef="let element" class="hideIfEmpty">
-      {{ element.stack }}
+        *matCellDef="let element" class="scrollable">
+      <pre>{{ element.stack | stacktrace | async }}</pre>
     </td>
   </ng-container>
 
