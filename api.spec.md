@@ -3,22 +3,6 @@
 This is the current API specification for clients that want to connect and send events to the
 Senstate hub.
 
-- [API v0.1.4](#api-v014)
-  - [Connecting](#connecting)
-  - [General payload](#general-payload)
-  - [Registering the app](#registering-the-app)
-    - [AppMeta](#appmeta)
-  - [Register a new watcher](#register-a-new-watcher)
-    - [WatchType](#watchtype)
-    - [WatcherMeta](#watchermeta)
-  - [Send watcher data](#send-watcher-data)
-    - [WatchData](#watchdata)
-  - [Send logs](#send-logs)
-    - [LogLevel](#loglevel)
-    - [LogData](#logdata)
-  - [Send errors](#send-errors)
-    - [ErrorData](#errordata)
-
 ## Connecting
 
 Point your websocket connection to the hub `ws://<ip>:3333`. Replace `<ip>` with the IP of the
@@ -62,7 +46,7 @@ Registering an app requires a unique identifier and a name that's shown in the d
 - Event `addWatcher`.
 
 Registering a new watcher requires a unique identifier, some tag that is show in the dashboard and a
-type to desribe what kind of data the watcher represents.
+type to describe what kind of data the watcher represents.
 
 ### WatchType
 
@@ -132,10 +116,10 @@ stack trace if available.
 
 ### ErrorData
 
-| Property   | Type   | Optional | Description                                 |
-| ---------- | ------ | -------- | ------------------------------------------- |
-| message    | string | 🚫       | The error message.                          |
-| errorName  | string | 👍       | Name of the error.                          |
-| line       | number | 👍       | Line where the errors occurred.             |
-| methodName | string | 👍       | Name of the method where the error occured. |
-| stack      | string | 👍       | Stack trace.                                |
+| Property   | Type   | Optional | Description                                  |
+| ---------- | ------ | -------- | -------------------------------------------- |
+| message    | string | 🚫       | The error message.                           |
+| errorName  | string | 👍       | Name of the error.                           |
+| line       | number | 👍       | Line where the errors occurred.              |
+| methodName | string | 👍       | Name of the method where the error occurred. |
+| stack      | string | 👍       | Stack trace.                                 |
