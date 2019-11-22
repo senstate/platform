@@ -1,10 +1,32 @@
 # `@senstate/client` TS Client 
 
+[![NPM Version][client-npm-img]][client-npm-url]
+[![Package Size][client-size-img]][client-size-url]
+[![Known Vulnerabilities][client-snyk-img]][client-snyk-url]
+
+[client-npm-img]: https://img.shields.io/npm/v/@senstate/client.svg?
+[client-npm-url]: https://www.npmjs.com/package/@senstate/client
+[client-size-img]: https://img.shields.io/bundlephobia/minzip/@senstate/client.svg
+[client-size-url]: https://bundlephobia.com/result?p=@senstate/client
+[client-snyk-img]: https://snyk.io/test/npm/@senstate/client/badge.svg
+[client-snyk-url]: https://snyk.io/test/npm/@senstate/client
+
 `npm install @senstate/client`
 
 This library contains the JS/TS client code.
 
-## Connect to Senstate
+## Connect to Senstate (`@senstate/client-connection`)
+
+[![NPM Version][con-npm-img]][con-npm-url]
+[![Package Size][con-size-img]][con-size-url]
+[![Known Vulnerabilities][con-snyk-img]][con-snyk-url]
+
+[con-npm-img]: https://img.shields.io/npm/v/@senstate/client-connection.svg?
+[con-npm-url]: https://www.npmjs.com/package/@senstate/client-connection
+[con-size-img]: https://img.shields.io/bundlephobia/minzip/@senstate/client-connection.svg
+[con-size-url]: https://bundlephobia.com/result?p=@senstate/client-connection
+[con-snyk-img]: https://snyk.io/test/npm/@senstate/client-connection/badge.svg
+[con-snyk-url]: https://snyk.io/test/npm/@senstate/client-connection
 
 `npm install @senstate/client-connection`
 
