@@ -22,6 +22,9 @@
 
 > Send your state / variables to the Debug Dashboard while developing :tada:
 
+![Senstate Example Gif](https://user-images.githubusercontent.com/842273/69455419-a4bf9400-0d68-11ea-953d-9c0b6ffe3e75.gif)
+
+
 ## Install Dashboard
 
 ```sh
