@@ -66,6 +66,42 @@
     <div *ngFor="let app of apps; trackBy: trackByAppFunc">
       <senstate-app-overview [app]="app"></senstate-app-overview>
     </div>
+
+    <div *ngIf="apps.length === 0" class="empty-area">
+      <div class="inner">
+      <mat-card>
+        <mat-card-title class="center"
+                        style="text-align: center">
+          Use it with your project
+        </mat-card-title>
+        <table class="center">
+          <tr>
+            <td>
+              <a href="https://github.com/senstate/platform/blob/master/libs/client/README.md"
+                 mat-raised-button color="primary" target="_blank">
+                JS
+              </a>
+            </td>
+            <td>
+              <a href="https://github.com/dnaka91/senstate-rs"
+                 mat-raised-button color="primary" target="_blank">
+                Rust
+              </a>
+            </td>
+            <td>
+              <a href="https://github.com/dnaka91/senstate-go"
+                 mat-raised-button color="primary" target="_blank">
+                Go
+              </a>
+            </td>
+          </tr>
+        </table>
+      </mat-card>
+
+      <button mat-raised-button
+              (click)="addExampleData()">Add example data</button>
+      </div>
+    </div>
   </div>
 
 

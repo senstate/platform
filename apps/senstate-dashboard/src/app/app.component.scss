@@ -97,3 +97,25 @@ mat-toolbar {
 .space {
   flex: 1;
 }
+
+.empty-area {
+  display: flex;
+  justify-content: center;
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+
+    .center {
+      margin: 0 auto;
+
+      .mat-button-base {
+        margin: 1rem;
+      }
+    }
+
+    button {
+      margin: 1rem 0;
+    }
+  }
+}
