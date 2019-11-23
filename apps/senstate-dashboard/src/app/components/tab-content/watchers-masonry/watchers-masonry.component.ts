@@ -2,11 +2,7 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  Input,
-  Directive,
-  TemplateRef,
-  ContentChild,
-  Output, EventEmitter
+  Input
 } from '@angular/core';
 import {Observable} from "rxjs";
 import {WatcherMeta} from "@senstate/client";

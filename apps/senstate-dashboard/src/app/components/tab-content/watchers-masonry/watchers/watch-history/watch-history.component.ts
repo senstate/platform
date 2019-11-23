@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef, Directive} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, TemplateRef} from '@angular/core';
 import {Observable} from "rxjs";
 import {HubService} from "../../../../../state/hub.service";
 import {map, scan} from "rxjs/operators";
