@@ -1,4 +1,4 @@
-# `@senstate/client` TS Client 
+# `@senstate/client` TS Client
 
 [![NPM Version][client-npm-img]][client-npm-url]
 [![Package Size][client-size-img]][client-size-url]
@@ -36,25 +36,30 @@ import {setSenstateConnection} from "@senstate/client-connection";
 setSenstateConnection({
   name: 'My Example App',
   // appId: 'customShortId' optional
-}  /* , ws://localhost:3333 */); // custom hub-address, working locally you won't need to change the target address
+}  /* , ws://localhost:3333 */);
+
+// second parameter is a custom hub-address, working locally you won't need to change this
 ```
+
 Without calling `setSenstateConnection` all watchers/senders won't send anything to the Dashboard.
 
 ## Low-Level Senders
 
 Those methods sending the data to the hub:
 
-|   	|Watch|Log|Error|
-|---	|---	|---	|---	|
+<!-- markdownlint-disable MD013 -->
+|    |Watch|Log|Error|
+|--- |--- |--- |--- |
 |Function|Send the current value of a "tag"|Sends a log entry to the Hub|Subscribes to the window.onerror method, and send this to the Hub|
-|Create|`const watcher = createWatchSender(tag: string, type?: WatchType)`|`const logger = createLogSender(logLevel: LogLevel = LogLevel.Info, logName?: string)`| `registerWindowErrorHandler()`   	|   	
-|   	| |`const otherlogger = genericLogSender()`   	|   	|   	
-|Send Data|`watcher(value)` |`logger(logMessage, data?, line?)`| Once an error happened it'll be sent  	|   	
-|   	| |`otherlogger(GenericLogSenderArgs)`  (full params, use codecompletion :))  	|   	|   	
+|Create|`const watcher = createWatchSender(tag: string, type?: WatchType)`|`const logger = createLogSender(logLevel: LogLevel = LogLevel.Info, logName?: string)`| `registerWindowErrorHandler()`    |
+|    | |`const otherLogger = genericLogSender()`    |    |
+|Send Data|`watcher(value)` |`logger(logMessage, data?, line?)`| Once an error happened it'll be sent   |
+|    | |`otherLogger(GenericLogSenderArgs)`  (full params, use code completion :))   |    |
+<!-- markdownlint-enable MD013 -->
 
 ## Measure Utils
 
-`TimeMeasurer` uses the time between `.start()` and `.stop` as value for the internal Watcher 
+`TimeMeasurer` uses the time between `.start()` and `.stop` as value for the internal Watcher
 
 ```ts
   const time = new TimeMeasurer(tag);
@@ -65,7 +70,8 @@ Those methods sending the data to the hub:
 
 ## Decorators
 
-Add `@PropertyWatcher(optionalWatcherTag)` to your class-property, uses a watcher internally to send the data
+Add `@PropertyWatcher(optionalWatcherTag)` to your class-property, uses a watcher internally to
+send the data
 
 ```ts
   @PropertyWatcher()
@@ -105,6 +111,4 @@ trigger$.pipe(
    mergeMap(() => longerObservableExecution$),
    SenstateOperators.measureStep(time)
 )
-
 ```
- 
