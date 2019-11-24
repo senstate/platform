@@ -161,6 +161,11 @@
                 "input": "apps/senstate/src/root-assets",
                 "glob": "*.*",
                 "output": "./"
+              },
+              {
+                "input": "./",
+                "glob": "README.MD",
+                "output": "./"
               }
             ]
           },

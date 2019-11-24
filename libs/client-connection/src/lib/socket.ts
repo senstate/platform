@@ -41,6 +41,10 @@ export class Socket {
 
     this.socketEvents$.next(SocketEvent.Connecting);
 
+    setTimeout(() => this.createSocketAndAttachEvents(), 50);
+  }
+
+  private createSocketAndAttachEvents() {
     this.socket = new WebSocket(this.address);
 
     this.socket.onmessage = ev => {

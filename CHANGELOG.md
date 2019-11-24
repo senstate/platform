@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.1] - 2019-11-24
 
 ### Added
 - Extend / pretty-print JavaScript-Errors with [`stacktracey`](https://www.npmjs.com/package/stacktracey) 
