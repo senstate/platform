@@ -147,7 +147,7 @@ export class HubService {
     }));
 
     // add watchers
-    interval(650).pipe(
+    return interval(650).pipe(
       startWith(0)
     ).subscribe(value => {
       this.state.dispatch(HubActions.RECEIVED_DATA({

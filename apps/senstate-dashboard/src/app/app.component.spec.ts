@@ -1,7 +1,7 @@
-import {Component, NO_ERRORS_SCHEMA} from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
 import {MdePopoverModule} from "@material-extended/mde";
 
 describe.skip('AppComponent', () => {
@@ -9,7 +9,7 @@ describe.skip('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [HttpClientModule, MdePopoverModule],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     done();
