@@ -1,5 +1,5 @@
 import {action, ActionCreator, ActionType, Creator, payload, Typed} from 'ts-action';
-import {AppMeta, WatchData, WatcherMeta} from "@senstate/client";
+import {WatchData} from "@senstate/client";
 import {ErrorEvent, LogEvent, MetaStore} from "@senstate/dashboard-connection";
 import {SocketEvent} from "@senstate/client-connection";
 

@@ -8,7 +8,6 @@ import {
   ViewChild,
   ChangeDetectorRef, AfterViewInit
 } from '@angular/core';
-import {LogEvent} from "@senstate/dashboard-connection";
 import {LogData} from "@senstate/client";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";

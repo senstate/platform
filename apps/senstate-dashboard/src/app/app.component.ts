@@ -62,14 +62,6 @@ export class AppComponent {
     return appObj.appId;
   }
 
-
-
-
-  getValues <T>(obj: {[key: string]: T}) {
-    console.info('getValues call');
-    return Object.values(obj);
-  }
-
   changeDebounce ($event: MatSliderChange) {
     this.socketService.socket.sendJson(DASHBOARD_EVENT_NAMES.CHANGE_DEBOUNCE_TIME, $event.value);
   }

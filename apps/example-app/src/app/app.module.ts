@@ -8,8 +8,6 @@ import {AngularErrorHandler} from "@senstate/client";
 import {RouterModule} from "@angular/router";
 import { ErrorRouteComponent } from './error-route/error-route.component';
 
-
-
 @NgModule({
   declarations: [AppComponent, ErrorRouteComponent],
   imports: [
@@ -34,6 +32,6 @@ setTimeout(() => {
   let foo: any;
 
   // noinspection JSUnusedAssignment
-  foo.baz();
+  foo.baz(); // lgtm [js/property-access-on-non-object]
 }, 4500);
 

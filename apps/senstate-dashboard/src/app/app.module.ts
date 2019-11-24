@@ -24,7 +24,6 @@ import {SenIconRegisterModule} from "@senstate/app-utils";
 import {app_icons} from "./app.icons";
 import {MatSliderModule} from "@angular/material/slider";
 import {PrettyJsonModule} from "angular2-prettyjson";
-import { JsonViewerComponent } from './components/json-viewer/json-viewer.component';
 import {MatTableModule} from "@angular/material/table";
 import {CdkTableModule} from "@angular/cdk/table";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -36,6 +35,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatMenuModule} from "@angular/material/menu";
 import {SocketService} from "./services/socket.service";
 import {AppOverviewModule} from "./components/app-overview/app-overview.module";
+
+// TODO Refactor Modules/Imports
 
 @NgModule({
   declarations: [

@@ -3,7 +3,7 @@ import {Store} from "@ngrx/store";
 import {State} from './index'
 import {SocketEvent} from "@senstate/client-connection";
 import {DashboardActions, HubActions} from "./actions";
-import {map, startWith, tap} from "rxjs/operators";
+import {map, startWith} from "rxjs/operators";
 import {someGuid, WatchType} from "@senstate/client";
 import {interval} from "rxjs";
 

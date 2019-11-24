@@ -7,11 +7,10 @@ import {
   ChangeDetectorRef,
   SimpleChanges, OnChanges
 } from '@angular/core';
-import {ErrorData, LogData} from "@senstate/client";
+import {ErrorData} from "@senstate/client";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
-import {ErrorEvent} from "@senstate/dashboard-connection";
 
 // TODO Extract table component with paginator / filter/ sort
 

@@ -2,7 +2,6 @@ import {DashboardActions, HubActions} from '../state/actions';
 import {Action} from "ts-action";
 import {on} from 'ts-action-immer/reducer';
 import {createReducer} from "@ngrx/store";
-import {WatchData} from "@senstate/client";
 import {ErrorEvent, LogEvent, MetaStore} from "@senstate/dashboard-connection";
 import {SocketEvent} from "@senstate/client-connection";
 

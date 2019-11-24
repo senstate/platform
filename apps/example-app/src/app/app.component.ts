@@ -115,7 +115,7 @@ export class AppComponent {
 
     // example error to be "uncaught"
     // noinspection JSObjectNullOrUndefined
-    foo.baz();
+    foo.baz(); // lgtm [js/property-access-on-non-object]
   }
 
   removeWatcher (index: number) {

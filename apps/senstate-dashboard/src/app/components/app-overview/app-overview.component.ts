@@ -1,9 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef} from '@angular/core';
 import {App} from "@senstate/dashboard-connection";
 import {Observable} from "rxjs";
-import {ErrorData, LogData, WatcherMeta} from "@senstate/client";
+import {ErrorData, LogData} from "@senstate/client";
 import {HubService} from "../../state/hub.service";
-import {filter, map, shareReplay} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'senstate-app-overview',
