@@ -1,6 +1,6 @@
 import {Injectable, NgZone} from "@angular/core";
 import {Socket} from "@senstate/client-connection";
-import {filter, map, tap} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import {enterZone} from "@senstate/app-utils";
 import {environment} from "../../environments/environment";
 

@@ -31,7 +31,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
 const wss = new WebSocket.Server({server});
 
 const state = new StateService();
-const socketGateway = new SocketGateway(state, wss);
+const socketGateway = new SocketGateway(state, wss); // lgtm [js/unused-local-variable]
 
 server.listen(port);
 
@@ -40,5 +40,5 @@ log('Listening at http://localhost:' + port );
 const interfaces = listNetworkInterfaces();
 
 for (const i of interfaces) {
-  log(`${i.ifname}: ${i.address}`)
+  log(`${i.ifname}: ${i.address}`);
 }

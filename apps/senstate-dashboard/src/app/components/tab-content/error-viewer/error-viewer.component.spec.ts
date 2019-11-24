@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ErrorViewerComponent } from './error-viewer.component';
 import {MatTableModule} from "@angular/material/table";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
+import {StacktracePipe} from "./stacktrace.pipe";
 
 describe('ErrorViewerComponent', () => {
   let component: ErrorViewerComponent;
@@ -11,7 +12,7 @@ describe('ErrorViewerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ MatTableModule ],
-      declarations: [ ErrorViewerComponent ],
+      declarations: [ ErrorViewerComponent, StacktracePipe ],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();

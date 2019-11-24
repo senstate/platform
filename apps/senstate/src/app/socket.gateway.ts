@@ -1,11 +1,11 @@
-import {BehaviorSubject, combineLatest, Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {AppMeta, CLIENT_CONSTS, ErrorData, LogData, toIsoWithOffset, WatchData, WatcherMeta} from '@senstate/client';
 import {DASHBOARD_EVENT_NAMES, LogEvent, ErrorEvent} from '@senstate/dashboard-connection';
 import {StateService} from "./state.service";
 
 import * as WebSocket from 'ws';
 import {ConnectedClient} from "./connectedClient";
-import {auditTime, groupBy, mergeMap, skip, switchMap, takeUntil, tap, withLatestFrom} from "rxjs/operators";
+import {auditTime, groupBy, mergeMap, skip, switchMap, takeUntil, tap} from "rxjs/operators";
 
 
 // extract
@@ -95,7 +95,7 @@ export class SocketGateway {
         this.events.pipe(
           takeUntil(this.auditTime$.pipe(
             skip(1),
-            tap (v => console.info('stop events with previous auditTime')),
+            tap(v => console.info('stop events with previous auditTime')),
           )),
           groupBy(e => e.watchId),
           mergeMap((grouped) => grouped.pipe(
@@ -116,7 +116,7 @@ export class SocketGateway {
     ).subscribe();
   }
 
-  sendToDashboards(event: string, data: any) {
+  sendToDashboards (event: string, data: any) {
     for (const dash of this.connected_dashboards) {
       if (dash.socket.readyState === WebSocket.OPEN) {
         dash.send(event, data);
@@ -124,7 +124,7 @@ export class SocketGateway {
     }
   }
 
-  inputEvent (client: ConnectedClient,  data: WatchData) {
+  inputEvent (client: ConnectedClient, data: WatchData) {
     this.events.next(data);
   }
 

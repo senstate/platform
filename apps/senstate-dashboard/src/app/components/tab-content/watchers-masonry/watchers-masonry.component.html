@@ -19,6 +19,10 @@
           [watchId]="tag.watchId"
 
         ></senstate-string-watcher>
+
+        <ng-template historyTemplate let-data>
+          <pre>{{data}}</pre>
+        </ng-template>
       </senstate-watcher-card>
       <senstate-watcher-card [title]="tag.tag" [showMenu]="true"
                              [appId]="appId"
@@ -32,6 +36,10 @@
           [showMinMax]="minMaxCheckbox.checked"
           [watchId]="tag.watchId"
         ></senstate-number-watcher>
+
+        <ng-template historyTemplate let-data>
+          {{data}}
+        </ng-template>
       </senstate-watcher-card>
 
       <senstate-watcher-card [title]="tag.tag"
@@ -43,6 +51,12 @@
         >
 
         </senstate-json-watcher>
+
+        <ng-template historyTemplate let-data>
+          <senstate-json-viewer [data]="data">
+
+          </senstate-json-viewer>
+        </ng-template>
       </senstate-watcher-card>
 
       <mat-card *ngSwitchDefault>

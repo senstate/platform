@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .filter-bar {
@@ -15,5 +16,11 @@ table {
   }
   mat-paginator {
     flex: 1;
+  }
+}
+
+:host ::ng-deep {
+  .scrollable {
+    overflow: auto;
   }
 }

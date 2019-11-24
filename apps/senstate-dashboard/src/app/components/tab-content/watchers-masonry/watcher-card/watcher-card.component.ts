@@ -1,6 +1,15 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, Directive, TemplateRef, ContentChild} from '@angular/core';
 import {HubService} from "../../../../state/hub.service";
 import {Observable} from "rxjs";
+
+@Directive({
+  selector: '[historyTemplate]'
+})
+export class HistoryTemplateDirective {
+
+  constructor(public tpl: TemplateRef<any>) { }
+
+}
 
 @Component({
   selector: 'senstate-watcher-card',
@@ -21,6 +30,14 @@ export class WatcherCardComponent implements OnInit {
   public appId: string;
 
   public paused$: Observable<boolean>;
+
+
+  @ContentChild(HistoryTemplateDirective, { static: true }) historyTemplateDir: HistoryTemplateDirective;
+
+  get historyTemplate(): TemplateRef<any> {
+    return this.historyTemplateDir && this.historyTemplateDir.tpl;
+  }
+
 
   constructor(private hub: HubService) { }
 

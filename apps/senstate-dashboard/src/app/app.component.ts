@@ -1,13 +1,11 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {filter, map, pluck, shareReplay,} from 'rxjs/operators';
-import {App, DASHBOARD_EVENT_NAMES, ErrorEvent, NetworkInfo} from '@senstate/dashboard-connection';
+import {map} from 'rxjs/operators';
+import {App, DASHBOARD_EVENT_NAMES, NetworkInfo} from '@senstate/dashboard-connection';
 import {ActivatedRoute} from "@angular/router";
 import {SocketEvent} from "@senstate/client-connection";
 import {HubService} from "./state/hub.service";
 import {MatSliderChange} from "@angular/material/slider";
-import {Observable} from "rxjs";
-import {ErrorData, LogData} from "@senstate/client";
 import {MaterialCssVarsService} from "angular-material-css-vars";
 import {SocketService} from "./services/socket.service";
 
@@ -23,12 +21,7 @@ export class AppComponent {
     map(i => `http://${i.address}:3333/#/?mobile=true`)
   );
 
-
   public isMobile = false;
-
-  // refactor..
-  logObservablesByApp: {[key: string]: Observable<LogData[]>} = {};
-  errorObservablesByApp: {[key: string]: Observable<ErrorData[]>} = {};
 
   mappedApps$ = this.hubService.app$;
   socketStatus$ = this.hubService.socketStatus$;
@@ -69,14 +62,6 @@ export class AppComponent {
     return appObj.appId;
   }
 
-
-
-
-  getValues <T>(obj: {[key: string]: T}) {
-    console.info('getValues call');
-    return Object.values(obj);
-  }
-
   changeDebounce ($event: MatSliderChange) {
     this.socketService.socket.sendJson(DASHBOARD_EVENT_NAMES.CHANGE_DEBOUNCE_TIME, $event.value);
   }
@@ -84,5 +69,9 @@ export class AppComponent {
   toggleTheme () {
     this.darkTheme = !this.darkTheme;
     this.materialCssVarsService.setDarkTheme(this.darkTheme);
+  }
+
+  addExampleData () {
+    this.hubService.startExampleData();
   }
 }
