@@ -68,8 +68,6 @@ All clients connect with web-sockets, here are the current [specs](api.spec.md).
 ## TODO / In progress
 
 - C# Client
-- Daily Build of the Dashboard
-- Demo Data on the Dashboard
 - more to come :)
 
 ## Show your support
