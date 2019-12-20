@@ -68,13 +68,13 @@
     "zone.js": "0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.17",
+    "@angular-devkit/build-angular": "0.803.21",
     "@angular-devkit/build-ng-packagr": "0.803.17",
     "@angular/cli": "8.3.17",
     "@angular/compiler-cli": "8.2.13",
     "@angular/language-service": "8.2.13",
     "@nrwl/jest": "8.6.0",
-    "@nrwl/node": "8.6.0",
+    "@nrwl/node": "8.8.0",
     "@nrwl/workspace": "8.6.0",
     "@types/jest": "24.0.9",
     "@types/node": "8.9.4",
