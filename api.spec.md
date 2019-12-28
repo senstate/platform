@@ -1,4 +1,4 @@
-# API v0.1.4
+# API v0.2.X
 
 This is the current API specification for clients that want to connect and send events to the
 Senstate hub.
@@ -34,6 +34,8 @@ The encapsulating payload looks as follows:
 
 Registering an app requires a unique identifier and a name that's shown in the dashboard.
 
+> The calling client, will receive the response event `appAdded`
+
 ### AppMeta
 
 | Property | Type   | Description                                   |
@@ -47,6 +49,8 @@ Registering an app requires a unique identifier and a name that's shown in the d
 
 Registering a new watcher requires a unique identifier, some tag that is show in the dashboard and a
 type to describe what kind of data the watcher represents.
+
+> The calling client, will receive the response event `watcherAdded`
 
 ### WatchType
 

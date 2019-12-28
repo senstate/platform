@@ -28,6 +28,7 @@ export class ErrorViewerComponent implements OnInit, OnChanges {
   secondRowColumns: (keyof ErrorData)[] = ['stack'];
 
 
+  private selectedError: ErrorData;
   private paginator: MatPaginator;
   private sort: MatSort;
 
@@ -76,5 +77,34 @@ export class ErrorViewerComponent implements OnInit, OnChanges {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  markElementForSearch (element: ErrorData) {
+    this.selectedError = element;
+  }
+
+  searchOnGoogle () {
+    this.openUrl(`https://www.google.com/search?q=${this.escapedSearchTerm()}`)
+
+  }
+
+  searchOnDuckDuck () {
+    this.openUrl(`https://duckduckgo.com/?q=${this.escapedSearchTerm()}&t=h_`)
+  }
+
+  searchOnGithub () {
+    this.openUrl(`https://github.com/search?q=${this.escapedSearchTerm()}`)
+  }
+
+  searchOnStackOverflow () {
+    this.openUrl(`https://stackoverflow.com/search?q=${this.escapedSearchTerm()}`)
+  }
+
+  private escapedSearchTerm() {
+    return encodeURIComponent(this.selectedError.message)
+  }
+
+  private openUrl(url) {
+    window.open(url, '_blank');
   }
 }

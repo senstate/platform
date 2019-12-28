@@ -129,6 +129,17 @@ export class HubService {
       }
     }));
 
+    this.state.dispatch(HubActions.ERROR_DATA({
+      appId,
+      data: {
+        message: 'just an another error',
+        methodName: 'methodWhereTheErrorHappendTwice',
+        line: 1338,
+        errorName: 'ExampleOtherError',
+        stack: ['error at file:13', 'caller at file2:54'].join('\n')
+      }
+    }));
+
     // add logs
     this.state.dispatch(HubActions.LOG_DATA({
       appId,

@@ -1,7 +1,10 @@
 import {Pipe, PipeTransform} from "@angular/core";
+import {Lazy} from "@gewd/lazy/utils";
+
 
 // Lazy-load :)
-const loadStacktracey = () => import('stacktracey')
+const loadStacktracey = Lazy.create(
+  () => import('stacktracey')
   .then(p => {
     const stacktracey = p.default;
 
@@ -12,22 +15,18 @@ const loadStacktracey = () => import('stacktracey')
     };
 
     return stacktracey;
-  });
-
-let loadedStacktracey = null;
+  })
+);
 
 @Pipe({
   name: 'stacktrace'
 })
 export class StacktracePipe implements PipeTransform {
   async transform (value: string): Promise<string> {
-    const stacktracesPromise = (loadedStacktracey
-      || (loadedStacktracey = loadStacktracey()));
-
-    const stacktracey = await stacktracesPromise;
+    const stacktracey = await loadStacktracey.getValue();
 
     const instance = new stacktracey(value);
 
-    return instance.pretty;
+    return instance.pretty.trim() || value; // fallback if it couldn't be parsed
   }
 }

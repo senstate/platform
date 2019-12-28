@@ -44,6 +44,7 @@
     "@angular/platform-browser": "8.2.13",
     "@angular/platform-browser-dynamic": "8.2.13",
     "@angular/router": "8.2.13",
+    "@gewd/lazy": "^0.1.1",
     "@material-extended/mde": "2.3.1",
     "@ngrx/effects": "8.4.0",
     "@ngrx/store": "8.4.0",

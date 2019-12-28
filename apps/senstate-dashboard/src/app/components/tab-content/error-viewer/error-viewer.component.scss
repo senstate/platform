@@ -24,3 +24,13 @@ table {
     overflow: auto;
   }
 }
+
+.message-column {
+  position: relative;
+}
+
+.search-issue {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}

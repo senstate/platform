@@ -153,10 +153,12 @@ export class SocketGateway {
 
   addApp (client: ConnectedClient, data: AppMeta) {
     this.state.appConnected(client, data);
+    client.send(CLIENT_CONSTS.APP_ADDED, '');
   }
 
   addWatcher (client: ConnectedClient, data: WatcherMeta) {
     this.state.addWatcher(client, data);
+    client.send(CLIENT_CONSTS.WATCHER_ADDED, '');
   }
 
   needMeta (client: ConnectedClient) {

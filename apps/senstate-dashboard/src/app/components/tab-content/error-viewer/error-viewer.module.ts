@@ -7,6 +7,11 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {StacktracePipe} from "./stacktrace.pipe";
+import {MdePopoverModule} from "@material-extended/mde";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 
@@ -21,7 +26,12 @@ import {StacktracePipe} from "./stacktrace.pipe";
     MatInputModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MdePopoverModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatExpansionModule
   ],
   exports: [
     ErrorViewerComponent

@@ -26,10 +26,22 @@
 
   <ng-container matColumnDef="message">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Message</th>
-    <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+    <td mat-cell *matCellDef="let element" class="message-column">
+      {{element.message}}
+
+      <button mat-icon-button class="search-issue"
+              [mdePopoverTriggerFor]="searchErrorPopover"
+              (opened)="markElementForSearch(element)"
+              mdePopoverTriggerOn="click">
+        <mat-icon svgIcon="search"
+                  style="width: 32px; height: 32px">
+
+        </mat-icon>
+      </button>
+    </td>
   </ng-container>
 
-  <!-- Secondary Column -->
+  <!-- Secondary Row -->
   <ng-container matColumnDef="stack">
     <td mat-cell [attr.colspan]="displayedColumns.length"
         *matCellDef="let element" class="scrollable">
@@ -42,3 +54,22 @@
   <tr mat-row *matRowDef="let row; columns: secondRowColumns; when: showRow"
       [class]="'data-row'"></tr>
 </table>
+
+<mde-popover #searchErrorPopover="mdePopover"
+             [mdePopoverOverlapTrigger]="false"
+             [mdePopoverCloseOnClick]="false"
+             [mdePopoverOffsetX]="5"
+             [mdePopoverOffsetY]="2"
+             [mdePopoverArrowOffsetX]="15">
+  <div class="popover mat-elevation-z2">
+    Search at: <br>
+
+    <mat-action-list>
+      <mat-list-item (click)="searchOnGoogle()">Google</mat-list-item>
+      <mat-list-item (click)="searchOnDuckDuck()">DuckDuckGo</mat-list-item>
+      <mat-list-item (click)="searchOnGithub()">GitHub</mat-list-item>
+      <mat-list-item (click)="searchOnStackOverflow()">Stack-Overflow</mat-list-item>
+    </mat-action-list>
+  </div>
+
+</mde-popover>

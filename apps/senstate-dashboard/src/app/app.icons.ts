@@ -7,5 +7,6 @@ export const app_icons = [
   'more_horiz',
   'more_vert',
   'settings_applications',
+  'search',
   'watch_later'
 ];
