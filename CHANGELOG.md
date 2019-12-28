@@ -5,6 +5,7 @@
 ### Added
 
 - Dashboard: Search for the error on multiple search engines
+- Dashboard: Show string + json diff
 - API: Add response actions
 
 ## [0.2.1] - 2019-11-24

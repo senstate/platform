@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, Directive, TemplateRef, ContentChild} from '@angular/core';
 import {HubService} from "../../../../state/hub.service";
 import {Observable} from "rxjs";
+import * as jsondiffpatch  from 'jsondiffpatch';
 
 @Directive({
   selector: '[historyTemplate]'
@@ -31,13 +32,13 @@ export class WatcherCardComponent implements OnInit {
 
   public paused$: Observable<boolean>;
 
-
   @ContentChild(HistoryTemplateDirective, { static: true }) historyTemplateDir: HistoryTemplateDirective;
 
   get historyTemplate(): TemplateRef<any> {
     return this.historyTemplateDir && this.historyTemplateDir.tpl;
   }
 
+  private lastValue: any;
 
   constructor(private hub: HubService) { }
 
@@ -48,4 +49,6 @@ export class WatcherCardComponent implements OnInit {
   togglePaused () {
     this.hub.togglePaused(this.appId, this.watchId);
   }
+
+
 }
