@@ -24,6 +24,6 @@ describe('HubService', () => {
     var subscription = hubService.startExampleData();
     subscription.unsubscribe();
 
-    expect(dispatchSpy).toBeCalledTimes(6);
+    expect(dispatchSpy).toBeCalledTimes(7);
   });
 });

@@ -30,8 +30,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MdePopoverModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule,
-    MatExpansionModule
+    MatListModule
   ],
   exports: [
     ErrorViewerComponent
