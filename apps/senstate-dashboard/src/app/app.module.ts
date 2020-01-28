@@ -39,69 +39,71 @@ import {AppOverviewModule} from "./components/app-overview/app-overview.module";
 // TODO Refactor Modules/Imports
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    HubModule,
-    RouterModule.forRoot([], {
-      useHash: true
-    }),
-    StoreModule.forRoot(stateReducer, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }),
-    EffectsModule.forRoot([
-      HubEffects
-    ]),
-    BrowserAnimationsModule,
-    MatCardModule,
-    QRCodeModule,
-    MatExpansionModule,
-    MatTabsModule,
-    MatBadgeModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MdePopoverModule,
-    SenIconRegisterModule.register({
-      svgFolder: 'assets/svg',
-      icons: app_icons
-    }),
-    MatSliderModule,
-    PrettyJsonModule,
-    MatTableModule,
-    CdkTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MaterialCssVarsModule.forRoot({
-      // all optional
-      isAutoContrast: true,
-      darkThemeClass: 'isDarkTheme',
-      lightThemeClass: 'isLightTheme',
-      isDarkTheme: true,
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        HubModule,
+        RouterModule.forRoot([], {
+            useHash: true
+        }),
+        StoreModule.forRoot(stateReducer, {
+            metaReducers,
+            runtimeChecks: {
+                strictStateImmutability: true,
+                strictActionImmutability: true
+            }
+        }),
+        EffectsModule.forRoot([
+            HubEffects
+        ]),
+        BrowserAnimationsModule,
+        MatCardModule,
+        QRCodeModule,
+        MatExpansionModule,
+        MatTabsModule,
+        MatBadgeModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MdePopoverModule,
+        SenIconRegisterModule.register({
+            svgFolder: 'assets/svg',
+            icons: app_icons
+        }),
+        MatSliderModule,
+        PrettyJsonModule,
+        MatTableModule,
+        CdkTableModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MaterialCssVarsModule.forRoot({
+            // all optional
+            isAutoContrast: true,
+            darkThemeClass: 'isDarkTheme',
+            lightThemeClass: 'isLightTheme',
+            isDarkTheme: true,
 
-      //      primary: '#3f51b5',
-      //     accent: '#e91e63',
-      //    warn: '#f44336',
+            //      primary: '#3f51b5',
+            //     accent: '#e91e63',
+            //    warn: '#f44336',
 
-      // ...
-    }),
-    MatCheckboxModule,
-    MatMenuModule,
-    AppOverviewModule,
-  ],
-  providers: [
-    SocketService,
-  ],
-  bootstrap: [AppComponent]
+            // ...
+        }),
+        MatCheckboxModule,
+        MatMenuModule,
+        AppOverviewModule,
+    ],
+    providers: [
+        SocketService,
+    ],
+    exports: [
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor () {

@@ -7,9 +7,13 @@
             matBadgeOverlap="false">Watchers</span>
     </ng-template>
 
-    <senstate-watchers-masonry [appId]="app.appId"
+    <senstate-watchers-masonry [appId]="app.appId" *ngIf="layoutOption.value === 'masonry'"
                                [autoSizeCards]="autoSizeActive">
     </senstate-watchers-masonry>
+
+    <senstate-watchers-list *ngIf="layoutOption.value === 'list'"
+                            [appId]="app.appId" >
+    </senstate-watchers-list>
   </mat-tab>
   <mat-tab label="Log">
     <senstate-log-viewer [logArray]="logs$ | async"></senstate-log-viewer>
@@ -42,9 +46,17 @@
              [mdePopoverOffsetY]="2"
              [mdePopoverArrowOffsetX]="15">
   <div class="popover mat-elevation-z2">
-    <label>Card-Size</label>
-    <mat-checkbox (click)="toggleAutoSize()">
-      Disable Max-Width
-    </mat-checkbox>
+    <label>Layout</label>
+    <mat-select #layoutOption value="masonry">
+      <mat-option value="masonry">Masonry</mat-option>
+      <mat-option value="list">List</mat-option>
+    </mat-select>
+    <ng-container *ngIf="layoutOption.value === 'masonry'">
+      <hr class="divider" />
+      <label>Card-Size</label>
+      <mat-checkbox (click)="toggleAutoSize()">
+        Disable Max-Width
+      </mat-checkbox>
+    </ng-container>
   </div>
 </mde-popover>

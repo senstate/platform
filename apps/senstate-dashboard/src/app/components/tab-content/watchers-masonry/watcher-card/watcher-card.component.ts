@@ -1,7 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, Directive, TemplateRef, ContentChild} from '@angular/core';
 import {HubService} from "../../../../state/hub.service";
 import {Observable} from "rxjs";
-import * as jsondiffpatch  from 'jsondiffpatch';
 
 @Directive({
   selector: '[historyTemplate]'
