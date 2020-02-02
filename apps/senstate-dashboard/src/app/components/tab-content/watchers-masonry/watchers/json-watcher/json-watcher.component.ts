@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {WatchData} from "@senstate/client";
 import {HubService} from "../../../../../state/hub.service";
@@ -6,7 +6,8 @@ import {HubService} from "../../../../../state/hub.service";
 @Component({
   selector: 'senstate-json-watcher',
   templateUrl: './json-watcher.component.html',
-  styleUrls: ['./json-watcher.component.scss']
+  styleUrls: ['./json-watcher.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JsonWatcherComponent implements OnInit {
   @Input()

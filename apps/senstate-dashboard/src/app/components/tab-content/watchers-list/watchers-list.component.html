@@ -1,14 +1,14 @@
 <ng-container *ngIf="watchers$ |async as watchers">
-
   <h2 class="mat-h3" *ngIf="watchers.length === 0">
     No watchers yet :)
   </h2>
 
-    <div [class]="'card card_type_'+tag.type"
-         *ngFor="let tag of watchers; trackBy: trackByWatcherFunc"
+  <div *ngFor="let group of watchers; trackBy: trackByGroupFunc">
+    <b *ngIf="group.key !== 'undefined'">{{group.key}}</b>
+    <div *ngFor="let tag of group.watchers; trackBy: trackByWatcherFunc"
          [ngSwitch]="tag.type">
-      {{ tag.tag }}: <br />
+      {{ tag.tag }}: <i class="mat-small">{{tag.watchId}}</i> <br />
       <senstate-list-json-value [watchId]="tag.watchId"></senstate-list-json-value>
     </div>
-
+  </div>
 </ng-container>

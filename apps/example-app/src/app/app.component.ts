@@ -35,8 +35,7 @@ export class AppComponent {
   @PropertyWatcher()
   public watchProperty = 0;
 
-
-  @PropertyWatcher('otherKey')
+  @PropertyWatcher({tag: 'otherKey'})
   public watchOtherProperty = 0;
 
   public runningWatchers: IWatcherInfo[] = [];
@@ -69,7 +68,7 @@ export class AppComponent {
 
           return v;
         }),
-        SenstateOperators.watch(`${typeToLabel(watchType)} Pipe`)
+        SenstateOperators.watch({tag: `${typeToLabel(watchType)} Pipe`, group: 'Example Data'})
       ).subscribe(value => {
 
       })

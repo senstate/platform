@@ -4,65 +4,67 @@
     No watchers yet :)
   </h2>
 
+  <div *ngFor="let group of watchers; trackBy: trackByGroupFunc">
+    <b *ngIf="group.key !== 'undefined'">{{group.key}}</b>
+    <ngx-masonry [options]="masonryConfig">
+      <div [class]="'card card_type_'+tag.type" ngxMasonryItem
+           [class.auto]="autoSizeCards"
+           *ngFor="let tag of group.watchers; trackBy: trackByWatcherFunc"
+           [ngSwitch]="tag.type">
 
-  <ngx-masonry [options]="masonryConfig">
-    <div [class]="'card card_type_'+tag.type" ngxMasonryItem
-         [class.auto]="autoSizeCards"
-         *ngFor="let tag of watchers; trackBy: trackByWatcherFunc"
-         [ngSwitch]="tag.type">
+        <senstate-watcher-card [title]="tag.tag"
+                               [appId]="appId"
+                               [watchId]="tag.watchId"
+                               *ngSwitchCase="0">
+          <senstate-string-watcher
+            [watchId]="tag.watchId"
 
-      <senstate-watcher-card [title]="tag.tag"
-                             [appId]="appId"
-                             [watchId]="tag.watchId"
-                             *ngSwitchCase="0">
-        <senstate-string-watcher
-          [watchId]="tag.watchId"
+          ></senstate-string-watcher>
 
-        ></senstate-string-watcher>
+          <ng-template historyTemplate let-data>
+            <pre>{{data}}</pre>
+          </ng-template>
+        </senstate-watcher-card>
+        <senstate-watcher-card [title]="tag.tag" [showMenu]="true"
+                               [appId]="appId"
+                               [watchId]="tag.watchId"
+                               *ngSwitchCase="1">
+          <div menu-content>
+            <mat-checkbox class="mat-menu-item" #minMaxCheckbox>Min / Max</mat-checkbox>
+          </div>
 
-        <ng-template historyTemplate let-data>
-          <pre>{{data}}</pre>
-        </ng-template>
-      </senstate-watcher-card>
-      <senstate-watcher-card [title]="tag.tag" [showMenu]="true"
-                             [appId]="appId"
-                             [watchId]="tag.watchId"
-                             *ngSwitchCase="1">
-        <div menu-content>
-          <mat-checkbox class="mat-menu-item" #minMaxCheckbox>Min / Max</mat-checkbox>
-        </div>
+          <senstate-number-watcher
+            [showMinMax]="minMaxCheckbox.checked"
+            [watchId]="tag.watchId"
+          ></senstate-number-watcher>
 
-        <senstate-number-watcher
-          [showMinMax]="minMaxCheckbox.checked"
-          [watchId]="tag.watchId"
-        ></senstate-number-watcher>
+          <ng-template historyTemplate let-data>
+            {{data}}
+          </ng-template>
+        </senstate-watcher-card>
 
-        <ng-template historyTemplate let-data>
-          {{data}}
-        </ng-template>
-      </senstate-watcher-card>
+        <senstate-watcher-card [title]="tag.tag"
+                               [appId]="appId"
+                               [watchId]="tag.watchId"
+                               *ngSwitchCase="2">
+          <senstate-json-watcher
+            [watchId]="tag.watchId"
+          >
 
-      <senstate-watcher-card [title]="tag.tag"
-                             [appId]="appId"
-                             [watchId]="tag.watchId"
-                             *ngSwitchCase="2">
-        <senstate-json-watcher
-          [watchId]="tag.watchId"
-        >
+          </senstate-json-watcher>
 
-        </senstate-json-watcher>
+          <ng-template historyTemplate let-data>
+            <senstate-json-viewer [data]="data">
 
-        <ng-template historyTemplate let-data>
-          <senstate-json-viewer [data]="data">
+            </senstate-json-viewer>
+          </ng-template>
+        </senstate-watcher-card>
 
-          </senstate-json-viewer>
-        </ng-template>
-      </senstate-watcher-card>
-
-      <mat-card *ngSwitchDefault>
-        <mat-card-title>{{tag.tag}}</mat-card-title>
-        <mat-card-subtitle>{{tag.watchId}}</mat-card-subtitle>
-      </mat-card>
-    </div>
-  </ngx-masonry>
+        <mat-card *ngSwitchDefault>
+          <mat-card-title>{{tag.tag}}</mat-card-title>
+          <mat-card-subtitle>{{tag.watchId}}</mat-card-subtitle>
+        </mat-card>
+      </div>
+    </ngx-masonry>
+  </div>
 </ng-container>

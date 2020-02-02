@@ -1,4 +1,4 @@
-# API v0.2.X
+# API v0.3.X
 
 This is the current API specification for clients that want to connect and send events to the
 Senstate hub.
@@ -13,20 +13,24 @@ machine where the hub runs, or simply `localhost` if client and hub run on the s
 All of the following events are encapsulated in a structure and paired with an event name.
 The event name can be one of these:
 
-| Event           | Description                                        |
-| --------------- | -------------------------------------------------- |
-| addApp          | [Register the app.](#registering-the-app)          |
-| addWatcher      | [Register a new watcher.](#register-a-new-watcher) |
-| inputEvent      | [Send watcher data.](#send-watcher-data)           |
-| inputLogEvent   | [Send a log event.](#send-logs)                    |
-| inputErrorEvent | [Send an error.](#send-errors)                     |
+| `Event`           | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| `addApp`          | [Register the app.](#registering-the-app)          |
+| `addWatcher`      | [Register a new watcher.](#register-a-new-watcher) |
+| `inputEvent`      | [Send watcher data.](#send-watcher-data)           |
+| `inputLogEvent`   | [Send a log event.](#send-logs)                    |
+| `inputErrorEvent` | [Send an error.](#send-errors)                     |
 
 The encapsulating payload looks as follows:
 
-| Property | Type  | Description                            |
-| -------- | ----- | -------------------------------------- |
-| event    | Event | Any of above mentioned event names.    |
-| data     | T     | One of the following described events. |
+```json
+{ "event": "addApp", "data": { } }
+```
+
+| Property | Type    | Description                            |
+| -------- | ------- | -------------------------------------- |
+| event    | `Event` | Any of above mentioned event names.    |
+| data     |         | One of the following described events. |
 
 ## Registering the app
 
@@ -38,10 +42,10 @@ Registering an app requires a unique identifier and a name that's shown in the d
 
 ### AppMeta
 
-| Property | Type   | Description                                   |
-| -------- | ------ | --------------------------------------------- |
-| appId    | string | A short unique identifier, UUIDs recommended. |
-| name     | string | The app name.                                 |
+| Property   | Type     | Description                                   |
+| ---------- | -------- | --------------------------------------------- |
+| appId      | string   | A short unique identifier, UUIDs recommended. |
+| name       | string   | The app name.                                 |
 
 ## Register a new watcher
 
@@ -52,7 +56,7 @@ type to describe what kind of data the watcher represents.
 
 > The calling client, will receive the response event `watcherAdded`
 
-### WatchType
+### `WatchType`
 
 | Name        | Value | Description                |
 | ----------- | ----- | -------------------------- |
@@ -63,11 +67,12 @@ type to describe what kind of data the watcher represents.
 
 ### WatcherMeta
 
-| Property | Type      | Description                                   |
-| -------- | --------- | --------------------------------------------- |
-| watchId  | string    | A short unique identifier, UUIDs recommended. |
-| tag      | string    | Visible name of the variable.                 |
-| type     | WatchType | One of the above watcher types.               |
+| Property | Type        | Description                                                            |
+| -------- | ----------- | ---------------------------------------------------------------------- |
+| watchId  | string      | A short unique identifier, UUIDs recommended.                          |
+| tag      | string      | Visible name of the variable.                                          |
+| group    | string      | Group watcher to this label, every group has to be the same to match it |
+| type     | `WatchType` | One of the above watcher types.                                        |
 
 ## Send watcher data
 
@@ -91,7 +96,7 @@ The application can send logging events to show on the dashboard. At the minimum
 simple message. If available from the client side, it can also contain the log name, level, line of
 occurrence and any additional data.
 
-### LogLevel
+### `LogLevel`
 
 | Name  | Value | Description                              |
 | ----- | ----- | ---------------------------------------- |
@@ -102,13 +107,13 @@ occurrence and any additional data.
 
 ### LogData
 
-| Property | Type     | Optional | Description                                   |
-| -------- | -------- | -------- | --------------------------------------------- |
-| log      | any      | 🚫       | The actual log message.                       |
-| logName  | string   | 👍       | Name of the logger.                           |
-| logLevel | LogLevel | 👍       | Severity level, defaults to `Info`.           |
-| line     | number   | 👍       | The line where the log was created.           |
-| data     | any      | 👍       | Any additional (structured) data for the log. |
+| Property | Type       | Optional | Description                                   |
+| -------- | ---------- | -------- | --------------------------------------------- |
+| log      | any        | 🚫       | The actual log message.                       |
+| logName  | string     | 👍       | Name of the logger.                           |
+| logLevel | `LogLevel` | 👍       | Severity level, defaults to `Info`.           |
+| line     | number     | 👍       | The line where the log was created.           |
+| data     | any        | 👍       | Any additional (structured) data for the log. |
 
 ## Send errors
 

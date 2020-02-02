@@ -1,12 +1,12 @@
 import {map, tap} from 'rxjs/operators';
 import {LogLevel, WatchType} from './interfaces';
 import {TimeMeasurer} from "./utils/measure";
-import {createWatchSender} from "./sender/watch-sender";
+import {CreateWatchPayload, createWatchSender} from "./sender/watch-sender";
 import { createLogSender } from './sender/log-sender';
 
 export const SenstateOperators = {
-  watch: <T> (tag: string, type?: WatchType) => {
-    const sender = createWatchSender(tag, type);
+  watch: <T> (opt: CreateWatchPayload) => {
+    const sender = createWatchSender(opt);
 
     return tap<T>(sender);
   },

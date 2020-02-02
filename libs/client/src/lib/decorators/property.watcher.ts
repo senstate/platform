@@ -1,4 +1,4 @@
-import {createWatchSender} from "../sender/watch-sender";
+import {CreateWatchPayload, createWatchSender} from "../sender/watch-sender";
 
 export interface SimpleChange<T> {
   previousValue: T;
@@ -7,11 +7,19 @@ export interface SimpleChange<T> {
 
 export type PropertyWatcherCallback<T> = (value: T, context, simpleChange?: SimpleChange<T>) => void
 
-export function PropertyWatcher<T = any> (tag?: string, callback?: PropertyWatcherCallback<T>) {
+export function PropertyWatcher<T = any> (opt?: Partial<CreateWatchPayload>, callback?: PropertyWatcherCallback<T>) {
   const cachedValueSymbol = Symbol('CachedValue');
 
+  if (!opt) {
+    opt = {};
+  }
+
   return (target: any, key: PropertyKey) => {
-    const watchSender = createWatchSender(tag || key.toString());
+    if (!opt.tag) {
+      opt.tag = key.toString();
+    }
+
+    const watchSender = createWatchSender(opt as CreateWatchPayload);
 
     Object.defineProperty(target, key, {
       set: function (value) {

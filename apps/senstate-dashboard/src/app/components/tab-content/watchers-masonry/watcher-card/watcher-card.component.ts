@@ -1,4 +1,13 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, Directive, TemplateRef, ContentChild} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Directive,
+  TemplateRef,
+  ContentChild,
+  ChangeDetectorRef
+} from '@angular/core';
 import {HubService} from "../../../../state/hub.service";
 import {Observable} from "rxjs";
 
@@ -37,9 +46,7 @@ export class WatcherCardComponent implements OnInit {
     return this.historyTemplateDir && this.historyTemplateDir.tpl;
   }
 
-  private lastValue: any;
-
-  constructor(private hub: HubService) { }
+  constructor(private hub: HubService) {}
 
   ngOnInit() {
     this.paused$ = this.hub.isWatcherPaused$(this.appId, this.watchId);

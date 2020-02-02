@@ -51,7 +51,7 @@ Those methods sending the data to the hub:
 |    |Watch|Log|Error|
 |--- |--- |--- |--- |
 |Function|Send the current value of a "tag"|Sends a log entry to the Hub|Subscribes to the window.onerror method, and send this to the Hub|
-|Create|`const watcher = createWatchSender(tag: string, type?: WatchType)`|`const logger = createLogSender(logLevel: LogLevel = LogLevel.Info, logName?: string)`| `registerWindowErrorHandler()`    |
+|Create|`const watcher = createWatchSender({tag: string, group?: string, type?: WatchType})`|`const logger = createLogSender(logLevel: LogLevel = LogLevel.Info, logName?: string)`| `registerWindowErrorHandler()`    |
 |    | |`const otherLogger = genericLogSender()`    |    |
 |Send Data|`watcher(value)` |`logger(logMessage, data?, line?)`| Once an error happened it'll be sent   |
 |    | |`otherLogger(GenericLogSenderArgs)`  (full params, use code completion :))   |    |
@@ -62,7 +62,7 @@ Those methods sending the data to the hub:
 `TimeMeasurer` uses the time between `.start()` and `.stop` as value for the internal Watcher
 
 ```ts
-  const time = new TimeMeasurer(tag);
+  const time = new TimeMeasurer({tag: string, group?: string});
   time.start();
   // your work
   time.step();  // step can be called often, to get multiple updates, if called in a loop
@@ -70,14 +70,14 @@ Those methods sending the data to the hub:
 
 ## Decorators
 
-Add `@PropertyWatcher(optionalWatcherTag)` to your class-property, uses a watcher internally to
+Add `@PropertyWatcher({tag: string, group?: string})` to your class-property, uses a watcher internally to
 send the data
 
 ```ts
   @PropertyWatcher()
   public watchProperty = 0;
 
-  @PropertyWatcher('otherKey')
+  @PropertyWatcher({tag: 'otherKey', group: 'Important'})
   public watchOtherProperty = 0;
 ```
 
@@ -88,7 +88,7 @@ more to be added
 Measure the time of a promise, and send the value
 
 ```ts
-const result = await measurePromise(watchTag, () => myPromiseFunc());
+const result = await measurePromise({tag: string, group?: string}, () => myPromiseFunc());
 ```
 
 ## RXJS Pipes
@@ -97,14 +97,14 @@ const result = await measurePromise(watchTag, () => myPromiseFunc());
 import { SenstateOperators } from '@senstate/client';
 
 myObservable$.pipe(
-   SenstateOperators.watch('Watcher Tag'), // Watcher
+   SenstateOperators.watch({tag: 'Watcher Tag', group: 'optional'}), // Watcher
 )
 
 other$.pipe(
    SenstateOperators.log('Log Name')
 )
 
-const time = new TimeMeasurer(tag);
+const time = new TimeMeasurer({tag: 'Measurer Tag', group: 'optional'});
 
 trigger$.pipe(
    SenstateOperators.measureStart(time),

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, TrackByFunction} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {App, DASHBOARD_EVENT_NAMES, NetworkInfo} from '@senstate/dashboard-connection';
@@ -8,6 +8,7 @@ import {HubService} from "./state/hub.service";
 import {MatSliderChange} from "@angular/material/slider";
 import {MaterialCssVarsService} from "angular-material-css-vars";
 import {SocketService} from "./services/socket.service";
+import { version } from '../../../senstate/src/root-assets/package.json';
 
 @Component({
   selector: 'senstate-root',
@@ -29,6 +30,12 @@ export class AppComponent {
   delayLabel = (num) => `${num} ms`;
 
   darkTheme = true;
+
+  version = version;
+
+  public trackByAppFunc: TrackByFunction<App> = (index, item) => {
+    return item.appId;
+  };
 
   constructor (private http: HttpClient,
                private socketService: SocketService,
@@ -56,10 +63,6 @@ export class AppComponent {
 
       this.hubService.statusChanged(value);
     });
-  }
-
-  public trackByAppFunc (appObj: App) {
-    return appObj.appId;
   }
 
   changeDebounce ($event: MatSliderChange) {

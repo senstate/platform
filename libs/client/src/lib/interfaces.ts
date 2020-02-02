@@ -12,6 +12,7 @@ export const enum WatchType {
 
 export interface WatcherMeta {
   watchId: string;
+  group?: string;
   tag: string;
   type: WatchType;
 }

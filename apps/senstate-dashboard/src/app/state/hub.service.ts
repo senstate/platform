@@ -3,15 +3,36 @@ import {Store} from "@ngrx/store";
 import {State} from './index'
 import {SocketEvent} from "@senstate/client-connection";
 import {DashboardActions, HubActions} from "./actions";
-import {map, startWith} from "rxjs/operators";
-import {someGuid, WatchType} from "@senstate/client";
-import {interval} from "rxjs";
+import {map, startWith, tap} from "rxjs/operators";
+import {someGuid, WatchData, WatcherMeta, WatchType} from "@senstate/client";
+import {BehaviorSubject, combineLatest, interval, NEVER, of} from "rxjs";
+import {App} from "@senstate/dashboard-connection";
+import groupBy from 'lodash-es/groupBy';
+
+const hubAppId = 'hub';
+const hubWatchId = 'hub#1';
+const hubWatchMeta =  {
+  watchId: hubWatchId,
+  tag: 'State',
+  type: WatchType.Json
+} as WatcherMeta;
+
+export interface GroupedWatchers {
+  key: string;
+  watchers: WatcherMeta[];
+}
 
 @Injectable()
 export class HubService {
+  private hubApp$ = new BehaviorSubject<App[]>([]);
 
   // todo selectors/refactor :)
-  app$ = this.state.select(s => Object.values(s.data.meta.apps));
+  app$ = combineLatest([this.hubApp$, this.state.select(s => Object.values(s.data.meta.apps))]).pipe(
+    map(([hubApp, allOther]) => {
+      return [...allOther, ...hubApp]
+    })
+  );
+
   socketStatus$ = this.state.select(s => {
     switch (s.data.socketStatus) {
       case SocketEvent.Connecting:
@@ -30,18 +51,40 @@ export class HubService {
   });
 
   constructor (private state: Store<State>) {
-
+    // this.addHubAsApp();
   }
 
   getWatchersByApp$ (appId: string) {
-    return this.state.select(state => {
+    console.info('appId', appId);
+    return appId === hubAppId ? of([
+      hubWatchMeta
+    ]) : this.state.select(state => {
       const watchers = state.data.meta.apps[appId].watchers;
       return Object.keys(watchers).map(w => watchers[w]);
     })
   }
 
+  getGroupedWatchersByApp$ (appId: string) {
+    return this.getWatchersByApp$(appId).pipe(
+      map(watchers => {
+        const grouped = groupBy(watchers, 'group');
+        return Object.keys(grouped).map(key => ({
+          key,
+          watchers: grouped[key]
+        }) as GroupedWatchers);
+      })
+    );
+  }
+
   getWatcherData$ (watchId: string) {
     return this.state.select(state => {
+      if (watchId === hubWatchId) {
+
+        return {
+          apps: Object.keys(state.data.eventsByApp)
+        };
+      }
+
       const appId = state.data.watcherToApp[watchId];
 
       if (!appId) {
@@ -101,16 +144,19 @@ export class HubService {
             [stringWatcherKey]: {
               type: WatchType.String,
               tag: 'string value',
+              group: 'Group 1',
               watchId: stringWatcherKey
             },
             [numWatcherKey]: {
               type: WatchType.Number,
               tag: 'number value',
+              group: 'Group 1',
               watchId: numWatcherKey
             },
             [jsonWatcherKey]: {
               type: WatchType.Json,
               tag: 'json values',
+              group: 'Group 2',
               watchId: jsonWatcherKey
             }
           }
@@ -181,5 +227,18 @@ export class HubService {
         }
       }));
     });
+  }
+
+  addHubAsApp () {
+    this.hubApp$.next([
+      {
+        appId: hubAppId,
+        name: 'Dashboard',
+        client: 'this',
+        watchers: {
+         // [hubWatchId]: hubWatchMeta
+        }
+      }
+    ])
   }
 }
