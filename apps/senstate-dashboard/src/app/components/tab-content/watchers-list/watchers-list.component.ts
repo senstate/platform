@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy, Input, TrackByFunction} from
 import {Observable} from "rxjs";
 import {WatcherMeta} from "@senstate/client";
 import {GroupedWatchers, HubService} from "../../../state/hub.service";
+import {DebugToggleService} from "../../../services/debug-toggle.service";
 
 @Component({
   selector: 'senstate-watchers-list',
@@ -24,7 +25,8 @@ export class WatchersListComponent implements OnInit {
     return item.key;
   };
 
-  constructor(private hub: HubService) { }
+  constructor(private hub: HubService,
+              public debugToggle: DebugToggleService) { }
 
   ngOnInit() {
     this.watchers$ = this.hub.getGroupedWatchersByApp$(this.appId);

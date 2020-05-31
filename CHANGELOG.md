@@ -7,8 +7,10 @@
 - Dashboard: Search for the error on multiple search engines
 - Dashboard: Show string + json diff
 - Dashboard: new View-Type: List watchers instead of masonry grid
+- Dashboard: show watchers in a grouped-way (if you don't set up a group, then the label is just hidden)
 - API: Add response actions
 - API: Add group param to a Watcher
+- Client: Log-Only Mode, in case the client-connection wasn't called yet.
 
 ### Breaking Changes `@senstate/client`
 

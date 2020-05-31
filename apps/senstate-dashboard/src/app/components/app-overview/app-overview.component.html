@@ -1,5 +1,7 @@
 <h2 class="mat-h2">{{app.name}}
-  <i class="mat-small">{{app.appId}}</i></h2>
+  <i class="mat-small"
+    *ngIf="debugToggle.showDebugId$() | async">{{app.appId}}</i>
+</h2>
 
 <mat-tab-group>
   <mat-tab #tab>

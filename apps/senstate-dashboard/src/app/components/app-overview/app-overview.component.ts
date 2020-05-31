@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {ErrorData, LogData} from "@senstate/client";
 import {HubService} from "../../state/hub.service";
 import {filter, map} from "rxjs/operators";
+import {DebugToggleService} from "../../services/debug-toggle.service";
 
 @Component({
   selector: 'senstate-app-overview',
@@ -21,7 +22,8 @@ export class AppOverviewComponent implements OnInit {
   public autoSizeActive = false;
 
   constructor (private hub: HubService,
-               private cd: ChangeDetectorRef) {
+               private cd: ChangeDetectorRef,
+               public debugToggle: DebugToggleService) {
   }
 
   ngOnInit () {

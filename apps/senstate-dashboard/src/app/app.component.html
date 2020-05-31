@@ -32,7 +32,7 @@
                [mdePopoverCloseOnClick]="false"
                [mdePopoverOffsetX]="-25"
                [mdePopoverOffsetY]="2"
-               [mdePopoverArrowOffsetX]="15">
+               [mdePopoverArrowOffsetX]="35">
     <div class="popover mat-elevation-z2">
       <label>Debounce Events</label>
       <div class="data-delay">
@@ -54,8 +54,18 @@
 
       <label>Theme</label>
       <div>
-        <button mat-raised-button color="primary" (click)="toggleTheme()">Toggle</button>
+        <button mat-raised-button color="primary"
+                (click)="toggleTheme()">Toggle</button>
       </div>
+
+      <br>
+      <br>
+      <label>Debug-Informations</label>
+      <div>
+        <button mat-raised-button color="primary"
+                (click)="debugToggle.toggle()">Toggle Debug</button>
+      </div>
+
     </div>
   </mde-popover>
 </mat-toolbar>

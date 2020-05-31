@@ -9,6 +9,7 @@ import {MatSliderChange} from "@angular/material/slider";
 import {MaterialCssVarsService} from "angular-material-css-vars";
 import {SocketService} from "./services/socket.service";
 import { version } from '../../../senstate/src/root-assets/package.json';
+import {DebugToggleService} from "./services/debug-toggle.service";
 
 @Component({
   selector: 'senstate-root',
@@ -41,7 +42,8 @@ export class AppComponent {
                private socketService: SocketService,
                private hubService: HubService,
                private route: ActivatedRoute,
-               public materialCssVarsService: MaterialCssVarsService) {
+               public materialCssVarsService: MaterialCssVarsService,
+               public debugToggle: DebugToggleService) {
     this.route.queryParamMap.subscribe(q => {
       this.isMobile = q.has('mobile');
       console.info('params', q)
