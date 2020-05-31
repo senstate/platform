@@ -36,6 +36,16 @@ function consoleCallByLogLevel(level: LogLevel): consoleMethod  {
   }
 }
 
+let logWritten = false;
+function writeSenstateNotification () {
+  if (!logWritten) {
+    logWritten = true;
+
+    console.warn('[Senstate]: You are using the "log-only"-mode, in order to send' +
+      ' the data to the dashboard, you need to install: [@senstate/client-connection] and call: [setSenstateConnection] before: `bootstrapModule`' +
+      ' - See for more information: https://github.com/senstate/platform/blob/master/libs/client/README.md')
+  }
+}
 
 /**
  * To be used with @senstate/client-connection
@@ -51,14 +61,17 @@ export const CONNECTION: {
       console.info(`[${meta.group}/${meta.tag}]:`, data.data);
     },
     setWatcher (meta: WatcherMeta) {
+      writeSenstateNotification();
       META_DICTIONARY[meta.watchId] = meta;
     },
     sendLog (data: LogData) {
+      writeSenstateNotification();
       const consoleMethodOfType = consoleCallByLogLevel(data.logLevel);
 
       consoleMethodOfType(`[${logLevelToString(data.logLevel)}]: ${data.log}`, data.data);
     },
     sendError (data: ErrorData) {
+      writeSenstateNotification();
       console.error(`${data.errorName} - ${data.message}`, data);
     }
   }
