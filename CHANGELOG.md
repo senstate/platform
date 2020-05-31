@@ -11,6 +11,7 @@
 - API: Add group param to a Watcher
 
 ### Breaking Changes `@senstate/client`
+
 Due to the `group` feature, all helper functions derived from
 `createWatchSender` changed to an object:
 
@@ -27,6 +28,7 @@ const watcher = createWatchSender({
 ```
 
 the same object will be used on:
+
 - `new TimeMeasurer(obj)`
 - `@PropertyWatcher`
 - `measurePromise`

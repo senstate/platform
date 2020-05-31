@@ -24,6 +24,15 @@
 
 ![Senstate Example Gif](https://user-images.githubusercontent.com/842273/69455419-a4bf9400-0d68-11ea-953d-9c0b6ffe3e75.gif)
 
+> Current workflow:
+
+![Senstate Current Workflow](readme_assets/senstate-current-workflow.svg)
+
+> Upcoming:
+
+![Senstate Current Workflow](readme_assets/senstate_upcoming_workflow.svg)
+
+
 ## Articles / Tutorial
 
 >[Introduction](https://dev.to/negue/senstate-make-sense-of-your-state-while-debugging-96f)
