@@ -14,6 +14,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {WatchHistoryComponent} from './watchers/watch-history/watch-history.component';
 import {WatchDiffComponent} from "./watchers/watch-diff/watch-diff.component";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -30,17 +31,18 @@ import {WatchDiffComponent} from "./watchers/watch-diff/watch-diff.component";
   exports: [
     WatchersMasonryComponent,
   ],
-  imports: [
-    CommonModule,
+    imports: [
+        CommonModule,
 
-    NgxMasonryModule,
-    MatCardModule,
-    JsonViewerModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCheckboxModule
-  ]
+        NgxMasonryModule,
+        MatCardModule,
+        JsonViewerModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        SharedModule
+    ]
 })
 export class WatchersMasonryModule {
 }

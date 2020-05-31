@@ -27,7 +27,7 @@
   <ng-container matColumnDef="message">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Message</th>
     <td mat-cell *matCellDef="let element" class="message-column">
-      {{element.message}}
+      <div class="error-message">{{element.message}}</div>
 
       <button mat-icon-button class="search-issue"
               [mdePopoverTriggerFor]="searchErrorPopover"

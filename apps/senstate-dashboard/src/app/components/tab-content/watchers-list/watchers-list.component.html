@@ -3,12 +3,18 @@
     No watchers yet :)
   </h2>
 
-  <div *ngFor="let group of watchers; trackBy: trackByGroupFunc">
-    <b *ngIf="group.key !== 'undefined'">{{group.key}}</b>
+  <senstate-group-holder
+    *ngFor="let group of watchers; trackBy: trackByGroupFunc">
+    <b *ngIf="group.key !== 'undefined'"
+        group_holder__name>
+      {{group.key}} - Watchers: {{group.watchers.length}}
+    </b>
+
     <div *ngFor="let tag of group.watchers; trackBy: trackByWatcherFunc"
-         [ngSwitch]="tag.type">
+         [ngSwitch]="tag.type"
+         class="watcher-entry">
       {{ tag.tag }}: <i class="mat-small">{{tag.watchId}}</i> <br />
       <senstate-list-json-value [watchId]="tag.watchId"></senstate-list-json-value>
     </div>
-  </div>
+  </senstate-group-holder>
 </ng-container>
