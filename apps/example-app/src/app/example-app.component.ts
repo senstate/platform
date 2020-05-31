@@ -131,10 +131,10 @@ export class ExampleAppComponent {
     this.runningWatchers.splice(index, 1);
   }
 
-  addEvents () {
-    this.startTimer(50, WatchType.String);
-    this.startTimer(50, WatchType.Number);
-    this.startTimer(50, WatchType.Json);
+  addEvents (interval) {
+    this.startTimer(interval, WatchType.String);
+    this.startTimer(interval, WatchType.Number);
+    this.startTimer(interval, WatchType.Json);
   }
 
   updateProperty () {
