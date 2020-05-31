@@ -11,6 +11,10 @@
   .mat-tab-body {
     padding-top: 10px;
   }
+
+  .mat-tab-body-content {
+    overflow-x: hidden;
+  }
 }
 
 .popover {
