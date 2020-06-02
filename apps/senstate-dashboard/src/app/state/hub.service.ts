@@ -7,7 +7,7 @@ import {map, startWith, tap} from "rxjs/operators";
 import {someGuid, WatchData, WatcherMeta, WatchType} from "@senstate/client";
 import {BehaviorSubject, combineLatest, interval, NEVER, of} from "rxjs";
 import {App} from "@senstate/dashboard-connection";
-import groupBy from 'lodash-es/groupBy';
+import groupBy from 'lodash/groupBy';
 
 const hubAppId = 'hub';
 const hubWatchId = 'hub#1';
