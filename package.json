@@ -33,7 +33,9 @@
     "client:coverage": "ng test client --codeCoverage=true",
     "client-connection:coverage": "ng test client-connection --codeCoverage=true",
     "markdown:lint": "npx markdownlint-cli@0.19 -c tools/configs/markdownlint.yml **/*.md -i node_modules -i dist",
-    "cspell:lint": "npx cspell@4.0 -c tools/configs/cspell.json -e node_modules '**/*.md'"
+    "cspell:lint": "npx cspell@4.0 -c tools/configs/cspell.json -e node_modules '**/*.md'",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "private": true,
   "dependencies": {
@@ -73,7 +75,8 @@
     "tslib": "1.10.0",
     "ws": "7.1.2",
     "xss": "^1.0.6",
-    "zone.js": "0.9.1"
+    "zone.js": "0.9.1",
+    "snyk": "^1.334.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.803.21",
@@ -106,5 +109,6 @@
   "browser": {
     "path": false,
     "fs": false
-  }
+  },
+  "snyk": true
 }
