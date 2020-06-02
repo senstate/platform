@@ -32,7 +32,6 @@
 
 ![Senstate Current Workflow](readme_assets/senstate_upcoming_workflow.svg)
 
-
 ## Articles / Tutorial
 
 >[Introduction](https://dev.to/negue/senstate-make-sense-of-your-state-while-debugging-96f)

@@ -70,8 +70,8 @@ Those methods sending the data to the hub:
 
 ## Decorators
 
-Add `@PropertyWatcher({tag: string, group?: string})` to your class-property, uses a watcher internally to
-send the data
+Add `@PropertyWatcher({tag: string, group?: string})` to your class-property,
+it uses a watcher internally to send the data
 
 ```ts
   @PropertyWatcher()
