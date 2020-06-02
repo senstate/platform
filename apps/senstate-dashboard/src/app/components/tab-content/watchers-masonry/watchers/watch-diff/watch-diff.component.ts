@@ -7,9 +7,11 @@ import * as disparity from 'disparity';
 import * as xss from 'xss';
 import {DomSanitizer} from "@angular/platform-browser";
 
-disparity.added = '';
-disparity.removed = '';
-disparity.colors = {
+const untypedDisparity = disparity as any;
+
+untypedDisparity.added = '';
+untypedDisparity.removed = '';
+untypedDisparity.colors = {
   // chars diff
   charsRemoved: { open: "<span class='removed'>", close: '</span>' },
   charsAdded: { open: "<span class='added'>", close: '</span>' },
