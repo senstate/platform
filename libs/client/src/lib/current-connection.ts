@@ -32,7 +32,7 @@ function consoleCallByLogLevel(level: LogLevel): consoleMethod  {
     case LogLevel.Error:
       return console.error;
     default:
-      throw new Error(`Not possible: ${level}`)
+      throw new Error(`Not possible LogLevel: ${level}`)
   }
 }
 
