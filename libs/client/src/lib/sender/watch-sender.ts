@@ -2,10 +2,11 @@ import { WatchType} from '../interfaces';
 import { CONNECTION } from '../current-connection';
 import {someGuid} from "../utils/utils";
 
-
 export type WatchSender = (v: any) => void;
 
-export function createWatchSender(tag: string, type?: WatchType): WatchSender {
+export type CreateWatchPayload = {tag: string, type?: WatchType, group?: string};
+
+export function createWatchSender(opt: CreateWatchPayload): WatchSender {
   const watchId = someGuid();
 
   let metaRegistered = false;
@@ -14,8 +15,11 @@ export function createWatchSender(tag: string, type?: WatchType): WatchSender {
     if (!metaRegistered) {
       CONNECTION.current.setWatcher({
         watchId,
-        tag,
-        type: typeof type !== 'undefined' ? type : getTypeOfValue(v)
+        tag: opt.tag,
+        group: opt.group,
+        type: typeof opt.type !== 'undefined'
+          ? opt.type
+          : getTypeOfValue(v)
       });
       metaRegistered = true;
     }

@@ -1,7 +1,6 @@
 import {DashboardActions, HubActions} from '../state/actions';
-import {Action} from "ts-action";
+import {Action, reducer} from "ts-action";
 import {on} from 'ts-action-immer/reducer';
-import {createReducer} from "@ngrx/store";
 import {ErrorEvent, LogEvent, MetaStore} from "@senstate/dashboard-connection";
 import {SocketEvent} from "@senstate/client-connection";
 
@@ -56,9 +55,8 @@ export const HubReducerInitState: HubState = {
   }
 };
 
-const topicReducer = createReducer(
+const topicReducer = reducer(
   HubReducerInitState,
-
   on(HubActions.GOT_META, (state, action) => {
 
     // remove events of a removed app

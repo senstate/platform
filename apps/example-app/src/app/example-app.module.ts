@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 
-import {AppComponent} from './app.component';
+import {ExampleAppComponent} from './example-app.component';
 import {MatButtonModule, MatInputModule, MatSelectModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AngularErrorHandler} from "@senstate/client";
@@ -9,7 +9,7 @@ import {RouterModule} from "@angular/router";
 import { ErrorRouteComponent } from './error-route/error-route.component';
 
 @NgModule({
-  declarations: [AppComponent, ErrorRouteComponent],
+  declarations: [ExampleAppComponent, ErrorRouteComponent],
   imports: [
     BrowserModule, MatButtonModule, MatSelectModule,
     BrowserAnimationsModule, MatInputModule,
@@ -23,9 +23,9 @@ import { ErrorRouteComponent } from './error-route/error-route.component';
   providers: [
     {provide: ErrorHandler, useClass: AngularErrorHandler}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ExampleAppComponent]
 })
-export class AppModule {
+export class ExampleAppModule {
 }
 
 setTimeout(() => {

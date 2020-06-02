@@ -24,3 +24,17 @@ table {
     overflow: auto;
   }
 }
+
+.message-column {
+  position: relative;
+}
+
+.search-issue {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.error-message {
+  padding-right: 40px;
+}

@@ -56,6 +56,6 @@ jobs:
         with:
           node_version: 13.x
       - name: Run markdownlint
-        run: npx markdownlint-cli@0.19 -c tools/configs/markdownlint.yml -i node_modules '**/*.md'
+        run: npm run markdown:lint
       - name: Run cspell
-        run: npx cspell@4.0 -c tools/configs/cspell.json -e node_modules '**/*.md'
+        run: npm run cspell:lint

@@ -1,0 +1,11 @@
+graph LR
+  subgraph "JS-Client only (*soon)"
+  JS --> App-Overlay
+  JS --> Log-OnlyMode
+ end
+  JS[JS-Client Library] --> Hub{Hub}
+
+
+  Rust[Rust-Client Library] --> Hub
+  Go[Go-Client Library] --> Hub
+  Hub--> Dashboard

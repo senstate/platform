@@ -1,12 +1,12 @@
 import { mil } from './utils';
-import {createWatchSender, WatchSender} from "../sender/watch-sender";
+import {CreateWatchPayload, createWatchSender, WatchSender} from "../sender/watch-sender";
 import {WatchType} from "../interfaces";
 
 export class TimeMeasurer {
   private readonly sender: WatchSender;
   private beganAt = -1;
-  constructor (tag: string, private resetOnStep = false) {
-    this.sender = createWatchSender(tag, WatchType.Performance);
+  constructor (opt: CreateWatchPayload, private resetOnStep = false) {
+    this.sender = createWatchSender({...opt, type: WatchType.Performance});
   }
 
   public start() {

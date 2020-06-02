@@ -1,0 +1,23 @@
+<ng-container *ngIf="watchers$ |async as watchers">
+  <h2 class="mat-h3" *ngIf="watchers.length === 0">
+    No watchers yet :)
+  </h2>
+
+  <senstate-group-holder
+    *ngFor="let group of watchers; trackBy: trackByGroupFunc">
+    <b *ngIf="group.key !== 'undefined'"
+        group_holder__name>
+      {{group.key}} - Watchers: {{group.watchers.length}}
+    </b>
+
+    <div *ngFor="let tag of group.watchers; trackBy: trackByWatcherFunc"
+         [ngSwitch]="tag.type"
+         class="watcher-entry">
+      {{ tag.tag }}:
+      <i class="mat-small"
+       *ngIf="debugToggle.showDebugId$() | async">{{tag.watchId}}</i>
+      <br />
+      <senstate-list-json-value [watchId]="tag.watchId"></senstate-list-json-value>
+    </div>
+  </senstate-group-holder>
+</ng-container>

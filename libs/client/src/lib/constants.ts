@@ -4,5 +4,8 @@ export const CLIENT_CONSTS = {
   INPUT_LOG_EVENT: 'inputLogEvent',
   INPUT_ERROR_EVENT: 'inputErrorEvent',
   ADD_APP: 'addApp',
-  ADD_WATCHER: 'addWatcher'
+  ADD_WATCHER: 'addWatcher',
+
+  APP_ADDED: 'appAdded',
+  WATCHER_ADDED: 'watcherAdded'
 };

@@ -22,6 +22,7 @@ describe('WatchersMasonryComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WatchersMasonryComponent);
     HubServiceMock.getLatest().getWatchersByApp$ = appId => NEVER;
+    HubServiceMock.getLatest().getGroupedWatchersByApp$ = appId => NEVER;
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

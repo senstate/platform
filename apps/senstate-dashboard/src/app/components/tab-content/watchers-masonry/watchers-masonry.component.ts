@@ -2,11 +2,11 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  Input
+  Input, TrackByFunction
 } from '@angular/core';
 import {Observable} from "rxjs";
 import {WatcherMeta} from "@senstate/client";
-import {HubService} from "../../../state/hub.service";
+import {GroupedWatchers, HubService} from "../../../state/hub.service";
 import {NgxMasonryOptions} from "ngx-masonry";
 
 
@@ -24,21 +24,24 @@ export class WatchersMasonryComponent implements OnInit {
   @Input()
   public autoSizeCards = false;
 
-  public watchers$: Observable<WatcherMeta[]>;
+  public watchers$: Observable<GroupedWatchers[]>;
 
   public masonryConfig: NgxMasonryOptions = {
     horizontalOrder: true
   };
 
+  public trackByWatcherFunc: TrackByFunction<WatcherMeta> = (index, item) => {
+    return item.watchId;
+  };
+
+  public trackByGroupFunc: TrackByFunction<GroupedWatchers> = (index, item) => {
+    return item.key;
+  };
+
   constructor(private hub: HubService) { }
 
   ngOnInit() {
-    this.watchers$ = this.hub.getWatchersByApp$(this.appId)
-  }
-
-
-  public trackByWatcherFunc (tagObj: any) {
-    return tagObj.watchId;
+    this.watchers$ = this.hub.getGroupedWatchersByApp$(this.appId);
   }
 
 }

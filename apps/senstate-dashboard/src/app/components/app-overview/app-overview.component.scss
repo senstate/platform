@@ -11,10 +11,21 @@
   .mat-tab-body {
     padding-top: 10px;
   }
+
+  .mat-tab-body-content {
+    overflow-x: hidden;
+  }
 }
 
 .popover {
   padding: 15px
 }
 
+.divider {
+  height: 1px;
+  background: white;
+  width: 100%;
+margin-top: 5px;
+margin-bottom: 5px;
+}
 

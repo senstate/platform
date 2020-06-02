@@ -1,0 +1,18 @@
+:host {
+  display: block;
+
+  &:not(:first-of-type) {
+    margin-top: 0.5rem;
+  }
+}
+
+.group-name {
+  background: rgba(0, 0, 0, 0.16);
+  padding-left: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  width: 100%;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+

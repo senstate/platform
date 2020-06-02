@@ -1,7 +1,9 @@
 <div class="split">
 
 
-  <div class="column">
+  <div class="column padding">
+    <h2>Don't mind the example-sending-data-app style :)</h2>
+
     <div>
       Running Watchers
 
@@ -38,18 +40,32 @@
     <br/>
 
 
-    <button mat-raised-button (click)="addEvents()">Add Basic Events</button>
+    <button mat-raised-button (click)="addEvents(interval.value)">Add Basic Events</button>
     <button mat-raised-button (click)="addLog()">Add Log</button>
     <button mat-raised-button (click)="addWindowError()" #test>Add Window Error</button>
     <button mat-raised-button routerLink="test" #test>Add NG Error</button>
-    <button mat-raised-button (click)="updateProperty()">Update Property</button>
 
+
+    <button mat-raised-button (click)="updateProperty()">
+      Update Properties: {{ watchProperty }} - {{watchOtherProperty}}
+
+    </button>
+
+    <br/>
+    <br/>
+    <br/>
+    <hr/>
+    <ul>
+      <li>Todo: better Example-App Style</li>
+      <li>Todo: stuff</li>
+    </ul>
 
     <router-outlet></router-outlet>
   </div>
 
 
-  <iframe src="http://localhost:4200"></iframe>
+  <iframe src="http://localhost:4200"
+  class="column"></iframe>
 
 </div>
 

@@ -1,4 +1,8 @@
 ::ng-deep {
+  pre {
+    word-break: break-all;
+  }
+
   pre span {
     white-space: normal;
   }

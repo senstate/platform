@@ -12,6 +12,10 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatRadioModule} from "@angular/material/radio";
 import {MdePopoverModule} from "@material-extended/mde";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDividerModule} from "@angular/material/divider";
+import {WatchersListModule } from "../tab-content/watchers-list/watchers-list.module";
 
 
 
@@ -32,7 +36,13 @@ import {MdePopoverModule} from "@material-extended/mde";
     MatMenuModule,
     MatCheckboxModule,
     MatRadioModule,
-    MdePopoverModule
+    MdePopoverModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDividerModule,
+    WatchersMasonryModule,
+    WatchersMasonryModule,
+    WatchersListModule
   ]
 })
 export class AppOverviewModule { }

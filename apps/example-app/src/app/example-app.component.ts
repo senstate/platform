@@ -24,20 +24,26 @@ function typeToLabel (watchType: WatchType) {
   }
 }
 
+const updateGroupPropertyName = 'Press: Update Property';
+
 @Component({
   selector: 'senstate-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './example-app.component.html',
+  styleUrls: ['./example-app.component.scss']
 })
-export class AppComponent {
+export class ExampleAppComponent {
   title = 'example-app';
 
-  @PropertyWatcher()
+  @PropertyWatcher({
+    group: updateGroupPropertyName
+  })
   public watchProperty = 0;
 
-
-  @PropertyWatcher('otherKey')
-  public watchOtherProperty = 0;
+  @PropertyWatcher({
+    // tag: 'otherKey',
+    group: updateGroupPropertyName
+  })
+  public watchOtherProperty = 1;
 
   public runningWatchers: IWatcherInfo[] = [];
 
@@ -69,7 +75,7 @@ export class AppComponent {
 
           return v;
         }),
-        SenstateOperators.watch(`${typeToLabel(watchType)} Pipe`)
+        SenstateOperators.watch({tag: `${typeToLabel(watchType)} Pipe`, group: 'Example Data'})
       ).subscribe(value => {
 
       })
@@ -125,10 +131,10 @@ export class AppComponent {
     this.runningWatchers.splice(index, 1);
   }
 
-  addEvents () {
-    this.startTimer(50, WatchType.String);
-    this.startTimer(50, WatchType.Number);
-    this.startTimer(50, WatchType.Json);
+  addEvents (interval) {
+    this.startTimer(interval, WatchType.String);
+    this.startTimer(interval, WatchType.Number);
+    this.startTimer(interval, WatchType.Json);
   }
 
   updateProperty () {
