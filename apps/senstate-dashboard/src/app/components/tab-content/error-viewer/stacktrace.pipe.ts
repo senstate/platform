@@ -4,7 +4,7 @@ import {Lazy} from "@gewd/lazy/utils";
 
 // Lazy-load :)
 const loadStacktracey = Lazy.create(
-  () => import('stacktracey')
+  () => /* webpackChunkName: "stacktracey" */ import('stacktracey')
   .then(p => {
     const stacktracey = p.default;
 
