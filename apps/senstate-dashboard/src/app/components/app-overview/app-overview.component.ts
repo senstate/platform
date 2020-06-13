@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnInit} from '@angular/core';
 import {App} from "@senstate/dashboard-connection";
 import {Observable} from "rxjs";
 import {ErrorData, LogData} from "@senstate/client";
@@ -20,6 +20,11 @@ export class AppOverviewComponent implements OnInit {
   public logs$: Observable<LogData[]>;
   public errors$: Observable<ErrorData[]>;
   public autoSizeActive = false;
+
+  @HostBinding('class.disconnected')
+  public get appStyle() : boolean  {
+    return this.app.disconnected;
+  }
 
   constructor (private hub: HubService,
                private cd: ChangeDetectorRef,

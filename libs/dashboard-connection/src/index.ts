@@ -7,6 +7,7 @@ export interface WatcherStore {
 export interface App extends AppMeta {
   client: string;
   watchers: WatcherStore;
+  disconnected?: boolean;
 }
 
 export interface AppStore {

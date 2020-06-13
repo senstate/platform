@@ -1,4 +1,11 @@
-<h2 class="mat-h2">{{app.name}}
+<h2 class="mat-h2" >
+  <span>
+    {{app.name}}
+
+    <mat-chip-list>
+    <mat-chip *ngIf="app.disconnected">Disconnected</mat-chip>
+    </mat-chip-list>
+  </span>
   <i class="mat-small"
     *ngIf="debugToggle.showDebugId$() | async">{{app.appId}}</i>
 </h2>

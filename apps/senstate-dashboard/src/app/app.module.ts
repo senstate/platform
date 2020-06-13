@@ -8,11 +8,12 @@ import {
   MatBadgeModule,
   MatButtonModule,
   MatCardModule,
-  MatExpansionModule, MatIconModule,
+  MatExpansionModule,
+  MatIconModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
-import { QRCodeModule } from 'angular2-qrcode';
+import {QRCodeModule} from 'angular2-qrcode';
 import {MdePopoverModule} from "@material-extended/mde";
 import {RouterModule} from "@angular/router";
 import {StoreModule} from '@ngrx/store'
@@ -35,6 +36,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatMenuModule} from "@angular/material/menu";
 import {SocketService} from "./services/socket.service";
 import {AppOverviewModule} from "./components/app-overview/app-overview.module";
+import {MatDividerModule} from "@angular/material/divider";
 
 // TODO Refactor Modules/Imports
 
@@ -42,62 +44,63 @@ import {AppOverviewModule} from "./components/app-overview/app-overview.module";
     declarations: [
         AppComponent,
     ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        HubModule,
-        RouterModule.forRoot([], {
-            useHash: true
-        }),
-        StoreModule.forRoot(stateReducer, {
-            metaReducers,
-            runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true
-            }
-        }),
-        EffectsModule.forRoot([
-            HubEffects
-        ]),
-        BrowserAnimationsModule,
-        MatCardModule,
-        QRCodeModule,
-        MatExpansionModule,
-        MatTabsModule,
-        MatBadgeModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MdePopoverModule,
-        SenIconRegisterModule.register({
-            svgFolder: 'assets/svg',
-            icons: app_icons
-        }),
-        MatSliderModule,
-        PrettyJsonModule,
-        MatTableModule,
-        CdkTableModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MaterialCssVarsModule.forRoot({
-            // all optional
-            isAutoContrast: true,
-            darkThemeClass: 'isDarkTheme',
-            lightThemeClass: 'isLightTheme',
-            isDarkTheme: true,
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    HubModule,
+    RouterModule.forRoot([], {
+      useHash: true
+    }),
+    StoreModule.forRoot(stateReducer, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      }
+    }),
+    EffectsModule.forRoot([
+      HubEffects
+    ]),
+    BrowserAnimationsModule,
+    MatCardModule,
+    QRCodeModule,
+    MatExpansionModule,
+    MatTabsModule,
+    MatBadgeModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MdePopoverModule,
+    SenIconRegisterModule.register({
+      svgFolder: 'assets/svg',
+      icons: app_icons
+    }),
+    MatSliderModule,
+    PrettyJsonModule,
+    MatTableModule,
+    CdkTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MaterialCssVarsModule.forRoot({
+      // all optional
+      isAutoContrast: true,
+      darkThemeClass: 'isDarkTheme',
+      lightThemeClass: 'isLightTheme',
+      isDarkTheme: true,
 
-            //      primary: '#3f51b5',
-            //     accent: '#e91e63',
-            //    warn: '#f44336',
+      //      primary: '#3f51b5',
+      //     accent: '#e91e63',
+      //    warn: '#f44336',
 
-            // ...
-        }),
-        MatCheckboxModule,
-        MatMenuModule,
-        AppOverviewModule,
-    ],
+      // ...
+    }),
+    MatCheckboxModule,
+    MatMenuModule,
+    AppOverviewModule,
+    MatDividerModule,
+  ],
     providers: [
         SocketService,
     ],

@@ -3,9 +3,9 @@ import {Store} from "@ngrx/store";
 import {State} from './index'
 import {SocketEvent} from "@senstate/client-connection";
 import {DashboardActions, HubActions} from "./actions";
-import {map, startWith, tap} from "rxjs/operators";
-import {someGuid, WatchData, WatcherMeta, WatchType} from "@senstate/client";
-import {BehaviorSubject, combineLatest, interval, NEVER, of} from "rxjs";
+import {map, startWith} from "rxjs/operators";
+import {someGuid, WatcherMeta, WatchType} from "@senstate/client";
+import {BehaviorSubject, combineLatest, interval, of} from "rxjs";
 import {App} from "@senstate/dashboard-connection";
 import groupBy from 'lodash/groupBy';
 
@@ -27,9 +27,19 @@ export class HubService {
   private hubApp$ = new BehaviorSubject<App[]>([]);
 
   // todo selectors/refactor :)
-  app$ = combineLatest([this.hubApp$, this.state.select(s => Object.values(s.data.meta.apps))]).pipe(
+  app$ = combineLatest([
+    this.hubApp$,
+    this.state.select(s => Object.values(s.data.meta.apps))
+  ]).pipe(
     map(([hubApp, allOther]) => {
-      return [...allOther, ...hubApp]
+      const combined = [...allOther, ...hubApp];
+
+      const sorted = [
+        ...combined.filter(c => !c.disconnected),
+        ...combined.filter(c => c.disconnected === true)
+      ]
+
+      return sorted;
     })
   );
 

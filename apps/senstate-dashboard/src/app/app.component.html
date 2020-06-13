@@ -72,8 +72,10 @@
 
 <div class="content">
   <div *ngIf="mappedApps$ | async as apps">
-    <div *ngFor="let app of apps; trackBy: trackByAppFunc">
+    <div *ngFor="let app of apps; trackBy: trackByAppFunc; last as last">
       <senstate-app-overview [app]="app"></senstate-app-overview>
+
+      <mat-divider *ngIf="!last" class="app-divider"></mat-divider>
     </div>
 
     <div *ngIf="apps.length === 0" class="empty-area">
