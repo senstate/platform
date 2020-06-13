@@ -141,7 +141,7 @@
       <br>
       <div>2. Scan this qr-code</div>
       <br>
-      <ng-container *ngIf="networkInterface$ | async as interface">
+      <ng-container *ngIf="networkInterface$ | async as interface; else noConnection">
         <qr-code
           [value]="interface"
           [size]="200">
@@ -151,6 +151,11 @@
         <div>or open <br/><code>{{interface}}</code></div>
 
       </ng-container>
+      <ng-template #noConnection>
+        <code>
+        No Hub-Connection available.
+        </code>
+      </ng-template>
     </div>
   </mde-popover>
 </div>
