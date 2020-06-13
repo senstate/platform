@@ -1,4 +1,7 @@
 :host ::ng-deep {
+  display: block;
+  width: 98%;
+
   mat-tab-group .mat-tab-label.mat-tab-disabled {
     position: absolute;
     right: 0;
@@ -29,3 +32,10 @@ margin-top: 5px;
 margin-bottom: 5px;
 }
 
+:host.disconnected {
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}

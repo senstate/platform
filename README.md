@@ -73,6 +73,8 @@ npx @senstate/cli
 
 All clients connect with web-sockets, here are the current [specs](api.spec.md).
 
+If you use the same static App-Id, you can keep the Watchers / Logger / Errors between App-restarts.
+
 ## TODO / In progress
 
 - C# Client

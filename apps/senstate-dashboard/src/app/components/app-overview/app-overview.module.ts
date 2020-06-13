@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {AppOverviewComponent} from "./app-overview.component";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatBadgeModule} from "@angular/material/badge";
@@ -15,8 +15,8 @@ import {MdePopoverModule} from "@material-extended/mde";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDividerModule} from "@angular/material/divider";
-import {WatchersListModule } from "../tab-content/watchers-list/watchers-list.module";
-
+import {WatchersListModule} from "../tab-content/watchers-list/watchers-list.module";
+import {MatChipsModule} from "@angular/material/chips";
 
 
 @NgModule({
@@ -42,7 +42,8 @@ import {WatchersListModule } from "../tab-content/watchers-list/watchers-list.mo
     MatDividerModule,
     WatchersMasonryModule,
     WatchersMasonryModule,
-    WatchersListModule
+    WatchersListModule,
+    MatChipsModule
   ]
 })
 export class AppOverviewModule { }

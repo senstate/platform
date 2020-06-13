@@ -63,22 +63,30 @@ const topicReducer = reducer(
     const currentAppIdList = Object.keys(state.meta.apps);
     const newAppIdList = Object.keys(action.payload.apps);
 
+    // current apps in the dashboard
     currentAppIdList.map(app => {
+      // new app list from hub
       if (!newAppIdList.includes(app)) {
-        delete state.eventsByApp[app];
+        // not exists anymore
+        state.meta.apps[app].disconnected = true;
       }
     });
 
-    // set meta
-    state.meta = action.payload;
-
+    newAppIdList.map(app => {
+      // new app list from hub
+      if (!currentAppIdList.includes(app)) {
+        state.meta.apps[app] = action.payload.apps[app];
+      }
+    });
 
     const watcherToApp: WatcherToApp = {};
     newAppIdList.map(app => {
-      Object.keys(state.meta.apps[app].watchers)
-        .map(watchId => {
-          watcherToApp[watchId] = app;
-        });
+      if (state.meta.apps[app]) {
+        Object.keys(state.meta.apps[app].watchers)
+          .map(watchId => {
+            watcherToApp[watchId] = app;
+          });
+      }
     });
 
     // update the watcher to app map
