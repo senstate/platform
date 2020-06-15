@@ -5,8 +5,8 @@
   </h2>
 
   <senstate-group-holder
-    *ngFor="let group of watchers; trackBy: trackByGroupFunc">
-    <b *ngIf="group.key !== 'undefined'"
+    *ngFor="let group of watchers; trackBy: trackByGroupFunc">Group 1
+    <b *ngIf="group.key && group.key !== 'undefined'"
        group_holder__name>
       {{group.key}} - Watchers: {{group.watchers.length}}
     </b>

@@ -14,5 +14,9 @@
   width: 100%;
   display: block;
   margin-bottom: 0.5rem;
+
+  &:empty {
+    display: none;
+  }
 }
 
