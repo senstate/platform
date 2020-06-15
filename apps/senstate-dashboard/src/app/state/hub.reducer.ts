@@ -72,22 +72,35 @@ const topicReducer = reducer(
       }
     });
 
-    newAppIdList.map(app => {
-      // new app list from hub
-      if (!currentAppIdList.includes(app)) {
-        state.meta.apps[app] = action.payload.apps[app];
-      }
-    });
 
     const watcherToApp: WatcherToApp = {};
-    newAppIdList.map(app => {
-      if (state.meta.apps[app]) {
-        Object.keys(state.meta.apps[app].watchers)
-          .map(watchId => {
-            watcherToApp[watchId] = app;
-          });
+
+    for(const app of newAppIdList) {
+      const newAppMeta = action.payload.apps[app];
+
+
+      // new app list from hub
+      if (!currentAppIdList.includes(app)) {
+        state.meta.apps[app] = {...newAppMeta};
       }
-    });
+
+      const appInState = state.meta.apps[app];
+      if (appInState) {
+        const watcherMetas = {
+          ...state.meta.apps[app].watchers
+        };
+
+        const watchers = Object.keys(newAppMeta.watchers);
+
+        for (const watchId of watchers) {
+          watcherToApp[watchId] = app;
+
+          watcherMetas[watchId] = newAppMeta.watchers[watchId];
+        }
+
+        state.meta.apps[app].watchers = watcherMetas;
+      }
+    }
 
     // update the watcher to app map
     state.watcherToApp = watcherToApp;
