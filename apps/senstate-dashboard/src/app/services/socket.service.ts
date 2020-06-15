@@ -25,7 +25,7 @@ export class SocketService {
         filter(ev => ev.data.includes(eventType)),
         map(ev => JSON.parse(ev.data)),
         map(parsed => parsed.data),
-        enterZone(this.ngZone)
+        enterZone(this.ngZone),
         // tap(e => console.info('received ', e)),
       );
     }

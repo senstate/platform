@@ -8,8 +8,12 @@ import {HubService} from "./state/hub.service";
 import {MatSliderChange} from "@angular/material/slider";
 import {MaterialCssVarsService} from "angular-material-css-vars";
 import {SocketService} from "./services/socket.service";
-import { version } from '../../../senstate/src/root-assets/package.json';
+import {version} from '../../../senstate/src/root-assets/package.json';
 import {DebugToggleService} from "./services/debug-toggle.service";
+import {SettingsService} from "./services/settings.service";
+
+
+const SETTING_THEME = 'theme';
 
 @Component({
   selector: 'senstate-root',
@@ -42,6 +46,7 @@ export class AppComponent {
                private socketService: SocketService,
                private hubService: HubService,
                private route: ActivatedRoute,
+               private settings: SettingsService,
                public materialCssVarsService: MaterialCssVarsService,
                public debugToggle: DebugToggleService) {
     this.route.queryParamMap.subscribe(q => {
@@ -65,6 +70,9 @@ export class AppComponent {
 
       this.hubService.statusChanged(value);
     });
+
+    this.darkTheme = this.settings.loadSetting(SETTING_THEME, true);
+    this.applyTheme();
   }
 
   changeDebounce ($event: MatSliderChange) {
@@ -73,6 +81,12 @@ export class AppComponent {
 
   toggleTheme () {
     this.darkTheme = !this.darkTheme;
+    this.settings.saveSetting(SETTING_THEME, this.darkTheme);
+    this.applyTheme();
+  }
+
+  applyTheme() {
+
     this.materialCssVarsService.setDarkTheme(this.darkTheme);
   }
 
