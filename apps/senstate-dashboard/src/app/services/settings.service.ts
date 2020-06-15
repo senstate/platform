@@ -18,7 +18,7 @@ export class SettingsService {
   public loadSetting(name: string, defaultValue: any) {
     const storedValue = localStorage.getItem(name);
 
-    if (typeof storedValue !== "undefined") {
+    if (storedValue != null) {
       return JSON.parse(storedValue);
     }
     return defaultValue;
