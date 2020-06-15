@@ -5,6 +5,10 @@ import {ErrorData, LogData} from "@senstate/client";
 import {HubService} from "../../state/hub.service";
 import {filter, map} from "rxjs/operators";
 import {DebugToggleService} from "../../services/debug-toggle.service";
+import {SettingsService} from "../../services/settings.service";
+
+const SETTING_LIST_TYPE = 'list';
+const SETTING_MAX_WIDTH = 'masonry_disable_max_width';
 
 @Component({
   selector: 'senstate-app-overview',
@@ -21,6 +25,8 @@ export class AppOverviewComponent implements OnInit {
   public errors$: Observable<ErrorData[]>;
   public autoSizeActive = false;
 
+  public listType: string;
+
   @HostBinding('class.disconnected')
   public get appStyle() : boolean  {
     return this.app.disconnected;
@@ -28,7 +34,10 @@ export class AppOverviewComponent implements OnInit {
 
   constructor (private hub: HubService,
                private cd: ChangeDetectorRef,
+               private settings: SettingsService,
                public debugToggle: DebugToggleService) {
+    this.listType = settings.loadSetting(SETTING_LIST_TYPE, 'list');
+    this.autoSizeActive = settings.loadSetting(SETTING_MAX_WIDTH, false);
   }
 
   ngOnInit () {
@@ -49,6 +58,13 @@ export class AppOverviewComponent implements OnInit {
 
   toggleAutoSize () {
     this.autoSizeActive = !this.autoSizeActive;
-    this.cd.markForCheck();
+
+    this.settings.saveSetting(SETTING_MAX_WIDTH, this.autoSizeActive);
+    // this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
+
+  saveListType(newListType: any) {
+    this.settings.saveSetting(SETTING_LIST_TYPE, newListType);
   }
 }

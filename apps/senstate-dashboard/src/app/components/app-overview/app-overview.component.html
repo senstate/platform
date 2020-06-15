@@ -57,14 +57,16 @@
              [mdePopoverArrowOffsetX]="15">
   <div class="popover mat-elevation-z2">
     <label>Layout</label>
-    <mat-select #layoutOption value="list">
+    <mat-select #layoutOption [value]="listType"
+                (valueChange)="saveListType($event)">
       <mat-option value="masonry">Masonry</mat-option>
       <mat-option value="list">List</mat-option>
     </mat-select>
     <ng-container *ngIf="layoutOption.value === 'masonry'">
       <hr class="divider" />
       <label>Card-Size</label>
-      <mat-checkbox (click)="toggleAutoSize()">
+      <mat-checkbox (click)="toggleAutoSize()"
+                    [checked]="autoSizeActive">
         Disable Max-Width
       </mat-checkbox>
     </ng-container>
