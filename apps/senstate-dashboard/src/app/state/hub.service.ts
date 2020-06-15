@@ -154,7 +154,6 @@ export class HubService {
             [stringWatcherKey]: {
               type: WatchType.String,
               tag: 'string value',
-              group: 'Group 1',
               watchId: stringWatcherKey
             },
             [numWatcherKey]: {

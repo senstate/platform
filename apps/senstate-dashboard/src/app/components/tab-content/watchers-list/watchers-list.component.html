@@ -5,7 +5,7 @@
 
   <senstate-group-holder
     *ngFor="let group of watchers; trackBy: trackByGroupFunc">
-    <b *ngIf="group.key !== 'undefined'"
+    <b *ngIf="group.key && group.key !== 'undefined'"
         group_holder__name>
       {{group.key}} - Watchers: {{group.watchers.length}}
     </b>
@@ -13,7 +13,7 @@
     <div *ngFor="let tag of group.watchers; trackBy: trackByWatcherFunc"
          [ngSwitch]="tag.type"
          class="watcher-entry">
-      {{ tag.tag }}:
+      <code>{{ tag.tag }}:</code>
       <i class="mat-small"
        *ngIf="debugToggle.showDebugId$() | async">{{tag.watchId}}</i>
       <br />
