@@ -80,7 +80,7 @@
     "snyk": "^1.334.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.21",
+    "@angular-devkit/build-angular": "0.901.9",
     "@angular-devkit/build-ng-packagr": "0.803.17",
     "@angular/cli": "8.3.17",
     "@angular/compiler-cli": "8.2.13",
