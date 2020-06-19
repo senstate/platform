@@ -250,4 +250,11 @@ export class HubService {
       }
     ])
   }
+
+  getWatcherUpdateCount$(watchId: string) {
+    return this.state.select(s => s.data.eventsCounter[watchId]).pipe(
+
+      );
+
+  }
 }

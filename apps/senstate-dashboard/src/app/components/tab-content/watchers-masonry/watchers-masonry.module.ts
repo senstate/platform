@@ -15,6 +15,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {WatchHistoryComponent} from './watchers/watch-history/watch-history.component';
 import {WatchDiffComponent} from "./watchers/watch-diff/watch-diff.component";
 import {SharedModule} from "../../shared/shared.module";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {SharedModule} from "../../shared/shared.module";
         MatIconModule,
         MatButtonModule,
         MatCheckboxModule,
-        SharedModule
+        SharedModule,
+        MatFormFieldModule
     ]
 })
 export class WatchersMasonryModule {
