@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, TrackByFunction} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, TrackByFunction} from '@angular/core';
 import {Observable} from "rxjs";
 import {WatcherMeta} from "@senstate/client";
 import {GroupedWatchers, HubService} from "../../../state/hub.service";
@@ -11,6 +11,9 @@ import {DebugToggleService} from "../../../services/debug-toggle.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WatchersListComponent implements OnInit {
+
+  @Input()
+  public columnWidth: number = 50;
 
   @Input()
   public appId: string;

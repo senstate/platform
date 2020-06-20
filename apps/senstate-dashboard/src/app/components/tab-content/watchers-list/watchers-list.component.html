@@ -3,6 +3,8 @@
     No watchers yet :)
   </h2>
 
+  <div class="groups" [cssProps]="{'--group-holder-width': columnWidth }">
+
   <senstate-group-holder
     *ngFor="let group of watchers; trackBy: trackByGroupFunc">
     <b *ngIf="group.key && group.key !== 'undefined'"
@@ -20,4 +22,26 @@
       <senstate-list-json-value [watchId]="tag.watchId"></senstate-list-json-value>
     </div>
   </senstate-group-holder>
+
+  </div>
 </ng-container>
+
+<ng-template dynamicPortalSource="view-options">
+  <hr class="divider" />
+
+  <label>Column Width</label>
+  <mat-select [(value)]="columnWidth" >
+    <mat-option [value]="50">50%</mat-option>
+    <mat-option [value]="33">33%</mat-option>
+    <mat-option [value]="25">25%</mat-option>
+  </mat-select>
+</ng-template>
+
+<hr class="divider" />
+
+<label>Column Width</label>
+<mat-select [(value)]="columnWidth" >
+  <mat-option [value]="50">50%</mat-option>
+  <mat-option [value]="33">33%</mat-option>
+  <mat-option [value]="25">25%</mat-option>
+</mat-select>

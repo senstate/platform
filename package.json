@@ -51,6 +51,7 @@
     "@angular/platform-browser-dynamic": "8.2.13",
     "@angular/router": "8.2.13",
     "@gewd/lazy": "^0.1.1",
+    "@gewd/ng-utils": "^0.2.1",
     "@material-extended/mde": "2.3.1",
     "@ngrx/effects": "8.4.0",
     "@ngrx/store": "8.4.0",
@@ -70,14 +71,14 @@
     "reflect-metadata": "0.1.12",
     "rxjs": "6.4.0",
     "serve-static": "1.14.1",
+    "snyk": "^1.334.0",
     "stacktracey": "1.2.122",
     "ts-action": "11.0.0",
     "ts-action-immer": "3.0.1",
     "tslib": "1.10.0",
     "ws": "7.1.2",
     "xss": "^1.0.6",
-    "zone.js": "0.9.1",
-    "snyk": "^1.334.0"
+    "zone.js": "0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.803.21",

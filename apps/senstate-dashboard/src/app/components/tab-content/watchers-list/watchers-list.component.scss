@@ -1,5 +1,6 @@
 .watcher-entry {
   margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 code {
@@ -8,4 +9,10 @@ code {
   padding: 6px;
   margin-bottom: 0.5rem;
   display: inline-block;
+}
+
+.groups {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
