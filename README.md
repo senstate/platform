@@ -28,10 +28,6 @@
 
 ![Senstate Current Workflow](readme_assets/senstate-current-workflow.svg)
 
-> Upcoming:
-
-![Senstate Current Workflow](readme_assets/senstate_upcoming_workflow.svg)
-
 ## Articles / Tutorial
 
 >[Introduction](https://dev.to/negue/senstate-make-sense-of-your-state-while-debugging-96f)
@@ -60,25 +56,23 @@ npx @senstate/cli
 | -------- | ----------------- | ----------------------- |
 | JS/TS    | [Repo][repo_js]   | [negue][user_negue]     |
 | C#       | [Repo][repo_csharp]   | [negue][user_negue]     |
-| Rust     | [Repo][repo_rust] | [dnaka91][user_dnaka91] |
-| Kotlin   | *(in progress)*   | [dnaka91][user_dnaka91] |
-| Go       | [Repo][repo_go]   | [dnaka91][user_dnaka91] |
+| Add yours| [Spec][SpecURL]    | |
 
 [repo_js]: https://github.com/senstate/platform/blob/master/libs/client/README.md
-[repo_rust]: https://github.com/dnaka91/senstate-rs
-[repo_go]: https://github.com/dnaka91/senstate-go
 [repo_csharp]: https://github.com/senstate/csharp-client
 
 [user_negue]: https://github.com/negue
-[user_dnaka91]: https://dnaka91.netlify.com
 
-All clients connect with web-sockets, here are the current [specs](api.spec.md).
+All clients connect with web-sockets, here are the current [specs][SpecURL].
+
+[SpecURL]: api.spec.md
 
 If you use the same static App-Id, you can keep the Watchers / Logger / Errors between App-restarts.
 
 ## TODO / In progress
 
 - more to come :)
+- idea? open an issue :)
 
 ## Show your support
 
