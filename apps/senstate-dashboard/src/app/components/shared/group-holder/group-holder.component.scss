@@ -16,6 +16,10 @@
   display: block;
   margin-bottom: 0.5rem;
   height: 1.3rem;
+
+  &:empty {
+    opacity: 0;
+  }
 }
 
 .inner-padding {
