@@ -12,12 +12,9 @@
   - Masonry min-width
 - Dashboard: Add Update counter
 
-
-
-### Styling:
+### Styling
 
 - Dashboard: Better styling List Mode
-
 
 ## [0.3] - 2020-06-02
 
