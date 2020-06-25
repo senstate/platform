@@ -16,6 +16,7 @@ import {WatchHistoryComponent} from './watchers/watch-history/watch-history.comp
 import {WatchDiffComponent} from "./watchers/watch-diff/watch-diff.component";
 import {SharedModule} from "../../shared/shared.module";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {DynamicPortalModule} from "@gewd/ng-utils/dynamic-portal";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
         MatButtonModule,
         MatCheckboxModule,
         SharedModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        DynamicPortalModule
     ]
 })
 export class WatchersMasonryModule {

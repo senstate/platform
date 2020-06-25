@@ -1,6 +1,6 @@
 :host {
   display: block;
-  width: calc(var(--group-holder-width, 50) * 1%);
+  width: calc(var(--group-holder-width, 100) * 1%);
 
   &:not(:last-of-type) {
     margin-bottom: 0.5rem;

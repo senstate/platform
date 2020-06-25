@@ -74,3 +74,14 @@
   </senstate-group-holder>
 
 </ng-container>
+
+
+<ng-template [dynamicPortalSource]="'view-options_'+appId">
+  <hr class="divider" />
+
+  <label>Card-Size</label>
+  <mat-checkbox (click)="toggleAutoSize()"
+                [checked]="autoSizeCards">
+    Auto-Size {{autoSizeCards}}
+  </mat-checkbox>
+</ng-template>
