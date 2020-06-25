@@ -11,9 +11,11 @@ describe('WatchersMasonryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        WatchersMasonryComponent,
+      imports: [
         DynamicPortalModule
+      ],
+      declarations: [
+        WatchersMasonryComponent
       ],
       providers: [
         HubServiceMockProvider
