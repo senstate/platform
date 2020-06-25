@@ -14,12 +14,15 @@ import {map} from "rxjs/operators";
 export class WatchersListComponent implements OnInit {
 
   @Input()
-  public columnWidth: number = 50;
+  public groupedColumnWidth: number = 50;
+
+  @Input()
+  public watcherColumnWidth: number = 50;
 
   @Input()
   public appId: string;
 
-  public watchers$: Observable<GroupedWatchers[]>;
+  public groupedWatchers$: Observable<GroupedWatchers[]>;
 
   public trackByWatcherFunc: TrackByFunction<WatcherMeta> = (index, item) => {
     return item.watchId;
@@ -33,7 +36,7 @@ export class WatchersListComponent implements OnInit {
               public debugToggle: DebugToggleService) { }
 
   ngOnInit() {
-    this.watchers$ = this.hub.getGroupedWatchersByApp$(this.appId).pipe(
+    this.groupedWatchers$ = this.hub.getGroupedWatchersByApp$(this.appId).pipe(
       map(groupedWatchers => {
         const hasGroupName = groupedWatchers.some(group => this.hasName(group));
 

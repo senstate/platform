@@ -1,7 +1,3 @@
-.watcher-entry {
-  margin-left: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 
 code {
   background: #444;
@@ -16,4 +12,24 @@ code {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.divider {
+
+}
+
+.watcher-holder {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.watcher-entry {
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: calc((var(--watcher-holder-width, 50) * 1%) - 8px);
+
+  &:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
 }

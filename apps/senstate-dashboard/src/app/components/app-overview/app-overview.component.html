@@ -71,7 +71,7 @@
       </mat-checkbox>
     </ng-container>
 
-    <dynamic-portal key="view-options">
+    <dynamic-portal [key]="'view-options_'+app.appId">
     </dynamic-portal>
   </div>
 </mde-popover>

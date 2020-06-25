@@ -154,14 +154,15 @@ export class HubService {
           client: '',
           watchers: {
             [stringWatcherKey]: {
+              group: 'Group 1',
               type: WatchType.String,
               tag: 'string value',
               watchId: stringWatcherKey
             },
             [numWatcherKey]: {
+              group: 'Group 1',
               type: WatchType.Number,
               tag: 'number value',
-              group: 'Group 1',
               watchId: numWatcherKey
             },
             [jsonWatcherKey]: {
