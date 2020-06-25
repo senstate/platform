@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'senstate-group-holder',
@@ -7,6 +7,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupHolderComponent implements OnInit {
+
+  @Input()
+  public showGroupName = false;
 
   constructor() { }
 

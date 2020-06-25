@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {WatcherMeta} from "@senstate/client";
 import {GroupedWatchers, HubService} from "../../../state/hub.service";
 import {DebugToggleService} from "../../../services/debug-toggle.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'senstate-watchers-list',
@@ -32,6 +33,21 @@ export class WatchersListComponent implements OnInit {
               public debugToggle: DebugToggleService) { }
 
   ngOnInit() {
-    this.watchers$ = this.hub.getGroupedWatchersByApp$(this.appId);
+    this.watchers$ = this.hub.getGroupedWatchersByApp$(this.appId).pipe(
+      map(groupedWatchers => {
+        const hasGroupName = groupedWatchers.some(group => this.hasName(group));
+
+        groupedWatchers.forEach(group => {
+          group.haveGroups = hasGroupName;
+          group.hasName = this.hasName(group);
+        });
+
+        return groupedWatchers;
+      })
+    );
+  }
+
+  private hasName(group: GroupedWatchers) {
+    return group.key && group.key !== 'undefined';
   }
 }

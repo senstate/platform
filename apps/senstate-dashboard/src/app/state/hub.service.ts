@@ -20,6 +20,8 @@ const hubWatchMeta =  {
 export interface GroupedWatchers {
   key: string;
   watchers: WatcherMeta[];
+  haveGroups?: boolean;
+  hasName?: boolean;
 }
 
 @Injectable()
