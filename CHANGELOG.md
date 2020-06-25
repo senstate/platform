@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.3.1] - TBA
+## [0.3.1] - 25.06.2020
 
 ### Added
 
@@ -12,7 +12,7 @@
   - Masonry min-width
 - Dashboard: Add Update counter
 
-  
+
 
 ### Styling:
 
