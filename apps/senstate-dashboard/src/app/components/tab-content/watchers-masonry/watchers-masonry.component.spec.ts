@@ -3,7 +3,7 @@ import {WatchersMasonryComponent} from './watchers-masonry.component';
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {HubServiceMock, HubServiceMockProvider} from "@test-utils/mocks";
 import {NEVER} from "rxjs";
-import {DynamicPortalModule} from "@gewd/ng-utils/dynamic-portal";
+import { DynamicPortalModule, PortalHubService } from "@gewd/ng-utils/dynamic-portal";
 
 describe('WatchersMasonryComponent', () => {
   let component: WatchersMasonryComponent;
@@ -18,7 +18,8 @@ describe('WatchersMasonryComponent', () => {
         WatchersMasonryComponent
       ],
       providers: [
-        HubServiceMockProvider
+        HubServiceMockProvider,
+        PortalHubService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
