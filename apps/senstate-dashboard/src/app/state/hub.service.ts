@@ -20,6 +20,8 @@ const hubWatchMeta =  {
 export interface GroupedWatchers {
   key: string;
   watchers: WatcherMeta[];
+  haveGroups?: boolean;
+  hasName?: boolean;
 }
 
 @Injectable()
@@ -152,14 +154,15 @@ export class HubService {
           client: '',
           watchers: {
             [stringWatcherKey]: {
+              group: 'Group 1',
               type: WatchType.String,
               tag: 'string value',
               watchId: stringWatcherKey
             },
             [numWatcherKey]: {
+              group: 'Group 1',
               type: WatchType.Number,
               tag: 'number value',
-              group: 'Group 1',
               watchId: numWatcherKey
             },
             [jsonWatcherKey]: {
@@ -249,5 +252,12 @@ export class HubService {
         }
       }
     ])
+  }
+
+  getWatcherUpdateCount$(watchId: string) {
+    return this.state.select(s => s.data.eventsCounter[watchId]).pipe(
+
+      );
+
   }
 }

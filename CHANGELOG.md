@@ -1,6 +1,22 @@
 # Changelog
 
-## [0.3] - 2019-06-02
+## [0.3.1] - 25.06.2020
+
+### Added
+
+- Dashboard: Show Groups (List Mode) in columns + ability to select more columns
+- Dashboard: Show Watchers in Groups (List Mode) in columns + ability to select more columns
+- Dashboard: Save/Restore following settings, when using the same Browser (localStorage):
+  - Theme
+  - View Mode
+  - Masonry min-width
+- Dashboard: Add Update counter
+
+### Styling
+
+- Dashboard: Better styling List Mode
+
+## [0.3] - 2020-06-02
 
 ### Added
 

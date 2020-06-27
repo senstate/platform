@@ -1,11 +1,19 @@
 graph LR
-  subgraph "JS-Client only (*soon)"
-  JS --> App-Overlay
-  JS --> Log-OnlyMode
- end
+  Hub--> Dashboard
+
+  subgraph "JS-Client"
+
+    JS --> Log[Log-Only Mode]
+    subgraph soon["soon*"]
+    JS --> App-Overlay
+    end
+  end
   JS[JS-Client Library] --> Hub{Hub}
 
+  CS[CSharp] --> Hub
 
-  Rust[Rust-Client Library] --> Hub
-  Go[Go-Client Library] --> Hub
-  Hub--> Dashboard
+
+class soon lightblue;
+classDef lightblue fill:#23D;
+classDef lightblue color: white;
+classDef lightblue padding-top: 10px;

@@ -129,3 +129,17 @@ mat-toolbar {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.center {
+  text-align: center;
+}
+
+::ng-deep {
+  .divider {
+    height: 1px;
+    background: white;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}

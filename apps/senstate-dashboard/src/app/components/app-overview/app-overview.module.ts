@@ -17,6 +17,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDividerModule} from "@angular/material/divider";
 import {WatchersListModule} from "../tab-content/watchers-list/watchers-list.module";
 import {MatChipsModule} from "@angular/material/chips";
+import {DynamicPortalModule, PortalHubService} from "@gewd/ng-utils/dynamic-portal";
 
 
 @NgModule({
@@ -24,26 +25,30 @@ import {MatChipsModule} from "@angular/material/chips";
   exports: [
     AppOverviewComponent
   ],
-  imports: [
-    CommonModule,
-    MatTabsModule,
-    MatBadgeModule,
-    WatchersMasonryModule,
-    LogViewerModule,
-    ErrorViewerModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MdePopoverModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatDividerModule,
-    WatchersMasonryModule,
-    WatchersMasonryModule,
-    WatchersListModule,
-    MatChipsModule
+    imports: [
+        CommonModule,
+        MatTabsModule,
+        MatBadgeModule,
+        WatchersMasonryModule,
+        LogViewerModule,
+        ErrorViewerModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MdePopoverModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatDividerModule,
+        WatchersMasonryModule,
+        WatchersMasonryModule,
+        WatchersListModule,
+        MatChipsModule,
+        DynamicPortalModule
+    ],
+  providers: [
+    PortalHubService
   ]
 })
 export class AppOverviewModule { }

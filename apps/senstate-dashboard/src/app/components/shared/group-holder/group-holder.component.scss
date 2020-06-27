@@ -1,8 +1,9 @@
 :host {
   display: block;
+  width: calc(var(--group-holder-width, 100) * 1%);
 
-  &:not(:first-of-type) {
-    margin-top: 0.5rem;
+  &:not(:last-of-type) {
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -14,9 +15,14 @@
   width: 100%;
   display: block;
   margin-bottom: 0.5rem;
+  height: 1.3rem;
 
   &:empty {
-    display: none;
+    opacity: 0;
   }
+}
+
+.inner-padding {
+  margin: 5px;
 }
 

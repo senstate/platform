@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Directive,
-  TemplateRef,
-  ContentChild,
-  ChangeDetectorRef
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ContentChild, Directive, Input, OnInit, TemplateRef} from '@angular/core';
 import {HubService} from "../../../../state/hub.service";
 import {Observable} from "rxjs";
 
@@ -39,6 +30,7 @@ export class WatcherCardComponent implements OnInit {
   public appId: string;
 
   public paused$: Observable<boolean>;
+  public updateCount$: Observable<number>;
 
   @ContentChild(HistoryTemplateDirective, { static: true }) historyTemplateDir: HistoryTemplateDirective;
 
@@ -50,6 +42,7 @@ export class WatcherCardComponent implements OnInit {
 
   ngOnInit() {
     this.paused$ = this.hub.isWatcherPaused$(this.appId, this.watchId);
+    this.updateCount$ = this.hub.getWatcherUpdateCount$(this.watchId);
   }
 
   togglePaused () {

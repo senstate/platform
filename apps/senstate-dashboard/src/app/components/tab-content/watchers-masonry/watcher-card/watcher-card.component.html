@@ -14,11 +14,11 @@
     <ng-content select="[menu-content]"></ng-content>
     <mat-checkbox class="mat-menu-item" #showHistory>Show History</mat-checkbox>
     <mat-checkbox class="mat-menu-item" #showDiffOfLast>Diff from previous</mat-checkbox>
+    <mat-checkbox class="mat-menu-item" #showUpdateCount>Update Counter</mat-checkbox>
   </mat-menu>
 </div>
 <mat-card>
   <ng-content></ng-content>
-
   <ng-container *ngIf="showDiffOfLast.checked">
     <hr class="mat-divider">
     <span class="mat-caption">Diff </span>
@@ -37,3 +37,8 @@
     </senstate-watch-history>
   </ng-container>
 </mat-card>
+
+<mat-hint *ngIf="showUpdateCount.checked">
+  Updated: {{ updateCount$ | async }}
+</mat-hint>
+

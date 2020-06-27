@@ -24,13 +24,7 @@
   padding: 15px
 }
 
-.divider {
-  height: 1px;
-  background: white;
-  width: 100%;
-margin-top: 5px;
-margin-bottom: 5px;
-}
+
 
 :host.disconnected {
   opacity: 0.5;

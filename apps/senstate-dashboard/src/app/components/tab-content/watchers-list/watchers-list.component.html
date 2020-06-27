@@ -1,23 +1,50 @@
-<ng-container *ngIf="watchers$ |async as watchers">
-  <h2 class="mat-h3" *ngIf="watchers.length === 0">
+<ng-container *ngIf="groupedWatchers$ |async as grouped">
+  <h2 class="mat-h3" *ngIf="grouped.length === 0">
     No watchers yet :)
   </h2>
 
-  <senstate-group-holder
-    *ngFor="let group of watchers; trackBy: trackByGroupFunc">
-    <b *ngIf="group.key && group.key !== 'undefined'"
-        group_holder__name>
-      {{group.key}} - Watchers: {{group.watchers.length}}
-    </b>
+  <div class="groups" [cssProps]="{'--group-holder-width': grouped.length > 1 ? groupedColumnWidth : 100 }">
 
-    <div *ngFor="let tag of group.watchers; trackBy: trackByWatcherFunc"
-         [ngSwitch]="tag.type"
-         class="watcher-entry">
-      <code>{{ tag.tag }}:</code>
-      <i class="mat-small"
-       *ngIf="debugToggle.showDebugId$() | async">{{tag.watchId}}</i>
-      <br />
-      <senstate-list-json-value [watchId]="tag.watchId"></senstate-list-json-value>
-    </div>
-  </senstate-group-holder>
+    <senstate-group-holder
+      *ngFor="let group of grouped; trackBy: trackByGroupFunc"
+      [showGroupName]="group.haveGroups">
+
+      <b *ngIf="group.hasName" group_holder__name>
+          {{group.key}} - Watchers: {{group.watchers.length}}
+      </b>
+
+      <div class="watcher-holder"
+           [cssProps]="{'--watcher-holder-width': group.watchers.length > 1 ? watcherColumnWidth : 100 }">
+        <div *ngFor="let tag of group.watchers; trackBy: trackByWatcherFunc"
+             [ngSwitch]="tag.type"
+             class="watcher-entry">
+          <code>{{ tag.tag }}:</code>
+          <i class="mat-small"
+           *ngIf="debugToggle.showDebugId$() | async">{{tag.watchId}}</i>
+          <br />
+          <senstate-list-json-value [watchId]="tag.watchId"></senstate-list-json-value>
+        </div>
+      </div>
+    </senstate-group-holder>
+
+  </div>
 </ng-container>
+
+<ng-template [dynamicPortalSource]="'view-options_'+appId">
+  <hr class="divider" />
+
+  <label>Grouped Width</label>
+  <mat-select [(value)]="groupedColumnWidth" >
+    <mat-option [value]="50">2 Columns</mat-option>
+    <mat-option [value]="33">3 Columns</mat-option>
+    <mat-option [value]="25">4 Columns</mat-option>
+  </mat-select>
+  <hr class="divider" />
+
+  <label>Watchers Width</label>
+  <mat-select [(value)]="watcherColumnWidth" >
+    <mat-option [value]="50">2 Columns</mat-option>
+    <mat-option [value]="33">3 Columns</mat-option>
+    <mat-option [value]="25">4 Columns</mat-option>
+  </mat-select>
+</ng-template>
