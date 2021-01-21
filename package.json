@@ -63,7 +63,7 @@
     "disparity": "3.0.0",
     "finalhandler": "1.1.2",
     "hammerjs": "2.0.8",
-    "immer": "4.0.2",
+    "immer": "8.0.1",
     "jsondiffpatch": "^0.3.11",
     "lodash": "4.17.15",
     "ngrx-store-logger": "0.2.4",
