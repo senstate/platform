@@ -65,7 +65,7 @@
     "hammerjs": "2.0.8",
     "immer": "4.0.2",
     "jsondiffpatch": "^0.3.11",
-    "lodash": "4.17.15",
+    "lodash": "4.17.21",
     "ngrx-store-logger": "0.2.4",
     "ngx-masonry": "1.1.4",
     "reflect-metadata": "0.1.12",
