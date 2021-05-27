@@ -76,7 +76,7 @@
     "ts-action": "11.0.0",
     "ts-action-immer": "3.0.1",
     "tslib": "1.10.0",
-    "ws": "7.1.2",
+    "ws": "7.4.6",
     "xss": "^1.0.6",
     "zone.js": "0.9.1"
   },
@@ -98,7 +98,7 @@
     "dotenv": "6.2.0",
     "eslint": "6.1.0",
     "ineeda": "0.11.3",
-    "jest": "24.1.0",
+    "jest": "25.0.0",
     "jest-preset-angular": "7.0.1",
     "ng-packagr": "9.0.0",
     "prettier": "1.18.2",
